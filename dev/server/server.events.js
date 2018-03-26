@@ -13,5 +13,7 @@ module.exports = {
   "resAllRooms": "rooms: all rooms' names sent",
   "resJoinCreatedRoom": "rooms: join created room",
   "reqJoinRoom": "rooms: join room",
-  "resNewroomJoined": "rooms: room joined"
+  "resNewroomJoined": "rooms: room joined",
+  "reqTakePlace": "room: take place",
+  "resTakePlaceSuccess": "room: player took place"
 };
