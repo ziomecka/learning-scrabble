@@ -7,33 +7,32 @@ angular
   "$rootScope",
   "$location",
   "clientService",
-  // "scrabbleDefaults",
+  "newroomDefaults",
   "authorizationService",
-  ($scope, $rootScope, $location, clientService, authorizationService) => {
-  let me = $scope;
+  "clientEvents",
+  ($scope, $rootScope, $location, clientService, newroomDefaults, authorizationService, clienrEvents) => {
+    let me = $scope;
+    me.defaults = newroomDefaults;
+    me.nameUnique = true;
+    me.newRoom = {
+      name: "scrabble",
+      // TODO
+      owner: {
+        id: clientService.id,
+        name: "player"
+      },
+      numberPlaces: me.defaults.placesOptions[0],
+      time: me.defaults.timeOptions[0]
+    };
 
-  // me.defaults = scrabbleDefaults;
-  me.nameUnique = true;
-  me.newRoom = {
-    name: "scrabble",
-    owner: {
-      id: clientService.id,
-      name: "player"
-    },
-    // numberPlaces: me.defaults.placesOptions[0],
-    // time: me.defaults.timeOptions[0]
-  };
+    me.changeName = () => {if (!me.nameUnique) me.nameUnique = true;};
 
-  me.changeName = () => {if (!me.nameUnique) me.nameUnique = true;};
+    me.createRoom = () => {
+      clientService.emit(clientEvents.reqNewroom, me.newRoom);
+    };
 
-  me.createRoom = () => {
-    console.log("dataownerid" + me.newRoom.owner.id);
-    clientService.emit("rooms: create new room", me.newRoom);
-  };
-
-  clientService.on("rooms: room joined", data => {
-    authorizationService.go({state: "private.room", roomId: data.id});
-    // authorizationService.go(`/rooms.${data.id}`);
-  });
-  // $location.path(`/room${data.id}`)
-}]);
+    clientService.on(clientEvents.resNewroomJoined, data => {
+      authorizationService.go({state: "private.room", roomId: data.id});
+    });
+  }
+]);
