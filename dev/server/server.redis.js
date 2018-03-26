@@ -78,6 +78,7 @@ function myRedis () {
     });
   };
 
+
   return {
     flush: flush,
     addUser: addUser,
