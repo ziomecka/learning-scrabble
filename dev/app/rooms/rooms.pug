@@ -1,0 +1,10 @@
+h1 Let's play scrabble
+p(ng-bind="user")
+h2 List of rooms
+p(ng-show="rooms.length === 0") There are no opened rooms.
+ul
+  li(ng-repeat="room in rooms track by room.id")
+    a(ui-sref="rooms.room({roomID: room.id })) {{room.name}}")
+    //- a(href="/room{{room.id}}" ng-click="enterRoom(room.id)") {{room.name}}
+button(class="button__link" ng-click="showForm=!showForm") create new room
+div(ui-view="newroom" ng-show="showForm")

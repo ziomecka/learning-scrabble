@@ -1,0 +1,7 @@
+html(ng-app="app" ng-controller="appController")
+  head
+    title Let's play scrabble
+    base(href="/")
+  body
+    div(ui-view class="content")
+    script(src="/socket.io/socket.io.js")

@@ -1,0 +1,32 @@
+%button
+  display: inline-block
+  font-size: 0.8em
+  font-weight: 800
+  padding: $button-padding
+  margin: 0 0 5px
+  letter-spacing: 1px
+  text-decoration: none
+  outline: none
+  width: 100%
+  max-width: 100px
+  height: 20px
+
+%button_button
+  border: $button-border-width
+  border-style: solid
+  border-radius: $button-border-radius
+  background: $button-color
+
+%button_link
+  border: none
+  background: inherit
+
+.button
+  @extend %button
+  @extend %button_button
+
+.button__link
+  @extend %button
+  @extend %button_link
+
+.form__message--error

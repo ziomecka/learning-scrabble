@@ -1,0 +1,38 @@
+.scrabble__board
+  @include center-flex
+  -ms-flex-wrap: wrap
+  flex-wrap: wrap
+  -webkit-box-orient: vertical
+  -webkit-box-direction: normal
+  -ms-flex-direction: column
+  flex-direction: column
+  width: 400px
+  height: 400px
+  max-height: calc(100vh * 0.8)
+  max-width: calc(100vh * 0.8)
+
+.scrabble__row
+  @include center-flex
+  flex-direction: row
+  width: 100%
+  height: calc(100% / 15)
+  border-top: 1px solid green
+  border-left: 1px solid green
+  &:last-child
+    border-bottom: 1px solid green
+
+.scrabble__field
+  display: inline-block
+  position: relative
+  flex-basis: calc(100% / 15)
+  height: 100%
+  width: calc(100% / 15)
+  margin: 0
+  padding: 0
+  border-right: 1px solid green
+
+.scrabble__field svg rect
+  fill: lightblue
+  // float: left
+  height: 100%
+  width: 100%

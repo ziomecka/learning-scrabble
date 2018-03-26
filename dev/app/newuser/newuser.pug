@@ -1,0 +1,15 @@
+h1(class="title__main") Let's play scrabble
+form(name="createUserForm" class="form" novalidate)
+  fieldset
+    label(for="login") login
+    input(type="text" id="login" ng-model="login" ng-class="{invalid: loginNotUnique}" required)
+    p(ng-show="loginNotUnique") login already exists
+  fieldset
+    label(for="password") password
+    input(type="text" id="password" ng-model="password" required)
+  fieldset
+    label(for="repeatedPassword") repeat password
+    input(type="text" id="repeatedPassword" ng-model="repeatedPassword" required)
+  fieldset
+    button(class="button" ng-click="createUser({login: login, password: password})" ng-disabled="createUserForm.$invalid") create user
+    button(class="button__link" ui-sref="authorization" ui-sref-active="active") login

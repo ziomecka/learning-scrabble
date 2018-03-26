@@ -1,0 +1,20 @@
+div(id="gameBoard" class="game")
+  div(id="gameBoard" class="game__board")
+    div(id="scrabbleBoard" board-directive)
+  div(id="gamePanel" class="game__panel")
+    span(ng-bind="")
+    div(class="game__panel--players" ng-repeat="place in places track by $index")
+      button(ng-bind="place.name" ng-click="place.reserved = !place.reserved" ng-disabled="!place.isOpened || seated")
+      input(ng-model="joinName" ng-show="place.reserved")
+      button(ng-click="takePlace({placeID: place.id, playerID: $index, joinName: joinName})" ng-show="place.reserved") join
+    div(players-directive)
+    div(class="game__panel--controls" id="gameControls")
+      button(ng-click="endTurn()") End turn
+      button(ng-click="exchangeTiles()") Exchange tiles
+      button(ng-click="challange()") Challenge
+      a(href="/rooms") back
+    div(id="gameOptions")
+      label(for="numberPlaces") number of players
+      input(type="number" id="numberPlaces" min="2" max="4" ng-model="optionsNumber" ng-change="numberPlacesChanged()")
+      label(for="time") time
+      input(type="number" id="time" ng-bind="time" min="3" max="15")

@@ -1,0 +1,26 @@
+first screen
+  title
+  login input
+  password input
+  log button (-> rooms screen, message success)
+  create user (-> create user screen)
+
+create user screen
+  title
+  login input
+  password input
+  password input
+  create button (-> rooms screen, message success)
+  log button (-> first screen)
+
+rooms screen
+  title
+  room you are playing in
+  list of all rooms
+  create new room button (-> create new room form)
+
+new room form
+  enter the new room checkbox
+  room name
+  number of players
+  invite field with users available???

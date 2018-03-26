@@ -1,0 +1,47 @@
+%scrabble__player--text
+  font-size: 0.8em
+  // border deducted
+  line-height: 18px
+  text-align: center
+
+%scrabble__player--boxes
+  margin: 0 0 5px
+  padding: 0
+
+%scrabble__player--size
+  height: 20px
+  width: 100%
+
+%scrabble__player--border
+  border: 1px solid green
+
+%scrabble__player--background
+  background: lightgreen
+
+.scrabble__player
+  @extend %scrabble__player--text
+  @extend %scrabble__player--boxes
+  @extend %scrabble__player--size
+  @extend %scrabble__player--border
+  @extend %scrabble__player--background
+  font-weight: 800
+
+.scrabble__rack
+  @include center-flex
+  @extend %scrabble__player--boxes
+  @extend %scrabble__player--size
+  @extend %scrabble__player--border
+  @extend %scrabble__player--background
+  flex-wrap: nowrap
+
+.scrabble__rack--field
+  @extend %scrabble__player--border
+  @extend %scrabble__player--background
+  height: 20px
+  width: 20px
+
+.scrabble__points
+  @extend %scrabble__player--boxes
+  @extend %scrabble__player--size
+  @extend %scrabble__player--border
+  @include center-flex

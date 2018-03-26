@@ -1,0 +1,31 @@
+%game__element
+  // display: inline-block
+  height: 100%
+  height: 100vh
+  padding: 10px
+
+.game
+  @include center-flex
+  height: 100vh
+  width: 100vw
+
+.game__panel
+  @extend %game__element
+  @include center-flex
+  flex-wrap: wrap
+  flex: 0 0 30%
+  min-width: 100px
+  background: $c-game-panel
+
+.game__board
+  @include center-flex
+  @extend %game__element
+  @include center-flex
+  flex: 0 0 70%
+  background: $c-game-board
+
+#game__panel--players,
+#game__panel--controls
+  @include center-flex
+  flex-wrap: wrap
+  width: 80%
