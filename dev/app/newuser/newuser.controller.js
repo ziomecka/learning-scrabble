@@ -8,13 +8,14 @@ angular
   "$state",
   "clientService",
   "authorizationService",
-  ($scope, $rootScope, $location, $state, clientService, authorizationService) => {
+  "clientEvents",
+  ($scope, $rootScope, $location, $state, clientService, authorizationService, clientEvents) => {
   const me = $scope;
   let loginNotUnique = false;
   me.login = "";
   me.password = "";
 
-  me.createUser = data => clientService.emit("auth: create user", data);
+  me.createUser = data => clientService.emit(clientEvents.reqNewuser, data);
   me.loginUser = () => authorizationService.go("authorization");
   clientService.on("auth: login already exists", () => loginNotUnique = true);
 

@@ -8,9 +8,9 @@ div(class="content")
       label(for="password") password
       input(type="text" ng-model="password" required)
     fieldset(class="box__buttons")
-      button(ng-click="loginUser({login: login, password: password})" class="button button__main") login
-      button(ui-sref="newuser" ui-sref-active="active" class="button__link") create user
-      button(ui-sref="guest" ui-sref-active="active" class="button__link") be a guest
+      button(ng-click="loginUser({login: login, password: password})" class="button button__main" ng-disabled="buttonsDisabled") login
+      button(ui-sref="newuser" ui-sref-active="active" class="button__link" ng-disabled="buttonsDisabled") create user
+      button(ui-sref="guest" ui-sref-active="active" class="button__link" ng-disabled="buttonsDisabled") be a guest
     fieldset
-    p(ng-show="loginDoesNotExist" class="form__message--error") Login does not exist
-    p(ng-show="passwordIncorrect" class="form__message--error") Incorrect password
+    p(ng-show="resNoLogin" class="form__message--error") Login does not exist
+    p(ng-show="resAuthorizeFailed" class="form__message--error") Incorrect password

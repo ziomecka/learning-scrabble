@@ -1,5 +1,4 @@
 /* jshint esversion: 6 */
-
 angular
 .module("roomsModule")
 .controller("roomsController", [
@@ -7,15 +6,17 @@ angular
   "$rootScope",
   "$location",
   "clientService",
-  ($scope, $rootScope, $location, clientService) => {
-  let me = $scope;
-  me.rooms = [];
+  "clientEvents",
+  ($scope, $rootScope, $location, clientService, clientEvents) => {
+    let me = $scope;
+    me.rooms = [];
 
-  clientService.emit("rooms: get all rooms' names");
+    clientService.emit(clientEvents.reqAllRooms);
 
-  clientService.on("rooms: all rooms' names sent", data => me.rooms = [...data.rooms]);
+    clientService.on(clientEvents.resAllRooms, data => me.rooms = [...data.rooms]);
 
-  clientService.on("rooms: new room created", data => me.rooms.push(data));
+    clientService.on(clientEvents.resNewroom, data => me.rooms.push(data));
 
-  me.joinRoom = (id) => clientService.emit("rooms: join room", {id: id});
-}]);
+    me.joinRoom = (id) => clientService.emit(clientEvents.reqJoinRoom, {id: id});
+  }
+]);

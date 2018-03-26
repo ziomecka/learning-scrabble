@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
- angular.module("app").constant("clientEvents", {
-   "createNewRoom": "rooms: create new room",
-   "newRoomJoined": "rooms: room joined",
+import serverEvents from "../../server/server.events";
 
- });
+ angular
+   .module("app")
+   .constant("clientEvents", serverEvents);

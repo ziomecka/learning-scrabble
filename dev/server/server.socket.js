@@ -13,108 +13,53 @@ const io = socketIO(server);
 const Room = require("./server.room").Room;
 const allRooms = require("./server.room").allRooms;
 const statusGame = require("./maps/server.status.game");
+const serverEvents = require("./server.events");
 
-const ioredis = require("./server.redis").ioredis;
 const redis = require("./server.redis").redis;
 
 io.on("connection", socket => {
+  /** Inform about the connection */
   console.log(`User connected: ${socket.id}`);
-  socket.emit("connected", {id: socket.id});
-
+  socket.emit(serverEvents.resConnected, {id: socket.id});
   socket.on("disconnect", () => console.log("user disconnected"));
 
-  socket.on("auth: create user", data => {
-    let {login, password} = data;
-    console.log(`Setting new login: ${login}`);
-    /** Set only if does not exist. */
-    redis.hsetnx(login, "login", login, (err, result) => {
-      // TODO err
-      if (result) {
-        redis.hset(login, "password", password, (err, result) => {
-          if (result) {
-            console.log(`User ${login} created`);
-            socket.emit("auth: user created");
-          } else {
-            console.log(`User ${login} not created`);
-            // TODO
-          }
-        });
-      } else {
-        console.log(`Login ${login} already exists`);
-        socket.emit("auth: login already exists");
-      }
-    });
+  socket.on(serverEvents.reqNewuser, data => {
+    data.socket = socket;
+    console.log(`Setting new login: ${data.login}`);
+    /** Add user if does not exist. */
+    redis.addUsernx(data);
   });
 
-  socket.on("auth: authorize user", data => {
-    let {login, password} = data;
-    console.log(`Authorizing user: ${login}`);
-    /** Get key */
-    redis.exists(login, (err, result) => {
-      if (err) {
-        throw err;
-      } else {
-        if (result) {
-          redis.hget(login, "password", (err, result) => {
-            if (err) {
-              throw err;
-            } else {
-              if (result === password) {
-                console.log(`User ${login} authorized`);
-                socket.emit("auth: authorized");
-              } else if (result !== password) {
-                console.log(`Incorrect password ${login}`);
-                socket.emit("auth: incorrect password");
-              } else {
-                // TODO???
-              }
-            }
-          });
-        } else {
-          console.log(`Login ${login} does not exist`);
-          socket.emit("auth: login does not exist");
-        }
-      }
-    });
+  socket.on(serverEvents.reqAuthorize, data => {
+    data.socket = socket;
+    console.log(`Authorizing user: ${data.login}`);
+    /** Authorize user */
+    redis.authorizeUser(data);
   });
 
-  socket.on("rooms: get all rooms' names", () => {
-
-    socket.emit("rooms: all rooms' names sent", {rooms: allRooms.getProperty("name")});
+  socket.on(serverEvents.reqAllRooms, () => {
+    socket.emit(serverEvents.resAllRooms, {rooms: allRooms.getProperty("name")});
 
     let joinRoom = (data) => {
       const {roomID, socketID, login} = data;
-
       return socket.join(`/room${roomID}`, () => {
-        redis.hset("room", roomID, (err, result) => {
-          if (err) {
-
-          } else {
-
-          }
-
-          socket.emit("rooms: room joined", {id: roomID});
-          io.sockets.in(`/room${roomID}`).emit("rooms: details of joined room sent", JSON.stringify(allRooms.getRoomDetails(roomID)));
-          console.log(`User ${socketID} joined room: ${roomID}.`);
-        });
+        socket.emit("rooms: room joined", {id: roomID});
+        io.sockets.in(`/room${roomID}`).emit("rooms: details of joined room sent", JSON.stringify(allRooms.getRoomDetails(roomID)));
+        console.log(`User ${socketID} joined room: ${roomID}.`);
       });
     };
 
-    socket.on("rooms: create new room", data => {
+    socket.on(serverEvents.reqNewroom, data => {
       data.owner.id = socket.id;
-      console.log("dataownerid" + data.owner.id);
-      console.log(`data.owner.id: ${data.owner.id}`);
       ({id: data.id, name: data.name} = new Room(data));
-      console.log("dataid" + data.id);
       joinRoom({socketID: socket.id, roomID: data.id});
-      socket.emit("rooms: join created room", data);
-      socket.broadcast.emit("rooms: new room created", data);
+      socket.emit(serverEvents.resJoinCreatedRoom, data);
+      socket.broadcast.emit(serverEvents.resNewroom, data);
       console.log(`new room with id ${data.id} created`);
     });
   });
 
-
-  socket.on("rooms: join room", data => {
+  socket.on(serverEvents.reqJoinRoom, data => {
     let id = data.id;
     console.log(`User joining the room: ${id}`);
     joinRoom({socketID: socket.id, roomID: data.id});

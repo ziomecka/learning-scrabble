@@ -1,0 +1,57 @@
+There is only one boardgame  (scrabble)
+One boardgame can have many rooms (games. I.e. 1 room === 1 played / opened game)
+There can be many users
+One room can have many players
+One player can be only in one room (One user can play one game)
+
+
+One user can be in many rooms (games) -> managed by socket.io
+One room can have many users -> managed by socket.io
+
+Data structure
+
+Hashes:
+---
+  room (=== game)
+    id - string, key
+    name - string
+
+---
+  game
+    id  - string, key
+    bag's tiles
+    tiles on board
+    boardgameId - string
+
+---
+  bag - set
+    id
+    tiles
+
+---
+  player's tiles - set
+    id
+    tiles
+
+---
+  roomplayer - sorted set
+    id
+    playerId
+
+---
+  player details
+    id
+    roomplayerId - string
+    userId
+    roomId
+    points
+    time
+    tilesId
+
+---
+  user
+    id
+    login
+    password
+    gameId
+    tiles
