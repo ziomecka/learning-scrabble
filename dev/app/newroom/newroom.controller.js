@@ -10,29 +10,34 @@ angular
   "newroomDefaults",
   "authorizationService",
   "clientEvents",
-  ($scope, $rootScope, $location, clientService, newroomDefaults, authorizationService, clienrEvents) => {
+  "$stateParams",
+  ($scope, $rootScope, $location, clientService, newroomDefaults,
+    authorizationService, clientEvents, $stateParams) => {
     let me = $scope;
     me.defaults = newroomDefaults;
     me.nameUnique = true;
-    me.newRoom = {
-      name: "scrabble",
-      // TODO
-      owner: {
-        id: clientService.id,
-        name: "player"
-      },
-      numberPlaces: me.defaults.placesOptions[0],
-      time: me.defaults.timeOptions[0]
-    };
+    me.name = "scrabble";
+    me.numberPlaces = me.defaults.placesOptions[0];
+    me.buttonsDisabled = false;
 
     me.changeName = () => {if (!me.nameUnique) me.nameUnique = true;};
 
     me.createRoom = () => {
-      clientService.emit(clientEvents.reqNewroom, me.newRoom);
+      me.buttonsDisabled = true;
+      $stateParams.numberPlaces = me.numberPlaces;
+      clientService.emit(clientEvents.reqNewroom, {
+        name: me.name,
+        numberPlaces: me.numberPlaces,
+        login: authorizationService.login
+      });
     };
 
     clientService.on(clientEvents.resNewroomJoined, data => {
-      authorizationService.go({state: "private.room", roomId: data.id});
+      me.buttonsDisabled = false;
+      authorizationService.go({
+        state: "private.room",
+        roomId: data.id
+      });
     });
   }
 ]);
