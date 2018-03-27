@@ -15,7 +15,7 @@
   @include center-flex
   flex-direction: row
   width: 100%
-  height: calc(100% / 15)
+  height: calc(100% / 16)
   border-top: 1px solid green
   border-left: 1px solid green
   &:last-child
@@ -24,12 +24,18 @@
 .scrabble__field
   display: inline-block
   position: relative
-  flex-basis: calc(100% / 15)
+  flex-basis: calc(100% / 16)
   height: 100%
-  width: calc(100% / 15)
+  width: calc(100% / 16)
   margin: 0
   padding: 0
   border-right: 1px solid green
+  &--description
+    text-align: center
+    vertical-align: middle
+    border: none
+    border-bottom: none
+    border-right: none
 
 .scrabble__field svg rect
   fill: lightblue
