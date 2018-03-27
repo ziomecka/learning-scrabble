@@ -16,6 +16,7 @@ const statusGame = require("./maps/server.status.game");
 const serverEvents = require("./server.events");
 
 const redis = require("./server.redis").redis;
+const mongoGame = require("./mongo/scrabble/game/game.mongo.insert");
 
 io.on("connection", socket => {
   /** Inform about the connection */
@@ -43,14 +44,13 @@ io.on("connection", socket => {
     let joinRoom = (data) => {
       const {roomID, socketID, login} = data;
       return socket.join(`/room${roomID}`, () => {
-        socket.emit("rooms: room joined", {id: roomID});
-        io.sockets.in(`/room${roomID}`).emit("rooms: details of joined room sent", JSON.stringify(allRooms.getRoomDetails(roomID)));
+        socket.emit(serverEvents.resNewroomJoined, {id: roomID});
+        io.sockets.in(`/room${roomID}`).emit(serverEvents.resJoinedRoomDetails, JSON.stringify(allRooms.getRoomDetails(roomID)));
         console.log(`User ${socketID} joined room: ${roomID}.`);
       });
     };
 
     socket.on(serverEvents.reqNewroom, data => {
-      data.owner.id = socket.id;
       ({id: data.id, name: data.name} = new Room(data));
       joinRoom({socketID: socket.id, roomID: data.id});
       socket.emit(serverEvents.resJoinCreatedRoom, data);
@@ -65,30 +65,38 @@ io.on("connection", socket => {
     joinRoom({socketID: socket.id, roomID: data.id});
   });
 
-  /**
-   * data: playerID, playerName: me.joinName, roomID, placeID
-   *
-   * @type {[type]}
-   */
-  socket.on("room: take place", data => {
+  socket.on(serverEvents.reqTakePlace, data => {
     allRooms.getRoomDetails(data.roomID).setPlaceOwner(data);
-    socket.emit("room: player took place",
+    socket.emit(serverEvents.resTakePlaceSuccess,
       {ownerID: data.playerID, ownerName: data.playerName, placeID: data.placeID}
     );
   });
 
-  socket.on("room: number of placess changed", data => {
+  socket.on(serverEvents.reqNumberPlacesChanged, data => {
     console.log(`Number of places changed: ${data.number}`);
 
     let places = allRooms.getRoomDetails(data.id).setNumberPlaces(data.number);
     console.log(`places: ${JSON.stringify(places)}`);
     if (places) {
       if (places.action === "places added") {
-        io.sockets.in(`/room${data.id}`).emit("room: new places", {places: places.places});
+        io.sockets.in(`/room${data.id}`).emit(serverEvents.resPlacesAdded, {places: places.places});
       } else if (places.action === "places removed") {
-        io.sockets.in(`/room${data.id}`).emit("room: new places", {places: []});
+        io.sockets.in(`/room${data.id}`).emit(serverEvents.resPlacesRemoved, {places: []});
       }
       places = null;
     }
+  });
+
+  socket.on(serverEvents.reqCreateScrabble, data => {
+    console.log("Creating scrabble");
+    let mongoGamePromise = new Promise((res, rej) => {
+      mongoGame.oninsert = data => res(data);
+      mongoGame.onerror = err => rej(`Insert game promise rejected: ${err}`);
+      mongoGame.insert();
+    });
+    mongoGamePromise.then(data => {
+      socket.emit(serverEvents.resCreateScrabbleSuccess, data);
+      console.log(`Game with id: ${data.id} has been created.`);
+    }).catch(reason => console.log(reason));
   });
 });
