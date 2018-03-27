@@ -6,49 +6,60 @@ angular
   "$scope",
   "$rootScope",
   "clientService",
-  ($scope, $rootScope, clientService) => {
-    let me = $scope;
-    me.places = [];
-    me.players = [];
-    me.seated = true;
-    me.joinName = "Joe Doe";
+  "newroomDefaults",
+  "authorizationService",
+  "clientEvents",
+    function ($scope, $rootScope, clientService, newroomDefaults, authorizationService, clientEvents) {
+      let me = $scope;
+      me.defaults = newroomDefaults;
+      me.time = newroomDefaults.timeOptions[3] || 10;
+      me.places = [];
+      me.players = [];
+      me.login = authorizationService.login;
 
-    me.numberOfPlaces = () => me.places.length;
+      this.$onInit = () => {
+        ({places: $scope.places, id: $scope.id, numberPlaces: $scope.numberPlaces} = JSON.parse(this.roomData));
+        clientService.emit(clientEvents.reqCreateScrabble);
+      };
 
-    clientService.on("rooms: details of joined room sent", data => {
+      clientService.on(clientEvents.resCreateScrabbleSuccess, data => {
+        console.log(`I have been informed about creating game with id: ${data.id}.`);
+      });
 
-      ({id: me.id, places: me.places} = JSON.parse(data));
+      me.seated = (() => me.places.some((place) => place.login === me.login))();
 
-      me.optionsNumber = me.numberOfPlaces();
-      me.seated = (() => me.places.some((place) => place.owner.id === clientService.id))();
+      me.numberPlacesChanged = num => {
+        clientService.emit(clientEvents.reqNumberPlacesChanged, {
+          id: me.id,
+          number: num
+        });
+      };
 
-      me.numberPlacesChanged = () => clientService.emit("room: number of places changed", {id: me.id, number: me.optionsNumber});
-
-      clientService.on("room: new places", data => {
+      clientService.on(clientEvents.resPlacesAdded, data => {
         me.places = [...me.places, ...data.places];
         console.log("New places created");
       });
 
-    });
+      me.takePlace = data => {
+        console.log("I try to take place");
+        clientService.emit(clientEvents.reqTakePlace, {
+          roomID: me.id,
+          placeID: data.placeID,
+          login: me.login
+        });
+      };
 
-    $scope.$watch("places", newValue => console.log(newValue), true);
-
-    me.takePlace = data => {
-      console.log("I try to take place");
-      clientService.emit("room: take place", {playerID: data.playerID, playerName: data.joinName, roomID: me.id, placeID: data.placeID});
-    };
-
-    clientService.on("room: player took place", data => {
-        console.log("I took place");
-        let place = me.places.find(item => item.id === data.placeID);
-        place.owner.id = data.ownerID;
-        place.owner.name = data.ownerName;
-        place.name = data.ownerName;
-        place.reserved = false;
-        place.isOpened = false;
-        me.seated = true;
-        me.players.push(data.ownerID);
-        place = null;
-    });
+      clientService.on("room: player took place", data => {
+          console.log("I took place");
+          let place = me.places.find(item => item.id === data.placeID);
+          // place.owner.id = data.ownerID;
+          // place.owner.name = data.ownerName;
+          // place.name = data.ownerName;
+          place.reserved = false;
+          place.isOpened = false;
+          me.seated = true;
+          me.players.push(data.login);
+          place = null;
+      });
   }
 ]);
