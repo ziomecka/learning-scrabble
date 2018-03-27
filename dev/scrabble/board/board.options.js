@@ -49,6 +49,12 @@ angular
     "field": {
       "id": "scrabbleField",
       "className": "scrabble__field",
+    },
+    "firstRow": {
+      "className": "scrabble__row scrabble__field--description",
+    },
+    "descriptionField": {
+      "className": "scrabble__field scrabble__field--description",
     }
   }
 });
