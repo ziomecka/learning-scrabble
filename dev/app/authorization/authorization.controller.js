@@ -24,10 +24,9 @@ angular
       me.buttonsDisabled = true;
     };
 
-    clientService.on(clientEvents.resAuthorizeSuccess, () => {
-      $rootScope.user = me.login;
-      $rootScope.authorized = true;
-      authorizationService.go({login: me.login});
+    clientService.on(clientEvents.resAuthorizeSuccess, data => {
+      authorizationService.authorize(data);
+      authorizationService.go();
     });
 
     clientService.on(clientEvents.resNoLogin, () => {
