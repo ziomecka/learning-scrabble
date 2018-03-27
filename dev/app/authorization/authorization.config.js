@@ -26,17 +26,16 @@ angular
   const privateState = {
     abstract: true,
     name: "private",
-    // url: "/private",
     resolve: {
-       user: ["authorizationService", "$q", (authorization, $q) => {
-         const d = $q.defer();
-         if (authorization.authorized) {
-           d.resolve(authorization.user);
-         } else {
-           d.reject("not authorized");
-         }
-         return d.promise;
-       }]
+      user: ["authorizationService", "$q", (authorization, $q) => {
+        const deferred = $q.defer();
+        if (authorization.authorized) {
+          deferred.resolve(authorization.user);
+        } else {
+          deferred.reject("not authorized");
+        }
+        return deferred.promise;
+      }]
     }
   };
 
@@ -58,9 +57,20 @@ angular
     name: "privateroom",
     url: "/:roomId",
     component: "roomComponent",
-    // resolve: {
-    //  "": (rooms, $stateParams) => rooms.find(room => room.id === $stateParams.roomId)
-    // }
+    resolve: {
+      roomData: [
+        "clientService",
+        "clientEvents",
+        "$q",
+        (clientService, clientEvents, $q) => {
+          const deferred = $q.defer();
+          clientService.on(clientEvents.resJoinedRoomDetails, data => deferred.resolve(data));
+          // TODO
+          clientService.on(clientEvents, data => deferred.reject("failed to join the room"));
+          return deferred.promise;
+        }
+      ]
+    }
  };
 
   $routeProvider.otherwise({templateUrl: "../index.html"});
