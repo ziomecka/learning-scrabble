@@ -7,6 +7,7 @@ module.exports = {
   "resAuthorizeFailed": "auth: incorrect password",
   "resLogoutSuccess": "",
   "reqNewuser": "newuser: create user",
+  "resNewuser": "newuser: user created",
   "reqNewroom": "rooms: create new room",
   "resNewroom": "rooms: new room created",
   "reqAllRooms": "rooms: get all rooms' names",
@@ -14,6 +15,12 @@ module.exports = {
   "resJoinCreatedRoom": "rooms: join created room",
   "reqJoinRoom": "rooms: join room",
   "resNewroomJoined": "rooms: room joined",
+  "resJoinedRoomDetails": "rooms: details of joined room sent",
   "reqTakePlace": "room: take place",
-  "resTakePlaceSuccess": "room: player took place"
+  "resTakePlaceSuccess": "room: player took place",
+  "reqNumberPlacesChanged": "room: number of places changed",
+  "resPlacesAdded": "room: new places",
+  "resPlacesRemoved": "room: places removed",
+  "reqCreateScrabble": "scrabble: create",
+  "resCreateScrabbleSuccess": "scrabble: created",
 };
