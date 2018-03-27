@@ -1,0 +1,47 @@
+read / write operations
+- create game:
+ - app: done when user enters a room
+ - mongo: done in
+   - games collection,
+   - bag collection,
+   game id returned to a user
+- join game as a player
+ - app: done when user: "seats" / "accepts game" ???
+ - mongo: done in
+   - players collection
+- draw 7 tiles per user:
+ - app: done when all users accept game
+ - mongo: done in
+   - bag collection
+   - players collection
+- accept word:
+ - app: done when word is accepted
+ - mongo: done in
+   - players collection
+   - board collection
+- calcluate points:
+ - app: done when word is accepted
+ - mongo: done in
+   - board collection
+- draw missing tiles per user:
+ - app: done when word is accepted
+ - mongo: done in
+   - bag collection
+   - players collection
+- exchange tiles
+ - app: done when users exchanges tiles
+ - mongo: done in
+   - bag collection
+   - players collection
+- get game data:
+ - app: done when player reenters a room with opened game
+ - mongo: done in
+   - games collection,
+   - players collection
+   - border collection
+- join game as a watcher
+ - app: done when user enters a room with opened game
+ - mongo: done in
+   - games collection,
+   - players collection
+   - border collection
