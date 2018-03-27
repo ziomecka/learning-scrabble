@@ -6,13 +6,20 @@ angular
       restrict: "A",
       require: "ngModel",
       link: ($scope, element, attr, ngModel) => {
-        ngModel.$validators.invalidPasswords = () => {
-          if (angular.element("#password").val() !== angular.element("#repeatedPassword").val()) {
-            $scope.createUserForm.$setValidity("passwordsNotMatch", false);
-          } else {
-            $scope.createUserForm.$setValidity("passwordsNotMatch", true);
-          }
+        const validate = val => {
+          let result = ((val === angular.element("#password").val()) &&
+                        (val === angular.element("#repeatedPassword").val()));
+          return result;
         };
+
+        const validator = val => {
+          $scope.createUserForm.$setValidity("passwordsNotMatch", validate(val));
+          return val;
+        };
+
+        /** Attach validator to the element */
+        ngModel.$parsers.unshift(validator);
+        ngModel.$formatters.unshift(validator);
       }
     };
   });
