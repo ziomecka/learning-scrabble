@@ -11,5 +11,5 @@ import "./client/socket.service";
 import "./client/app.service";
 import "./client/scrabble.service";
 
-import "./app.run";
+// import "./app.run";
 import "./home/home";
