@@ -3,5 +3,11 @@ html(ng-app="app" ng-controller="appController")
     title Let's play scrabble
     base(href="/")
   body
-    div(ui-view class="content")
+    header(ng-class="{'title__box--narrow': narrowTitle}")
+      div(title class="title__box" ng-class="{'title__box--short': shortTitle, 'title__box--narrow': narrowTitle}")
+    main
+      div(class="main__content" ng-class="" ui-view)
+    footer
+      p
+        a(href="") Katarzyna Ziomek-Zdanowicz
     script(src="/socket.io/socket.io.js")
