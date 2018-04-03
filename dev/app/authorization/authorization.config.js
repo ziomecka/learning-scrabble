@@ -26,8 +26,9 @@ angular
       };
 
       const newuser = {
-        component: "newuserComponent",
         url: "/newuser",
+        templateUrl: "../newuser.html",
+        controller: require("../newuser/newuser.controller")
       };
 
       const games = {
