@@ -1,22 +1,29 @@
 /* jshint esversion: 6 */
-angular
-.module("roomsModule")
-.controller("roomsController", [
+module.exports = [
   "$scope",
-  "$rootScope",
-  "$location",
-  "clientService",
-  "clientEvents",
-  ($scope, $rootScope, $location, clientService, clientEvents) => {
+  "appService",
+  "roomsList",
+  function ($scope, appService, roomsList) {
     let me = $scope;
     me.rooms = [];
 
-    clientService.emit(clientEvents.reqAllRooms);
+    this.$onInit = () => {
+      me.rooms = [...roomsList];
+    };
 
-    clientService.on(clientEvents.resAllRooms, data => me.rooms = [...data.rooms]);
+    appService.newRoomAdded({
+      callback: {
+        successNewRoomAdded: data => me.rooms = [...me.rooms, ...data] // TODO
+      }
+    });
 
-    clientService.on(clientEvents.resNewroom, data => me.rooms.push(data));
-
-    me.joinRoom = (id) => clientService.emit(clientEvents.reqJoinRoom, {id: id});
+    me.joinRoom = id => appService.joinRoom({
+      id: id,
+      callback: {
+        successJoinRoom: data => {
+          me.buttonsDisabled = false; //TODO not needed?
+        }
+      }
+    });
   }
-]);
+];
