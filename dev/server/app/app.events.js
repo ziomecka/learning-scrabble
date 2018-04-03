@@ -1,0 +1,28 @@
+/* jshint esversion: 6 */
+module.exports = {
+  "reqAuthorize": "auth: authorize user",
+  "resAuthorizeSuccess": "auth: authorized on the password basis",
+  "resAuthorizeFailed": "auth: incorrect password",
+  "resLogoutSuccess": "",
+  "reqNewuser": "newuser: create user",
+  "resNewuser": "newuser: user created",
+  "resNoLogin": "auth: login does not exist",
+  "resDuplicatedLogin":  "auth: login already exists",
+  "reqCreateNewRoom": "rooms: create new room",
+  "resCreateNewRoom": "rooms: new room created",
+  "resNewRoomAdded": "rooms: new room added to list",
+  "reqAllRooms": "rooms: get all rooms' names",
+  "resAllRooms": "rooms: all rooms' names sent",
+  "reqJoinRoom": "rooms: join room",
+  "resRoomJoined": "rooms: room joined",
+  "reqJoinedRoomDetails": "rooms: send details of joined room",
+  "resJoinedRoomDetails": "rooms: details of joined room sent",
+  "reqTakePlace": "room: take place",
+  "resTakePlaceSuccess": "room: player took place",
+  "reqNumberPlacesChanged": "room: number of places changed",
+  "resPlacesAdded": "room: new places",
+  "resPlacesRemoved": "room: places removed",
+  "reqGetUp": "room: player get up",
+  "resGetUp": "room: player got up",
+  "resAskPlayerStart": "room: ask player to start game"
+};
