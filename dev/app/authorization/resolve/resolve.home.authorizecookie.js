@@ -1,4 +1,5 @@
 /* jshint esversion: 6 */
+/** Authorize user via the cookies. */
 module.exports = [
   "authorizationCookiesService",
   "authorizationService",
