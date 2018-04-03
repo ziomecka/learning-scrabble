@@ -1,17 +1,4 @@
-div(id="game" class="game")
-  div(id="gameBoard" class="game__board")
+div(id="game" class="room")
+  div(id="gameBoard" class="room__board")
     div(id="scrabbleBoard" board-directive)
-  div(id="gamePanel" class="game__panel")
-    span(ng-bind="")
-    div(class="game__panel--players" ng-repeat="place in places track by $index")
-      button(ng-bind="place.login" ng-click="takePlace({placeId: place.id, login: login})" ng-disabled="place.login || !place.isOpened || seated")
-    div(class="game__panel--controls" id="gameControls")
-      button(ng-click="endTurn()") End turn
-      button(ng-click="exchangeTiles()") Exchange tiles
-      button(ng-click="challange()") Challenge
-      a(href="/rooms") back
-    div(id="gameOptions")
-      label(for="numberPlaces") number of players
-      select(ng-model="numberPlaces" ng-options="placesOption for placesOption in defaults.placesOptions track by placesOption" ng-change="numberPlacesChanged(numberPlaces)" class="form__input--narrow")
-      label(for="time") time
-      select(ng-model="time" ng-options="timeOption for timeOption in defaults.timeOptions track by timeOption" class="form__input--narrow")
+  div(ui-view="roomsidebar" class="room__sidebar")
