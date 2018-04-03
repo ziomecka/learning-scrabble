@@ -1,5 +1,6 @@
 /* jshint esversion: 6 */
 const mongo = require("./mongo.client");
+const assert = require("assert");
 
 const insertOne = options => {
   let {collection, object} = options;
@@ -7,13 +8,27 @@ const insertOne = options => {
     if (err) throw err;
     const dbo = db.db(mongo.name);
     dbo.collection(collection).insertOne(object, (err, res) => {
-      if (err) throw err;
       console.log(`1 document inserted to ${collection}`);
       db.close();
     });
   });
 };
 
+const createCollection = options => {
+  let {collection} = options;
+  if (collection) {
+    let validator = require(path.resolve(__dirname, "./validate", `${collection}.validator.js`));
+    mongo.client.connect(mongo.url, (err, db) => {
+      if (err) throw err;
+      const dbo = db.db(mongo.name);
+      dbo.createCollection(collection, validator, (err, res) => {
+        db.close();
+      });
+    });
+  }
+};
+
  module.exports = {
    insertOne: insertOne,
+   createCollection: createCollection
  };
