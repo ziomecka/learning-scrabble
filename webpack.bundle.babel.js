@@ -1,4 +1,6 @@
 /* jshint esversion: 6 */
+// TODO: html spec correct
+// TODO change names of html files
 import merge from "webpack-merge";
 import common from "./webpack.common.babel";
 import HtmlWebpackPlugin  from "html-webpack-plugin";
@@ -11,9 +13,6 @@ const htmlIndex = {
   title: "Welcome",
   myPageHeader: "Scrabble",
   template: path.join("./app/index.pug"),
-  // assets: {
-  //   style: path.join("./css/index.css")
-  // },
   chunks: ["app"],
   filename: "./index.html",
   inject: "head"
@@ -22,6 +21,30 @@ const htmlIndex = {
 const htmlIndexAssets = {
   assets: [path.join("./app/css/index.css")],
   append: true
+};
+
+const htmlTitle = {
+  title: "Scrabble room",
+  myPageHeader: "Let's play scrabble",
+  template: path.join("./app/title/title.pug"),
+  filename: "./title.html",
+  inject: false
+};
+
+const htmlNavigation = {
+  title: "Scrabble room",
+  myPageHeader: "Let's play scrabble",
+  template: path.join("./app/navigation/navigation.pug"),
+  filename: "./navigation.html",
+  inject: false
+};
+
+const htmlRoomSidebar = {
+  title: "Scrabble room",
+  myPageHeader: "Let's play scrabble",
+  template: path.join("./app/room/sidebar/room.sidebar.pug"),
+  filename: "./room.sidebar.html",
+  inject: false
 };
 
 const htmlRooms = {
@@ -51,7 +74,7 @@ const htmlNewUser = {
 const htmlNewRoom = {
   title: "Scrabble room",
   myPageHeader: "Let's play scrabble",
-  template: path.join("./app/newroom/newroom.pug"),
+  template: path.join("./app/rooms/newroom/newroom.pug"),
   filename: "./newroom.html",
   inject: false
 };
@@ -82,7 +105,10 @@ const settings = merge (common, {
   },
   plugins: [
     new HtmlWebpackPlugin(htmlIndex),
+    new HtmlWebpackPlugin(htmlTitle),
+    new HtmlWebpackPlugin(htmlNavigation),
     new HtmlWebpackPlugin(htmlRoom),
+    new HtmlWebpackPlugin(htmlRoomSidebar),
     new HtmlWebpackPlugin(htmlRooms),
     new HtmlWebpackPlugin(htmlAuth),
     new HtmlWebpackPlugin(htmlNewUser),
