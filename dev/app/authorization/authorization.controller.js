@@ -1,42 +1,46 @@
 /* jshint esversion: 6 */
-angular
-.module("authorizationModule")
-.controller("authorizationController", [
+module.exports = [
   "$scope",
-  "$rootScope",
-  "$location",
-  "$state",
-  "clientService",
+  "appService",
   "authorizationService",
-  "clientEvents",
-  ($scope, $rootScope, $location, $state, clientService, authorizationService, clientEvents) => {
+  "authorizationStates",
+  function ($scope, appService, authorizationService, authorizationStates) {
     const me = $scope;
+
+    // TODO move to authorizationService?
+    const authorize = data => {
+      authorizationService.authorize(data);
+      authorizationService.go();
+    };
+
     me.resNoLogin = false;
     me.resAuthorizeFailed = false;
     me.buttonsDisabled = false;
     me.login = "";
     me.password = "";
 
+    me.goNewuser = () => {
+      authorizationService.go({state: authorizationStates.newuser});
+    };
+
     me.loginUser = data => {
-      clientService.emit(clientEvents.reqAuthorize, data);
       me.resNoLogin = false;
       me.resAuthorizeFailed = false;
       me.buttonsDisabled = true;
+      appService.authorize({
+        data: data,
+        callback: {
+          success: data => authorize(data),
+          failureLogin: () => {
+            me.buttonsDisabled = false;
+            me.resNoLogin = true;
+          },
+          failurePassword: () => {
+            me.buttonsDisabled = false;
+            me.resAuthorizeFailed = true;
+          }
+        }
+      });
     };
-
-    clientService.on(clientEvents.resAuthorizeSuccess, data => {
-      authorizationService.authorize(data);
-      authorizationService.go();
-    });
-
-    clientService.on(clientEvents.resNoLogin, () => {
-      me.buttonsDisabled = false;
-      me.resNoLogin = true;
-    });
-
-    clientService.on(clientEvents.resAuthorizeFailed, () => {
-      me.buttonsDisabled = false;
-      me.resAuthorizeFailed = true;
-    });
   }
-]);
+];
