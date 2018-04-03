@@ -1,4 +1,5 @@
 /* jshint esversion: 6 */
+/** Ui-router states. */
 angular
   .module("authorizationModule")
   .constant("authorizationStates", {
