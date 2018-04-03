@@ -1,87 +1,92 @@
 /* jshint esversion: 6 */
+// TODO what if url address is incorrect
 angular
-.module("authorizationModule")
-.config([
-  "$routeProvider",
-  "$locationProvider",
-  "$stateProvider",
-  ($routeProvider, $locationProvider, $stateProvider) => {
+  .module("authorizationModule")
+  .config([
+    "$routeProvider",
+    "$locationProvider",
+    "$stateProvider",
+    "authorizationStates",
+    ($routeProvider, $locationProvider, $stateProvider, authorizationStates) => {
 
-  const authorizationState = {
-    name: "authorization",
-    component: "authorizationComponent",
-    url: "/",
-    resolve: {
-      loginUser : (clientService) => {
-      }
-    }
-  };
+      const home = {
+        url: "/",
+        resolve: {
+          authorizeCookie: require("./resolve/resolve.home.authorizecookie")
+        },
+      };
 
-  const newUserState = {
-    name: "newuser",
-    url: "/newuser",
-    component: "newuserComponent",
-  };
-
-  const privateState = {
-    abstract: true,
-    name: "private",
-    resolve: {
-      user: ["authorizationService", "$q", (authorization, $q) => {
-        const deferred = $q.defer();
-        if (authorization.authorized) {
-          deferred.resolve(authorization.user);
-        } else {
-          deferred.reject("not authorized");
+      const authorization = {
+        url: "/authorization",
+        templateUrl: "../authorization.html",
+        controller: require("./authorization.controller"),
+        resolve: {
+          fromApp: require("./resolve/resolve.authorization.fromhome")
         }
-        return deferred.promise;
-      }]
-    }
-  };
+      };
 
-  const privateRoomsState = {
-    // abstract: true,
-    name: "privaterooms",
-    url: "/rooms",
-    views: {
-      "": {
-        component: "roomsComponent"
-      },
-      "newroom@private.rooms": {
-        component: "newroomComponent"
-      }
-    }
-  };
+      const newuser = {
+        component: "newuserComponent",
+        url: "/newuser",
+      };
 
-  const privateRoomState = {
-    name: "privateroom",
-    url: "/:roomId",
-    component: "roomComponent",
-    resolve: {
-      roomData: [
-        "clientService",
-        "clientEvents",
-        "$q",
-        (clientService, clientEvents, $q) => {
-          const deferred = $q.defer();
-          clientService.on(clientEvents.resJoinedRoomDetails, data => deferred.resolve(data));
-          // TODO
-          clientService.on(clientEvents, data => deferred.reject("failed to join the room"));
-          return deferred.promise;
+      const games = {
+        abstract: true,
+        template: "<ui-view/>",
+        resolve: {
+          authorizeCookie: require("./resolve/resolve.home.authorizecookie")
+          // user: require("./resolve/resolve.games.user"), // TODO out because done in cookies?
         }
-      ]
+      };
+
+      const gamesRooms = {
+        url: "/rooms",
+        resolve: {
+          roomsList: require("./resolve/resolve.rooms.roomslist"),
+        },
+        views: {
+          "": {
+            templateUrl: "../rooms.html",
+            controller: require("../rooms/rooms.controller")
+          },
+          [`navigation@${authorizationStates.rooms}`]: {
+            templateUrl: "../navigation.html",
+            controller: require("../navigation/navigation.controller")
+          },
+          [`newroom@${authorizationStates.rooms}`]: {
+            templateUrl: "../newroom.html",
+            controller: require("../rooms/newroom/newroom.controller")
+          }
+        }
+      };
+
+      const gamesRoom = {
+        url: "/rooms/room/:roomId",
+        resolve: {
+          roomData: require("./resolve/resolve.room.roomdata"),
+          narrowTitle: require("./resolve/resolve.room.narrowtitle")
+        },
+        views: {
+          "": {
+            templateUrl: "../room.html",
+            controller: require("../room/room.controller")
+          },
+          [`roomsidebar@${authorizationStates.room}`]: {
+            templateUrl: "../room.sidebar.html",
+            controller: require("../room/sidebar/room.sidebar.controller")
+          }
+        }
+      };
+
+      $routeProvider.otherwise({templateUrl: "../index.html"});
+
+      $stateProvider.state(authorizationStates.home, home);
+      $stateProvider.state(authorizationStates.authorization, authorization);
+      $stateProvider.state(authorizationStates.newuser, newuser);
+      $stateProvider.state(authorizationStates.games, games);
+      $stateProvider.state(authorizationStates.rooms, gamesRooms);
+      $stateProvider.state(authorizationStates.room, gamesRoom);
+
+      $locationProvider.html5Mode({enabled: true});
     }
- };
-
-  $routeProvider.otherwise({templateUrl: "../index.html"});
-
-  $stateProvider.state("authorization", authorizationState);
-  $stateProvider.state("newuser", newUserState);
-  $stateProvider.state("private", privateState);
-  $stateProvider.state("private.rooms", privateRoomsState);
-  // $stateProvider.state("private.rooms.newroom", privateNewRoomState);
-  $stateProvider.state("private.room", privateRoomState);
-
-  $locationProvider.html5Mode({enabled: true});
-}
-]);
+  ]);
