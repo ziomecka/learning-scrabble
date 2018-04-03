@@ -3,13 +3,13 @@
   font-size: 0.8em
   font-weight: 800
   padding: $button-padding
-  margin: 0 0 5px
+  margin: $button-margin
   letter-spacing: 1px
   text-decoration: none
   outline: none
   width: 100%
-  max-width: 100px
-  height: 20px
+  max-width: $button-width-max
+  height: $button-height
 
 %button_button
   border: $button-border-width
@@ -21,9 +21,15 @@
   border: none
   background: inherit
 
+%button_player
+  min-width: $button-width-min
+
 .button
   @extend %button
   @extend %button_button
+
+.button__player
+  @extend %button
 
 .button__link
   @extend %button
