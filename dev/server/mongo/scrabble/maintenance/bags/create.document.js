@@ -2,13 +2,14 @@
 const ObjectID = require("mongodb").ObjectID;
 const lettersNumber = require("./letters.number");
 const lettersPoints = require("./letters.points");
+const points = require("./points");
 const findkey = require("lodash/findkey");
 
 const create = options => {
   options = Object(options);
   let {lang: lang = "Polish"} = options;
   let letters = lettersNumber[lang];
-  let points = lettersPoints[lang];
+  let point = points[lang];
   let tiles = [];
   let tile;
   let tileId = 0;
@@ -19,16 +20,13 @@ const create = options => {
       tile = {
         _id: tileId++,
         letter: letter,
-        points: points[level]
+        points: point[level]
       };
       tiles.push(tile);
     }
   });
 
-  return {
-    _id: new ObjectID(),
-    tiles: tiles
-  };
+  return tiles;
 };
 
 module.exports = {

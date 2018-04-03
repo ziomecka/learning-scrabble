@@ -1,34 +1,22 @@
 /* jshint esversion: 6 */
 const ObjectID = require("mongodb").ObjectID;
 const dbName = require("../../mongo.client").name;
+const bags = require("./assets/bags.json");
+const boards = require("./assets/boards.json");
+const createPlayer = require("../players/create.document").create;
 
 const create = options => {
   options = Object(options);
-  let {bagId, boardId, playersId} = options;
+  let {id: id = ObjectID(), lang: lang = "Polish", number = 2, time = 3} = options;
 
-  // TODO
-  // if (bagId === undefined || boardId === undefined || playersId === undefined) {
-  //   throw Error;
-  // }
+  let players = new Array(number).fill(createPlayer({time: time}));
 
   return {
-    _id: id,
-    name: "scrabble",
-    bag: {
-      "$ref": "bags",
-      "$id": bagId,
-      "$db": dbName
-    },
-    board: {
-      "$ref": "boards",
-      "$id": boardId,
-      "$db": dbName
-    },
-    players: {
-      "$ref": "players",
-      "$id": playersId,
-      "$db": dbName
-    }
+    "_id": id,
+    "name": "scrabble",
+    "bag": bags[lang],
+    "board": boards[lang],
+    "players": players
   };
 };
 
