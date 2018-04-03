@@ -1,0 +1,19 @@
+//- div(id="gamePanel" class="room__sidebar")
+span(ng-bind="")
+div(class="room__sidebar--players")
+  div(ng-repeat="place in places track by $index" class="room__sidebar--place")
+    button(ng-bind="place.login" ng-click="takePlace({placeId: place.id, login: login})" ng-disabled="place.login || !place.isOpened | seated" ng-class="" class="button button__player")
+    p(ng-bind="place.points")
+div(ng-bind="")
+div(class="room__sidebar--controls" id="gameControls")
+  button(ng-click="endTurn()") End turn
+  button(ng-click="exchangeTiles()") Exchange tiles
+  button(ng-click="challange()") Challenge
+  button(ng-click="getUp()" ng-show="seated") Get up
+  a(href="/rooms") back
+div(id="gameOptions")
+  label(for="numberPlaces") number of players
+  select(ng-model="numberPlaces" ng-options="placesOption for placesOption in defaults.placesOptions track by placesOption" ng-change="numberPlacesChanged(numberPlaces)" class="form__input--narrow")
+  label(for="time") time
+  select(ng-model="time" ng-options="timeOption for timeOption in defaults.timeOptions track by timeOption" class="form__input--narrow")
+startGamePopup(acceptPopup="acceptGame" ng-show="askForAcceptance")
