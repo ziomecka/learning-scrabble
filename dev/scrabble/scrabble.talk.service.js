@@ -4,21 +4,15 @@ angular
   .service("scrabbleTalk", [
     "socketService",
     "scrabbleEvents",
-    "$q",
-    function (socketService, scrabbleEvents, $q) {
+    function (socketService, scrabbleEvents) {
 
       this.createScrabble = options => {
-        // options = Object(options);
-        // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
-        // let {callbacks: {scrabbleCreated}} = options;
         this.listenScrabbleCreated(options);
         socketService.emit(scrabbleEvents.reqCreateScrabble);
       };
 
       this.listenScrabbleCreated = options => {
-        // options = Object(options);
-        // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
         let {callbacks: {scrabbleCreated}} = options;
         let eventName = scrabbleEvents.resCreateScrabbleSuccess;
@@ -30,8 +24,6 @@ angular
       };
 
       this.listenInitialTiles = options => {
-        // options = Object(options);
-        // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
         let {callbacks: {initialTiles}} = options;
         let eventName = scrabbleEvents.resInitialTiles;
@@ -42,8 +34,6 @@ angular
       };
 
       this.listenRoundStarted = options => {
-        // options = Object(options);
-        // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
         let {callbacks: {roundStarted}} = options;
         let eventName = scrabbleEvents.resRoundStarted;
@@ -54,8 +44,6 @@ angular
       };
 
       this.listenTilesExchanged = options => {
-        // options = Object(options);
-        // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
         let {callback} = options;
         let eventName = scrabbleEvents.resExchangeTilesSuccess;
@@ -66,8 +54,6 @@ angular
       };
 
       this.listenRoundEnded = options => {
-        // options = Object(options);
-        // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
         let {callback: {getTiles}} = options;
 
@@ -89,16 +75,12 @@ angular
       };
 
       this.verifyWord = options => {
-        // options = Object(options);
-        // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
         socketService.emit(scrabbleEvents.reqVerifyWord);
         // TODO listn to repsonse
       };
 
       this.exchangeTiles = options => {
-        // options = Object(options);
-        // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
         let {callbacks: {exchangedTiles}, tiles} = options;
         socketService.emit(scrabbleEvents.reqExchangeTiles, tiles);
@@ -106,8 +88,6 @@ angular
       };
 
       this.endRound = options => {
-        // options = Object(options);
-        // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
         socketService.emit(scrabbleEvents.reqEndRound);
         this.listenRoundEnded();
