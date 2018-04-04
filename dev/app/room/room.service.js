@@ -8,7 +8,7 @@ angular
 
       // clientService.emit("room: get player statuses");
       // clientService.on("room: player statuses sent", data => this.statusPlayer = data);
-      // 
+      //
       this.changeNumberPlaces = options => {
         let {id, number, callback: {successChanged}} = options;
 
@@ -64,7 +64,7 @@ angular
 
       this.listenAskForAcceptance = options => {
         let {callbacks: ask} = options;
-        let eventName = scrabbleEvents.askForAcceptance;
+        let eventName = roomEvents.askForAcceptance;
         socektService.on(eventName, data => {
           ask();
           socketService.off(eventName);
@@ -73,13 +73,13 @@ angular
 
       this.tellAccepted = options => {
         let {data} = options;
-        let eventName = scrabbleEvents.resAskForAcceptance;
+        let eventName = roomEvents.resAskForAcceptance;
         socektService.emit(eventName);
       };
 
       this.listenToStart = options => {
         let {callbacks: start} = options;
-        let eventName = scrabbleEvents.start;
+        let eventName = roomEvents.start;
         socektService.on(eventName, data => {
           start();
           socketService.off(eventName);
