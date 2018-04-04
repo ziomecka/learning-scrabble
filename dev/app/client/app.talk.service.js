@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 angular
   .module("app")
-  .service("appService", [
+  .service("appTalkService", [
     "socketService",
     "appEvents",
     "$stateParams",
@@ -74,56 +74,5 @@ angular
         });
       };
 
-      this.changeNumberPlaces = options => {
-        let {id, number, callback: {successIncreased}} = options;
-        socketService.emit(appEvents.reqNumberPlacesChanged, {
-          id: id,
-          number: number
-        });
-
-        socketService.on(appEvents.resPlacesAdded, data => {
-          successIncreased(data);
-          console.log("New places created");
-        });
-      };
-
-      this.takePlace = options => {
-        let {roomId, placeId, callback: {successTakePlace}} = options;
-
-        socketService.emit(appEvents.reqTakePlace, {
-          roomID: roomId,
-          placeId: placeId,
-          login: authorizationService.login
-        });
-        console.log("I try to take place");
-
-        socketService.on(appEvents.resTakePlace, data => {
-          successTakePlace(data);
-          console.log("I took place");
-        });
-      };
-
-      this.getUp = options => {
-        let {roomId, placeId, callback: {successGetUp}} = options;
-        socketService.emit(appEvents.reqGetUp, {
-          roomID: roomId,
-          placeId: placeId,
-          login: authorizationService.login
-        });
-        console.log("I get up.");
-
-        socketService.on(appEvents.resGetUp, data => {
-            successGetUp(data);
-            console.log("I've got up");
-        });
-      };
-
-      this.askPlayerStart = options => {
-        let {callback: {successAskPlayerStart}} = options;
-        socketService.on(appEvents.resAskPlayerStart, () => {
-          successAskPlayerStart();
-          console.log("Ask player to start.");
-        });
-      };
     }
   ]);
