@@ -1,9 +1,9 @@
 /* jshint esversion: 6 */
 module.exports = [
   "$scope",
-  "appService",
+  "appTalkService",
   "roomsList",
-  function ($scope, appService, roomsList) {
+  function ($scope, appTalkService, roomsList) {
     let me = $scope;
     me.rooms = [];
 
@@ -11,13 +11,13 @@ module.exports = [
       me.rooms = [...roomsList];
     };
 
-    appService.newRoomAdded({
+    appTalkService.newRoomAdded({
       callback: {
         successNewRoomAdded: data => me.rooms = [...me.rooms, ...data] // TODO
       }
     });
 
-    me.joinRoom = id => appService.joinRoom({
+    me.joinRoom = id => appTalkService.joinRoom({
       id: id,
       callback: {
         successJoinRoom: data => {
