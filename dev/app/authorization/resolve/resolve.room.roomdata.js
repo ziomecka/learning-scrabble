@@ -2,12 +2,12 @@
 // TODO correct
 /** Gets room's details */
 module.exports = [
-  "appService",
+  "appTalk",
   "$q",
-  (appService, $q) => {
+  (appTalk, $q) => {
     const deferred = $q.defer();
     const resolve = data => deferred.resolve(data);
-    appService.getRoomDetails({
+    appTalk.getRoomDetails({
       callback: resolve
     });
   // TODO deferred.reject("failed to join the room")
