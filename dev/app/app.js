@@ -9,6 +9,5 @@ import "./client/scrabble.events";
 
 import "./client/socket.service";
 import "./client/app.talk.service";
-import "./client/scrabble.service";
 
 import "./tools/lodash.factory";
