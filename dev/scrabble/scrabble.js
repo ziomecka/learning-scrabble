@@ -1,2 +1,5 @@
 /* jshint esversion: 6 */
-import scrabbleModule from "./scrabble.module";
+import "./scrabble.module";
+import "./scrabble.game.factory";
+import "./scrabble.talk.service";
+import "./scrabble.events";
