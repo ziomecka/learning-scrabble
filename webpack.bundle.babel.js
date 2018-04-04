@@ -87,6 +87,30 @@ const htmlRoom = {
   inject: false
 };
 
+const htmlControlsRound = {
+  title: "Scrabble room",
+  myPageHeader: "Let's play scrabble",
+  template: path.join("./scrabble/controls/round/round.pug"),
+  filename: "./room.controls.round.html",
+  inject: false
+};
+
+const htmlControlsExchange = {
+  title: "Scrabble room",
+  myPageHeader: "Let's play scrabble",
+  template: path.join("./scrabble/controls/exchange/exchange.pug"),
+  filename: "./room.controls.exchange.html",
+  inject: false
+};
+
+const htmlControlsVerify = {
+  title: "Scrabble room",
+  myPageHeader: "Let's play scrabble",
+  template: path.join("./scrabble/controls/verify/verify.pug"),
+  filename: "./room.controls.verify.html",
+  inject: false
+};
+
 const copyOptions = [
   {
     from: "./server/",
@@ -113,6 +137,9 @@ const settings = merge (common, {
     new HtmlWebpackPlugin(htmlAuth),
     new HtmlWebpackPlugin(htmlNewUser),
     new HtmlWebpackPlugin(htmlNewRoom),
+    new HtmlWebpackPlugin(htmlControlsRound),
+    new HtmlWebpackPlugin(htmlControlsExchange),
+    new HtmlWebpackPlugin(htmlControlsVerify),
     new HtmlWebpackIncludeAssetsPlugin(htmlIndexAssets),
     new CopyWebpackPlugin(copyOptions)
   ]
