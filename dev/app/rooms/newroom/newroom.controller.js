@@ -1,11 +1,11 @@
 /* jshint esversion: 6 */
 module.exports = [
   "$scope",
-  "appService",
+  "appTalkService",
   "newroomDefaults",
   "authorizationService",
   "authorizationStates",
-  ($scope, appService, newroomDefaults, authorizationService, authorizationStates) => {
+  ($scope, appTalkService, newroomDefaults, authorizationService, authorizationStates) => {
     let me = $scope;
     me.defaults = newroomDefaults;
     me.nameUnique = true;
@@ -20,7 +20,7 @@ module.exports = [
     };
 
     me.createRoom = () => {
-      appService.createRoom({
+      appTalkService.createRoom({
         name: me.name,
         numberPlaces: me.numberPlaces,
         callback: {
