@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 module.exports = [
   "$scope",
-  "appService",
+  "appTalkService",
   "authorizationService",
   "authorizationStates",
-  ($scope, appService, authorizationService, authorizationStates) => {
+  ($scope, appTalkService, authorizationService, authorizationStates) => {
     const me = $scope;
     let loginNotUnique = false;
     me.login = "";
@@ -16,7 +16,7 @@ module.exports = [
 
     me.createUser = data => {
       const failureLogin = () => loginNotUnique = true;
-      appService.createUser({
+      appTalkService.createUser({
         data: data,
         callback: {
           failureLogin: failureLogin
