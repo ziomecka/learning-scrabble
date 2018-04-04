@@ -1,12 +1,12 @@
 /* jshint esversion: 6 */
 /** Gets list of rooms. */
 module.exports = [
-  "appTalk",
+  "appTalkService",
   "$q",
-  (appTalk, $q) => {
+  (appTalkService, $q) => {
     const deferred = $q.defer();
     const resolve = data => deferred.resolve(data);
-    appTalk.getAllRooms({callback: resolve});
+    appTalkService.getAllRooms({callback: resolve});
     // TODO reject
     return deferred.promise;
   }
