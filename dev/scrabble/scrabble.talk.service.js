@@ -4,7 +4,17 @@ angular
   .service("scrabbleTalk", [
     "socketService",
     "scrabbleEvents",
-    function (socketService, scrabbleEvents) {
+    "$q",
+    function (socketService, scrabbleEvents, $q) {
+
+      this.createScrabble = options => {
+        // options = Object(options);
+        // options.callbacks = Object(options.callbacks);
+        options.callbacks = Object(Object(options).callbacks);
+        // let {callbacks: {scrabbleCreated}} = options;
+        this.listenScrabbleCreated(options);
+        socketService.emit(scrabbleEvents.reqCreateScrabble);
+      };
 
       this.listenScrabbleCreated = options => {
         // options = Object(options);
@@ -13,9 +23,10 @@ angular
         let {callbacks: {scrabbleCreated}} = options;
         let eventName = scrabbleEvents.resCreateScrabbleSuccess;
         socketService.on(eventName, data => {
-          socketService.off(eventName);
-          scrabbleCreated(data);
-        });
+            console.log("I was informed of created game.");
+            scrabbleCreated(data);
+            socketService.off(eventName);
+          });
       };
 
       this.listenInitialTiles = options => {
@@ -75,15 +86,6 @@ angular
           this.listenRoundStarted();
           getTiles(data);
         });
-      };
-
-      this.createScrabble = options => {
-        // options = Object(options);
-        // options.callbacks = Object(options.callbacks);
-        options.callbacks = Object(Object(options).callbacks);
-        let {callbacks: {scrabbleCreated}} = options;
-        socketService.emit(scrabbleEvents.reqCreateScrabble);
-        this.listenScrabbleCreated({callback: scrabbleCreated});
       };
 
       this.verifyWord = options => {
