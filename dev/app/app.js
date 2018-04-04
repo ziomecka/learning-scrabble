@@ -4,9 +4,9 @@ import "./app.controller";
 
 import "./title/title";
 
-import "./client/app.events";
+import "./app.events";
 
-import "./client/socket.service";
-import "./client/app.talk.service";
+import "./socket/socket.service";
+import "./app.talk.service";
 
 import "./tools/lodash.factory";
