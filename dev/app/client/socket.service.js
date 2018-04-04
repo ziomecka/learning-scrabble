@@ -17,6 +17,10 @@ angular
         });
       };
 
+      this.off = (event) => {
+        socket.off(event);
+      };
+
       this.emit = (event, data, callback) => {
         socket.emit(event, data, () => {
           const args = arguments;
