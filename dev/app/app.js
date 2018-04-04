@@ -5,7 +5,6 @@ import "./app.controller";
 import "./title/title";
 
 import "./client/app.events";
-import "./client/scrabble.events";
 
 import "./client/socket.service";
 import "./client/app.talk.service";
