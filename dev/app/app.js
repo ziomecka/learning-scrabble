@@ -8,8 +8,7 @@ import "./client/app.events";
 import "./client/scrabble.events";
 
 import "./client/socket.service";
-import "./client/app.service";
+import "./client/app.talk.service";
 import "./client/scrabble.service";
 
-// import "./app.run";
-import "./home/home";
+import "./tools/lodash.factory";
