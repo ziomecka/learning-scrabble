@@ -1,15 +1,6 @@
 /* jshint esversion: 6 */
+import events from "../../server/scrabble/scrabble.events";
+
 angular
   .module("scrabbleModule")
-  .constant("srabbleEvents", {
-    reqCreateScrabble: "scrabble: create game",
-    resScrabbleCreated: "scrabble: game has been created",
-    resInitialTiles: "scrabble: your initial tiles",
-    resRoundStarted: "scrabble: your round has started",
-    reqExchangeTiles: "scrabble: exchange tiles",
-    resTilesExchanged: "scrabble: tiles have been exchanged",
-    resWordRejected: "",
-    resRoundEnded: "",
-    reqVerifyWord: "",
-    reqEndRound: "scrabble: end round"
-  });
+  .constant("srabbleEvents", events);

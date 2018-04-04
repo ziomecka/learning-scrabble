@@ -11,7 +11,7 @@ angular
         // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
         let {callbacks: {scrabbleCreated}} = options;
-        let eventName = scrabbleEvents.resScrabbleCreated;
+        let eventName = scrabbleEvents.resCreateScrabbleSuccess;
         socketService.on(eventName, data => {
           socketService.off(eventName);
           scrabbleCreated(data);
@@ -47,7 +47,7 @@ angular
         // options.callbacks = Object(options.callbacks);
         options.callbacks = Object(Object(options).callbacks);
         let {callback} = options;
-        let eventName = scrabbleEvents.resTilesExchanged;
+        let eventName = scrabbleEvents.resExchangeTilesSuccess;
         socketService.on(eventName, data => {
           socketService.off(eventName);
           callback(data);
