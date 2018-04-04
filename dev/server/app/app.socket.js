@@ -7,9 +7,11 @@ const Room = require("./app.room").Room;
 const allRooms = require("./app.room").allRooms;
 const statusGame = require("../maps/server.status.game");
 const serverEvents = require("./app.events");
+const scrabbleEvents = require("../scrabble/scrabble.events");
+const createScrabble = require("../scrabble/scrabble.socket").createScrabble;
+const scrabbleSocket = require("../scrabble/scrabble.socket").scrabbleSocket;
 
 const redis = require("./app.user").redis;
-const mongoGame = require("../mongo/scrabble/game/game.mongo.insert");
 
 const serverApp = socket => {
   /** Authorize user. */
@@ -62,7 +64,21 @@ const serverApp = socket => {
     /* Send room's data to the socket. */
     socket.emit(serverEvents.resJoinedRoomDetails, JSON.stringify(data));
 
-    createScrabble();
+    /** Now initiated by CLient.
+        I thisnk it is not needed - may be initiated by Server? // TODO: think
+        */
+    socket.on(scrabbleEvents.reqCreateScrabble, data => {
+      createScrabble({
+        callbacks: {
+          success: data => {
+            console.log("I inform about the successfully created game: " + scrabbleEvents.resCreateScrabbleSuccess);
+            socket.emit(scrabbleEvents.resCreateScrabbleSuccess, data);
+          }
+        }
+      });
+      /** Initialise scrabbleSocket */
+      scrabbleSocket(socket);
+    });
   });
 
   /* Join the room */
@@ -131,19 +147,6 @@ const serverApp = socket => {
       //   .broadcast.emit(serverEvents.resJoinedRoomDetails, data);
       console.log(`User ${login} joined room: ${roomId}.`);
     });
-  };
-
-  const createScrabble = () => {
-    console.log("Creating scrabble");
-    let mongoGamePromise = new Promise((res, rej) => {
-      mongoGame.oninsert = data => res(data);
-      mongoGame.onerror = err => rej(`Insert game promise rejected: ${err}`);
-      mongoGame.insert();
-    });
-    mongoGamePromise.then(data => {
-      socket.emit(serverEvents.resCreateScrabbleSuccess, data);
-      console.log(`Game with id: ${data.id} has been created.`);
-    }).catch(reason => console.log(reason));
   };
 };
 
