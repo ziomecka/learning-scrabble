@@ -1,12 +1,16 @@
 /* jshint esversion: 6 */
 module.exports = [
   "$scope",
-  "scrabbleService",
-  "appService",
+  "scrabbleGameFactory",
+  "appTalkService",
+  "roomService",
   "newroomDefaults",
   "authorizationService",
-  function ($scope, scrabbleService, appService, newroomDefaults, authorizationService) {
+  "playerFactory",
+  function ($scope, scrabbleGameFactory, roomService, appTalkService, newroomDefaults, authorizationService, playerFactory) {
     let me = $scope;
+    me.player = null;
+    me.tiles = null;
     me.defaults = newroomDefaults;
     me.time = newroomDefaults.timeOptions[3] || 10;
     me.places = [];
@@ -14,6 +18,11 @@ module.exports = [
     me.login = authorizationService.login; // TODO needed?
     me.placeId = "";
     me.seated = false;
+
+
+    me.scrabble = scrabbleGameFactory;
+    /** ask server to prepare data */
+    me.scrabble.id = me.scrabble.prepare(); // TODO promise?
 
     // this.$onInit = () => {
     //   ({
@@ -26,22 +35,37 @@ module.exports = [
     //   me.seated = me.doISeat();
     // };
 
+    me.exchanging = false;
+    me.playing = false;
+
+    me.clickTile = () => {
+     if (me.exchanging)  {
+       tile.toBeExchanged = true;
+     } else if (me.playing) {
+       // TODO
+     }
+   };
+
+    // me.exchangeTiles = scrabblePlayer.exchangeTiles();
+    // me.endRound = scrabblePlayer.endRound();
+    // me.verifyWord = scrabblePlayer.verifyWord();
+
     me.findPlace = () => me.places.findIndex((place) => place.login === me.login);
 
     me.doISeat = () => me.place >= 0;
 
     me.numberPlacesChanged = number => {
-      appService.changeNumberPlaces({
+      roomService.changeNumberPlaces({
         id: me.id,
         number: number,
         callback: {
-          successIncreased: data => me.places = [...me.places, ...data.places],
+          successChanged: data => me.places = [...me.places, ...data.places],
         }
       });
     };
 
     me.takePlace = data => {
-      appService.takePlace({
+      roomService.takePlace({
         roomID: me.id,
         placeId: data.placeId,
         callback: {
@@ -64,7 +88,7 @@ module.exports = [
       place.isOpened = true;
       me.seated = false;
       me.players.splice(me.players.findIndex(me.login), 1);
-      appService.getUp({
+      roomService.getUp({
         roomID: me.id,
         placeId: me.place,
         callback: {
@@ -73,16 +97,27 @@ module.exports = [
       });
     };
 
-    me.listenToStart = (() => appService.askPlayerStart({
+    me.listenToStart = () => roomService.listenToStart({
+      callbacks: {
+        start: data => me.start(data)
+      }
+    });
+
+    me.listenAskForAcceptance = () => roomService.askPlayerStart({
       callback: {
         successAskPlayerStart: () => me.askForAcceptance = true
       }
-    }))();
+    });
 
-    me.listenToCreateScrabble = (() => scrabbleService.createScrabble({
-      callback: {
-        successCreateScrabble: () => {} //TODO
-      }
-    }))();
+    me.accept = options => {
+      roomService.resAccepted({});
+    };
+
+    me.start = options => {
+      let {tiles} = options;
+      me.scrabble.start({tiles: tiles});
+    };
+
+
   }
 ];
