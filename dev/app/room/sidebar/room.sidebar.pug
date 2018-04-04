@@ -1,14 +1,16 @@
 //- div(id="gamePanel" class="room__sidebar")
-span(ng-bind="")
+//- span(ng-bind="")
 div(class="room__sidebar--players")
   div(ng-repeat="place in places track by $index" class="room__sidebar--place")
     button(ng-bind="place.login" ng-click="takePlace({placeId: place.id, login: login})" ng-disabled="place.login || !place.isOpened | seated" ng-class="" class="button button__player")
     p(ng-bind="place.points")
-div(ng-bind="")
+div(ng-repeat="tile in tiles")
+  span(tile="{letter: tile.letter, points: tile.points}" draggable="true")
 div(class="room__sidebar--controls" id="gameControls")
-  button(ng-click="endTurn()") End turn
-  button(ng-click="exchangeTiles()") Exchange tiles
-  button(ng-click="challange()") Challenge
+  round-controls(ng-if="player.state === round")
+  exchange-control(ng-if="player.state === exchange")
+  verify-controls(ng-if="player.state === verify")
+  //- TODO not here get up
   button(ng-click="getUp()" ng-show="seated") Get up
   a(href="/rooms") back
 div(id="gameOptions")
