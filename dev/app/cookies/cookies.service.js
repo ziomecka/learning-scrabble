@@ -6,10 +6,9 @@ angular
   .service("authorizationCookiesService", [
     "socketService",
     "cookiesEvents",
-    "appEvents",
     "cookiesNames",
     "$cookies",
-  function (socketService, cookiesEvents, appEvents, cookiesNames, $cookies) {
+  function (socketService, cookiesEvents, cookiesNames, $cookies) {
     /**
      * [listenReqCookies description]
      * @param  {[type]} options events{name, response, listen, callback}
@@ -70,7 +69,7 @@ angular
         events: [{
           name: cookiesEvents.reqAuthorizationCookies,
           response: cookiesEvents.resAuthorizationCookies,
-          listen: cookiesEvents.resAuthorizedCookies,
+          listen: cookiesEvents.resAuthorizedCookiesSuccess,
           callback: data => callback(data)
         }]
       });
@@ -99,11 +98,11 @@ angular
           "cookies": answer,
           "callbacks": [
             {
-              "event": appEvents.resAuthorizeFailed,
+              "event": cookiesEvents.resAuthorizedCookiesFailure,
               "callback": data => resolve(data)
             },
             {
-              "event": cookiesEvents.resAuthorizedCookies,
+              "event": cookiesEvents.resAuthorizedCookiesSuccess,
               "callback": data => reject(data)
             }
           ]
@@ -120,7 +119,7 @@ angular
     };
 
     this.removeListeners = options => {
-      let {events = [appEvents.resAuthorizedCookie]} = options;
+      let {events = Object.keys(cookiesEvents)} = options;
       events.forEach(event => {
         socketService.off(event);
       });
