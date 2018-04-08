@@ -7,7 +7,8 @@ module.exports = [
   "newroomDefaults",
   "authorizationService",
   "playerFactory",
-  function ($scope, scrabbleGameFactory, roomService, appTalkService, newroomDefaults, authorizationService, playerFactory) {
+  "roomData",
+  function ($scope, scrabbleGameFactory, roomService, appTalkService, newroomDefaults, authorizationService, playerFactory, roomData) {
     let me = $scope;
     me.player = null;
     me.tiles = null;
@@ -19,32 +20,54 @@ module.exports = [
     me.placeId = "";
     me.seated = false;
 
+    me.createGame = () => {
+      /** Ask to prepare the game */
+      me.scrabble = scrabbleGameFactory.prepare({
+        data: {
+          id: $scope.id
+        }
+      });
 
-    me.scrabble = scrabbleGameFactory;
-    /** ask server to prepare data */
-    me.scrabble.id = me.scrabble.prepare(); // TODO promise?
+      me.scrabble.then(data => {
+        console.log(`id: ${data.id}`);
+        me.scrabble.id = data.id;
+        me.ready = true;
+      });
+    };
 
-    // this.$onInit = () => {
-    //   ({
-    //     places: $scope.places,
-    //     id: $scope.id,
-    //     numberPlaces: $scope.numberPlaces,
-    //     name: $scope.name
-    //   } = JSON.parse(this.roomData));
-    //   me.place = me.findPlace();
-    //   me.seated = me.doISeat();
-    // };
+    this.$onInit = () => {
+      let game;
 
-    me.exchanging = false;
-    me.playing = false;
+      ({
+        room: {
+          places: $scope.places,
+          id: $scope.id, // roomsId === gamesId
+          numberPlaces: $scope.numberPlaces,
+          name: $scope.name,
+        } = {},
+        game: {
+          id: $scope.game
+        } = {} // TODO check if correctly default
+      } = JSON.parse(roomData));
 
-    me.clickTile = () => {
-     if (me.exchanging)  {
-       tile.toBeExchanged = true;
-     } else if (me.playing) {
-       // TODO
-     }
-   };
+      me.place = me.findPlace();
+      me.seated = me.doISeat();
+      /** If no game in the room then create game */
+      if ($scope.game === undefined || $scope.game === null) {
+        me.createGame();
+      }
+    };
+
+    // me.exchanging = false;
+    // me.playing = false;
+
+   //  me.clickTile = () => {
+   //   if (me.exchanging)  {
+   //     tile.toBeExchanged = true;
+   //   } else if (me.playing) {
+   //     // TODO
+   //   }
+   // };
 
     // me.exchangeTiles = scrabblePlayer.exchangeTiles();
     // me.endRound = scrabblePlayer.endRound();
@@ -109,15 +132,27 @@ module.exports = [
       }
     });
 
+    me.listenAskForAcceptance = () => roomService.askPlayerStart({
+      callback: {
+        successAskPlayerStart: () => me.askForAcceptance = true
+      }
+    });
+
     me.accept = options => {
       roomService.resAccepted({});
     };
 
     me.start = options => {
-      let {tiles} = options;
-      me.scrabble.start({tiles: tiles});
+      options = Object(options);
+      me.scrabble.start().then((data) => {
+        console.log(`id: ${me.scrabble.id}`);
+        me.drawTiles({number: 7});
+      });
     };
 
-
+    me.drawTiles = options => {
+      console.log("Tiles have been drawn.");
+      me.tiles = [...me.tiles, ...me.scrabble.drawTiles({number: options.number})];
+    };
   }
 ];
