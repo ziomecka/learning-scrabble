@@ -4,13 +4,21 @@
 module.exports = [
   "appTalkService",
   "$q",
-  (appTalkService, $q) => {
+  "$stateParams",
+  (appTalkService, $q, $stateParams) => {
     const deferred = $q.defer();
     const resolve = data => deferred.resolve(data);
+    const reject = () => deferred.reject("Failed to get room's details");
+
     appTalkService.getRoomDetails({
-      callback: resolve
+      roomId: $stateParams.roomId,
+      callbacks: {
+        success: data => {
+          resolve(data);
+        },
+        failure: () => reject()
+      }
     });
-  // TODO deferred.reject("failed to join the room")
   return deferred.promise;
   }
 ];
