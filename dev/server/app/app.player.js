@@ -7,8 +7,9 @@
 const UUID = require("uuid");
 
 class Player {
-  constructor (playerOptions) {
-    ({name: this.name, time: this.time} = playerOptions);
+  constructor (options) {
+    // TODO get default name from defaults based on options.lang
+    ({name: this.name = "player", time: this.time} = options);
     this.points = 0;
     this.id = UUID();
   }
@@ -19,5 +20,7 @@ const allPlayers = {
   }
 };
 
-module.exports.Player = Player;
-module.exports.allPlayers = allPlayers;
+module.exports = {
+  Player: Player,
+  allPlayers: allPlayers
+};

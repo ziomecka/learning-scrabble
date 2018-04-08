@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 const UUID = require("uuid");
 
-export default class Player {
+export default class Place {
   constructor(options) {
     options = Object(options);
     ({login: this.login, id: this.id = UUID()} = options);
@@ -28,3 +28,7 @@ export default class Player {
     };
   }
 }
+
+module.exports = {
+  Place: Place
+};
