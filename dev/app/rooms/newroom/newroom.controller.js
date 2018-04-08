@@ -1,11 +1,10 @@
 /* jshint esversion: 6 */
 module.exports = [
   "$scope",
-  "appTalkService",
   "newroomDefaults",
-  "authorizationService",
-  "authorizationStates",
-  ($scope, appTalkService, newroomDefaults, authorizationService, authorizationStates) => {
+  "newroomService",
+  "roomsService",
+  function ($scope, newroomDefaults, newroomService, roomsService) {
     let me = $scope;
     me.defaults = newroomDefaults;
     me.nameUnique = true;
@@ -13,26 +12,14 @@ module.exports = [
     me.numberPlaces = me.defaults.placesOptions[0];
     me.buttonsDisabled = false;
 
-    me.changeName = () => {
-      if (!me.nameUnique) {
-        me.nameUnique = true;
-      }
-    };
-
-    me.createRoom = () => {
-      appTalkService.createRoom({
-        name: me.name,
-        numberPlaces: me.numberPlaces,
-        callback: {
-          successCreateRoom: data => {
-            authorizationService.go({
-              state: authorizationStates.room,
-              roomId: data.roomId
-            });
-          }
+    me.createRoom = data => {
+      newroomService.createRoom({
+        data: data,
+        callbacks: {
+          success: data => data, // TODO not needed
+          failure: () => {} //TODO
         }
       });
-      me.buttonsDisabled = true;
     };
   }
 ];
