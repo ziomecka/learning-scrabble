@@ -4,11 +4,11 @@ form(name="authorizationForm" class="form" novalidate)
     input(type="text" id="login" ng-model="login" required)
   fieldset
     label(for="password") password
-    input(type="text" ng-model="password" required)
+    input(type="password" ng-model="password" required)
   fieldset(class="box__buttons")
     button(ng-click="loginUser({login: login, password: password})" class="button button__main" ng-disabled="buttonsDisabled") login
     button(ng-click="goNewuser()" class="button__link"  ng-disabled="buttonsDisabled") create user
     button(ui-sref="guest" ui-sref-active="active" class="button__link" ng-disabled="buttonsDisabled") be a guest
   fieldset
   p(ng-show="resNoLogin" class="form__message--error") Login does not exist
-  p(ng-show="resAuthorizeFailed" class="form__message--error") Incorrect password
+  p(ng-show="resAuthorizeFailure" class="form__message--error") Incorrect password
