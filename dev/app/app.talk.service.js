@@ -23,9 +23,11 @@ angular
       };
 
       this.getRoomDetails = options => {
-        let {callback} = options;
-        socketService.emit(appEvents.reqJoinedRoomDetails, {roomId: $stateParams.roomId});
-        socketService.on(appEvents.resJoinedRoomDetails, data => callback(data));
+        let {roomId, callbacks: {success}} = options;
+        socketService.emit(appEvents.reqJoinedRoomDetails, {roomId: roomId});
+        socketService.on(appEvents.resJoinedRoomDetails, data => {
+          success(data);
+        });
       };
 
       this.authorize = options => {
@@ -33,7 +35,7 @@ angular
         socketService.emit(appEvents.reqAuthorize, data);
         socketService.on(appEvents.resAuthorizeSuccess, data => success(data));
         socketService.on(appEvents.resNoLogin, () => failureLogin());
-        socketService.on(appEvents.resAuthorizeFailed, () => failurePassword());
+        socketService.on(appEvents.resAuthorizeFailure, () => failurePassword());
       };
 
       this.createUser = options => {
@@ -47,19 +49,26 @@ angular
       };
 
       this.createRoom = options => {
-        let {name, numberPlaces, callback: {successCreateRoom}} = options;
+        let {name, numberPlaces, createGame = true, callback: {success}} = options;
         $stateParams.numberPlaces = numberPlaces;
         socketService.emit(appEvents.reqCreateNewRoom, {
           name: name,
           numberPlaces: numberPlaces,
+          createGame: createGame,
           login: authorizationService.login
         });
-        socketService.on(appEvents.resCreateNewRoom, data => successCreateRoom(data));
+        this.createRoomSuccess(success);
+      };
+
+      this.createRoomSuccess = callback => {
+        socketService.on(appEvents.resCreateNewRoom, data => callback(data));
       };
 
       this.newRoomAdded = options => {
-        let {callback: {successNewRoomAdded}} = options;
-        socketService.on(appEvents.resNewRoomAdded, data => successNewRoomAdded(data));
+        let {callback: {success}} = options;
+        socketService.on(appEvents.resNewRoomAdded, data => {
+          success(data);
+        });
       };
 
       this.joinRoom = options => {
@@ -73,6 +82,5 @@ angular
           });
         });
       };
-
     }
   ]);
