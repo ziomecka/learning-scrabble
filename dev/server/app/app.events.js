@@ -2,7 +2,7 @@
 module.exports = {
   "reqAuthorize": "auth: authorize user",
   "resAuthorizeSuccess": "auth: authorized on the password basis",
-  "resAuthorizeFailed": "auth: incorrect password",
+  "resAuthorizeFailure": "auth: incorrect password",
   "resLogoutSuccess": "",
   "reqNewuser": "newuser: create user",
   "resNewuser": "newuser: user created",
