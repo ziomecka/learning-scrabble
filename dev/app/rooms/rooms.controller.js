@@ -3,27 +3,32 @@ module.exports = [
   "$scope",
   "appTalkService",
   "roomsList",
-  function ($scope, appTalkService, roomsList) {
+  "roomsService",
+  function ($scope, appTalkService, roomsList, roomsService) {
     let me = $scope;
     me.rooms = [];
+    // me.rooms = roomsService.rooms;
+    // console.log(me.rooms);
 
     this.$onInit = () => {
       me.rooms = [...roomsList];
+      roomsService.rooms = [...roomsList];
     };
 
-    appTalkService.newRoomAdded({
-      callback: {
-        successNewRoomAdded: data => me.rooms = [...me.rooms, ...data] // TODO
-      }
+    me.joinRoom = id => roomsService.joinRoom({
+      id: id
+      // callback: {
+      //   successJoinRoom: data => {
+      //     me.buttonsDisabled = false; //TODO not needed?
+      //   }
+      // }
     });
 
-    me.joinRoom = id => appTalkService.joinRoom({
-      id: id,
-      callback: {
-        successJoinRoom: data => {
-          me.buttonsDisabled = false; //TODO not needed?
-        }
-      }
-    });
+    me.updateRooms = data => {
+      me.rooms.push(data);
+    };
+
+    // TODO:
+    appTalkService.createRoomSuccess(me.updateRooms);
   }
 ];
