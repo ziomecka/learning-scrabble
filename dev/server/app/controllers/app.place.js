@@ -1,10 +1,8 @@
 /* jshint esversion: 6 */
-const UUID = require("uuid");
-
 export default class Place {
   constructor(options) {
     options = Object(options);
-    ({login: this.login, id: this.id = UUID()} = options);
+    ({id: this.id} = options);
   }
 
   get isOpened() {
