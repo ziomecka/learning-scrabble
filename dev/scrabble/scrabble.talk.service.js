@@ -7,20 +7,20 @@ angular
     function (socketService, scrabbleEvents) {
 
       this.createScrabble = options => {
-        options.callbacks = Object(Object(options).callbacks);
-        this.listenScrabbleCreated(options);
-        socketService.emit(scrabbleEvents.reqCreateScrabble);
+        options = Object(options);
+        this.listenScrabbleCreated(options.callbacks);
+        socketService.emit(scrabbleEvents.reqCreateScrabble, options.data);
       };
 
       this.listenScrabbleCreated = options => {
-        options.callbacks = Object(Object(options).callbacks);
-        let {callbacks: {scrabbleCreated}} = options;
+        options = Object(options);
+        let {success} = options;
         let eventName = scrabbleEvents.resCreateScrabbleSuccess;
         socketService.on(eventName, data => {
-            console.log("I was informed of created game.");
-            scrabbleCreated(data);
-            socketService.off(eventName);
-          });
+          console.log("I was informed of created game.");
+          success(data);
+          socketService.off(eventName);
+        });
       };
 
       this.listenInitialTiles = options => {
@@ -91,6 +91,25 @@ angular
         options.callbacks = Object(Object(options).callbacks);
         socketService.emit(scrabbleEvents.reqEndRound);
         this.listenRoundEnded();
+      };
+
+      this.drawTiles = options => {
+        options.callbacks = Object(Object(options).callbacks);
+        let {gameId, number} = options;
+        this.listenTilesDrawn(options);
+        console.log("I ask to draw tiles");
+        socketService.emit(scrabbleEvents.reqDrawTiles, {gameId: gameId, number: number});
+      };
+
+      this.listenTilesDrawn = options => {
+        options.callbacks = Object(Object(options).callbacks);
+        let {callbacks: {success}} = options;
+        let eventName = scrabbleEvents.resDrawTilesSuccess;
+        socketService.on(eventName, data => {
+          console.log("I've got tiles.");
+          success(data);
+          socketService.off(eventName);
+        });
       };
     }
   ]);
