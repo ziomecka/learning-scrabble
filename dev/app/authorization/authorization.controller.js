@@ -14,7 +14,7 @@ module.exports = [
     };
 
     me.resNoLogin = false;
-    me.resAuthorizeFailed = false;
+    me.resAuthorizeFailure = false;
     me.buttonsDisabled = false;
     me.login = "";
     me.password = "";
@@ -25,7 +25,7 @@ module.exports = [
 
     me.loginUser = data => {
       me.resNoLogin = false;
-      me.resAuthorizeFailed = false;
+      me.resAuthorizeFailure = false;
       me.buttonsDisabled = true;
       appTalkService.authorize({
         data: data,
@@ -37,7 +37,7 @@ module.exports = [
           },
           failurePassword: () => {
             me.buttonsDisabled = false;
-            me.resAuthorizeFailed = true;
+            me.resAuthorizeFailure = true;
           }
         }
       });
