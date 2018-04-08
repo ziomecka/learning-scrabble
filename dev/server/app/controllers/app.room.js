@@ -11,13 +11,14 @@ const statusGame = require("../../maps/server.status.game");
 const accessMap = require("../handlers/app.access.map");
 
 const rooms = new Map();
+/** Counter added to duplicates in names. */
 let roomUUID = 1;
 
 class Room {
   constructor (options) {
     /** Set name */
     let name = options.name || "room";
-    /** Avoid dupes */
+    /** Avoid duplicates in names by adding a counter. */
     if (Array.from(rooms.values()).some((item) => item.name === name)) {
       this.name = `${name}${roomUUID++}`;
     } else {
@@ -29,12 +30,20 @@ class Room {
     this.places = [];
     this.addPlaces(options.numberPlaces);
 
-    /** add to map */
+    /** Player sits on the first place */
+    if(options.joinRoom && options.login) {
+      this.setPlaceOwner({
+        placeId: 0,
+        login: options.login
+      });
+    }
+    /** Add room to map. */
     rooms.set(this.id, this);
   }
 
   addPlaces(num) {
     for(let i = 0; i < num; i ++) {
+      /** Places' ids === indexes in array */
       this.places.push(new Place({id: i}));
     }
     let len = this.places.length;
@@ -50,16 +59,16 @@ class Room {
     return this.places.every((place) => !place.isOpened);
   }
 
-  /** playerID, playerName, roomID, placeId */
+  /** player's login, roomID, placeId */
   setPlaceOwner(data) {
-    /* Find place within all room's places and set its owner */
-    // let id = this.places
-    //   .filter((place) => place.id === data.placeId)[0]
-    //   .setOwner({
-    //     login: data.login
-    //   }).id;
-    //
-    // return id;
+    /** Find place by index (id === index).
+        Set its owner.
+        */
+    let id = this.places[data.placeId].setOwner({
+          login: data.login
+        }).id;
+
+    return id;
   }
 
   setNumberPlaces(num) {
