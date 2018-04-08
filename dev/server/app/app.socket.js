@@ -5,15 +5,15 @@
     Create and destroy player.
      */
 
-const allRooms = require("./app.room").allRooms;
+const allRooms = require("./controllers/app.room").allRooms;
 // const statusGame = require("../maps/server.status.game");
 const appEvents = require("./app.events");
 const scrabbleEvents = require("../scrabble/scrabble.events");
 const scrabbleSocket = require("../scrabble/scrabble.socket").scrabbleSocket;
 const allScrabbles = require("../scrabble/scrabble.game").allScrabbles;
-const socketsManagerFactory = require("./app.sockets.manager");
-const handlersFactory = require("./app.socket.handlers");
-const redisFactory = require("./app.redis");
+const socketsManagerFactory = require("./authorization/app.sockets.manager");
+const handlersFactory = require("./handlers/app.socket.handlers");
+const redisFactory = require("./authorization/app.redis");
 const sendAuthorizationCookies = require("../cookies/cookies").sendAuthorizationCookies;
 const messages = require("./app.messages");
 

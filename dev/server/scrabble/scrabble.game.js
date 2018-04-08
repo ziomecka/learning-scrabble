@@ -3,8 +3,8 @@ const Player = require("./scrabble.player").Player;
 const Bag = require("./scrabble.bag").Bag;
 const Board = require("./scrabble.board").Board;
 const Round = require("./scrabble.round").Round;
-const allRooms = require("../app/app.room").allRooms;
-const accessMap = require("../app/app.access.map");
+const allRooms = require("../app/controllers/app.room").allRooms;
+const accessMap = require("../app/handlers/app.access.map");
 
 const scrabbles = new Map();
 

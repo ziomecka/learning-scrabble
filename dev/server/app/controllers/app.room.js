@@ -7,8 +7,8 @@
     */
 const UUID = require("uuid");
 const Place = require("./app.place");
-const statusGame = require("../maps/server.status.game");
-const accessMap = require("./app.access.map");
+const statusGame = require("../../maps/server.status.game");
+const accessMap = require("../handlers/app.access.map");
 
 const rooms = new Map();
 let roomUUID = 1;

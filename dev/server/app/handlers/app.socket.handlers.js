@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
-const Room = require("./app.room").Room;
-const Scrabble = require("../scrabble/scrabble.game").Scrabble;
+const Room = require("../controllers/app.room").Room;
+const Scrabble = require("../../scrabble/scrabble.game").Scrabble;
 
-const scrabbleEvents = require("../scrabble/scrabble.events");
-const appEvents = require("./app.events");
-const messages = require("./app.messages");
+const scrabbleEvents = require("../../scrabble/scrabble.events");
+const appEvents = require("../app.events");
+const messages = require("../app.messages");
 
 const socketHandlers = () => {
   const createRoom = data => {

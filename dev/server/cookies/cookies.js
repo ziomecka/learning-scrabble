@@ -1,8 +1,8 @@
 /* jshint esversion: 6 */
 // TODO add off events
-const redisFactory = require("../app/app.redis");
+const redisFactory = require("../app/authorization/app.redis");
 const cookiesEvents = require("./cookies.events");
-const socketsManagerFactory = require("../app/app.sockets.manager");
+const socketsManagerFactory = require("../app/authorization/app.sockets.manager");
 const messages = require("../app/app.messages");
 
 const reqCookies = options => {
