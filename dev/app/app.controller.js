@@ -1,6 +1,5 @@
 /* jshint esversion: 6 */
 // TODO create new room does not work!
-// console console error
 // + unhandled promise rejections
 // transport pooling https://stackoverflow.com/questions/28261546/transport-polling-error-with-socket-io
 angular
