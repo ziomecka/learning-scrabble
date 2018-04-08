@@ -1,24 +1,24 @@
 /* jshint esversion: 6 */
-const mongoGame = require("../mongo/scrabble/game/game.mongo.insert");
-
-const createScrabble = options => {
-  let {callbacks: {success}} = options;
-  console.log("Creating scrabble");
-  let mongoGamePromise = new Promise((res, rej) => {
-    mongoGame.oninsert = data => res(data);
-    mongoGame.onerror = err => rej(`Insert game promise rejected: ${err}`);
-    mongoGame.insert();
-  });
-  mongoGamePromise.then(data => {
-    success(data);
-    console.log(`Game with id: ${data.id} has been created.`);
-  }).catch(reason => console.log(reason));
-};
+const scrabbleEvents = require("./scrabble.events");
+const Scrabble  = require("./scrabble.game").Scrabble;
+const allScrabbles  = require("./scrabble.game").allScrabbles;
 
 const scrabbleSocket = socket => {
+  console.log(`ScrabbleSocket initialised`);
+  socket.on(scrabbleEvents.reqDrawTiles, data => {
+    let {gameId, number} = data;
+    console.log(`Draw tiles for game: ${gameId}`);
+    let promise = new Promise((res, rej) => {
+      res(allScrabbles.getScrabble(gameId).drawInitialTiles());
+    });
+
+    promise.then(result => {
+      console.log(`Tiles send to game: ${gameId}`);
+      socket.emit(scrabbleEvents.resDrawTilesSuccess, JSON.stringify(result));
+    });
+  });
 };
 
 module.exports = {
-  scrabbleSocket: scrabbleSocket,
-  createScrabble: createScrabble
+  scrabbleSocket: scrabbleSocket
 };
