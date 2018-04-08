@@ -10,7 +10,7 @@ const redis = () => {
   const sha512 = require("./app.password").sha512;
   const salt = require("./app.password").generateSalt;
 
-  const messages = require("./app.messages");
+  const messages = require("../app.messages");
 
   const flush = () => {
     redis.flushdb();
