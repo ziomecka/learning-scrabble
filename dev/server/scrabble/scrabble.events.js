@@ -9,5 +9,7 @@ module.exports = {
   "resWordRejected": "",
   "resRoundEnded": "",
   "reqVerifyWord": "",
-  "reqEndRound": "scrabble: end round"
+  "reqEndRound": "scrabble: end round",
+  "reqDrawTiles": "scrabble: draw tiles",
+  "resDrawTilesSuccess": "scrabble: tiles drawn"
 };
