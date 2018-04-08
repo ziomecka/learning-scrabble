@@ -6,4 +6,4 @@ form(name="createRoomForm" class="form" novalidate)
     label(for="numberPlaces" class="form-label") Number of places
     select(ng-model="numberPlaces" class="form-input--narrow" ng-options="placesOption for placesOption in defaults.placesOptions track by placesOption")
   fieldset
-    button(ng-click="createRoom()" ng-disabled="createRoomForm.$invalid || buttonsDisabled") create room
+    button(ng-click="createRoom({'numberPlaces': numberPlaces, 'name': gameName})" ng-disabled="createRoomForm.$invalid || buttonsDisabled") create room
