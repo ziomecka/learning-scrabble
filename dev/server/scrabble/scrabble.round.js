@@ -3,3 +3,7 @@ class Round {
   constructor (game, player) {
   }
 }
+
+module.exports = {
+  Round: Round
+};

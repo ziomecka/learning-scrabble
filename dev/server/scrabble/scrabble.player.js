@@ -1,20 +1,21 @@
 /* jshint esversion: 6 */
-const Rack = require("./scrabble.rack");
-const Player = require("../server.player");
+const Player = require("../app/app.player").Player;
 
 const players = new Map();
 
 class ScrabblePlayer extends Player {
   constructor (options) {
     super(options);
-    this.rack = new Rack();
+    this.tiles = new Array(7);
     players.set([this.id, this]);
   }
 
   getsTile (tile) {
-    tile.onRack = true;
-    this.rack.getsTile(tile);
+    let index = this.tiles.findIndex((element) => element === undefined);
+    this.index[index] = tile;
   }
 }
 
-module.exports.ScrabblePlayer = ScrabblePlayer;
+module.exports = {
+  Player: ScrabblePlayer
+};
