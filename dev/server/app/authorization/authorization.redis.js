@@ -2,18 +2,20 @@
 //TODO: cookie agree
 //TODO: when reloaded any page -check if authrized (routing level)
 //TODO: communicate that authorized by me
+const Client = require("redis");
+const redis_url = "redis://h:p15bad823b7a21c1e59a561d7bb247897f65e3982800c10198d6207864761776d@ec2-34-243-134-85.eu-west-1.compute.amazonaws.com:28329";
+
+const sha512 = require("./authorization.password").sha512;
+const salt = require("./authorization.password").generateSalt;
+
+const authorizationMessages = require("./authorization.messages");
+
 const redis = () => {
-  const Client = require("redis");
-  const redis_url = "redis://h:p15bad823b7a21c1e59a561d7bb247897f65e3982800c10198d6207864761776d@ec2-34-243-134-85.eu-west-1.compute.amazonaws.com:28329";
-  const redis = Client.createClient(redis_url);
-
-  const sha512 = require("./authorization.password").sha512;
-  const salt = require("./authorization.password").generateSalt;
-
-  const authorizationMessages = require("./authorization.messages");
 
   const flush = () => {
+    let redis = Client.createClient(redis_url);
     redis.flushdb();
+    redis = null;
   };
 
   const addUsernx = data => {
@@ -21,13 +23,16 @@ const redis = () => {
     // TODO inform user about changed login
     data.login = login.replace(/[!@#$%^&*()]/g, "");
     let promise = new Promise((res, rej) => {
+      let redis = Client.createClient(redis_url);
       redis.hsetnx(login, "login", login, (err, result) => {
         if (err) throw err;
         if (result) {
+          redis = null;
           addUser(data)
           .then(data => res({"login": data.login, "longNumber": data.longNumber}))
           .catch(reason => rej(reason));
         } else {
+          redis = null;
           rej(authorizationMessages.loginAlreadyExists(login));
         }
       });
@@ -39,11 +44,14 @@ const redis = () => {
   const setPasswordInRedis = options => {
     let {login, keys} = options;
     let promise = new Promise((res, rej) => {
+      let redis = Client.createClient(redis_url);
       redis.hmset(login, [...keys], (err, result) => {
         if (err) throw err;
         if (result) {
+          redis = null;
           res(login);
         } else {
+          redis = null;
           rej();
         }
       });
@@ -140,6 +148,7 @@ const redis = () => {
     console.log(authorizationMessages.authorizeOption({"login": login, "option": option}));
 
     let promise = new Promise((res, rej) => {
+      let redis = Client.createClient(redis_url);
       redis.exists(login, (err, result) => {
         if (err) throw err;
         if (result) {
@@ -148,6 +157,7 @@ const redis = () => {
             if (err) throw err;
             /** If both: hashed password and salt got. */
             if (result[0] !== null && result[1] !== null) {
+              redis = null;
               /** Hash the password entered by the user / number from cookie */
               let enteredPasswordHashed = sha512({"password": password, "salt": result[1]}).hashed;
               /** If the hashed entered password === hashed pasword in db */
@@ -157,10 +167,12 @@ const redis = () => {
                 rej(authorizationMessages.authorizePasswordFailure(login));
               }
             } else {
+              redis = null;
               rej(authorizationMessages.authorizeDataFailure());
             }
           });
         } else {
+          redis = null;
           rej(authorizationMessages.authorizeLoginFailure(login));
         }
       });
