@@ -1,0 +1,22 @@
+module.exports = {
+  "reqJoinedRoomDetails": "room: send details of joined room",
+  "resJoinedRoomDetails": "room: details of joined room sent",
+  "reqTakePlace": "room: take place",
+  "resTakePlaceSuccess": "room: player took place",
+  "resOtherUserTookPlace": "room: other player took place",
+  "reqChangeNumberPlaces": "room: change number of places",
+  "resChangeNumberPlacesSuccess": "room: number of places changed",
+  "reqChangeTime": "room: change time",
+  "resChangeTimeSuccess": "room: time changed",
+  "reqGetUp": "room: player get up",
+  "resGetUp": "room: player got up",
+  "resOtherPlayerGotUp": "room: other player got up",
+  "reqLeaveRoom": "room: leave room",
+  "resLeaveRoomSuccess": "room: room left",
+  "resOtherUserJoinedRoom": "room: other user joined room",
+  "resOtherUserLeftRoom": "room: other user left room",
+  "resAskPlayerStart": "room: ask player to start game",
+  "reqStart": "room: start game",
+  "resNotStarted": "room: game is not started",
+  "resAllPlayersStarted": "room: all other players started"
+};

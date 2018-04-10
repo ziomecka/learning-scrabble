@@ -28,7 +28,22 @@ const createCollection = options => {
   }
 };
 
+const findOne = options => {
+  let {collection, query} = options;
+  if (collection) {
+    mongo.client.connect(mongo.url, (err, db) => {
+      if (err) throw err;
+      const dbo = db.db(mongo.name);
+      dbo.collection(collection).findOne(query, (err, result) => {
+        if (err) throw err;
+        db.close();
+      });
+    });
+  }
+};
+
  module.exports = {
    insertOne: insertOne,
-   createCollection: createCollection
+   createCollection: createCollection,
+   findOne: findOne
  };

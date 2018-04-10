@@ -2,15 +2,15 @@
 // TODO correct
 /** Gets room's details */
 module.exports = [
-  "appTalkService",
+  "roomSocket",
   "$q",
   "$stateParams",
-  (appTalkService, $q, $stateParams) => {
+  (roomSocket, $q, $stateParams) => {
     const deferred = $q.defer();
     const resolve = data => deferred.resolve(data);
     const reject = () => deferred.reject("Failed to get room's details");
 
-    appTalkService.getRoomDetails({
+    roomSocket.getRoomDetails({
       roomId: $stateParams.roomId,
       callbacks: {
         success: data => {

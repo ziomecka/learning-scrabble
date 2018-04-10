@@ -6,7 +6,7 @@ angular
     appTitle => {
       return {
         restrict: "A",
-        templateUrl: "../title.html",
+        templateUrl: "../index.title.html",
         link: ($scope) => {
           $scope.title = appTitle;
         }

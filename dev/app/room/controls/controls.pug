@@ -1,0 +1,3 @@
+button(ng-click="getup()" ng-show="room.state === 'waitingForPlayers' && player.placeId" class="button") Get up
+button(ng-click="leave()" ng-show="!player.placeId" class="button") Leave room
+button(ng-click="start()" ng-show="room.state === 'waitingForStart' && player.placeId" class="button") Start

@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-const Player = require("../app/controllers/app.player").Player;
+const Player = require("../app/room/player.class").Player;
 
 const players = new Map();
 

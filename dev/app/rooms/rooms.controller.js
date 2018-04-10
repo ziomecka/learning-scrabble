@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 module.exports = [
   "$scope",
-  "appTalkService",
+  "roomsSocket",
   "roomsList",
   "roomsService",
-  function ($scope, appTalkService, roomsList, roomsService) {
+  function ($scope, roomsSocket, roomsList, roomsService) {
     let me = $scope;
     me.rooms = [];
     // me.rooms = roomsService.rooms;
@@ -17,7 +17,7 @@ module.exports = [
 
     me.joinRoom = id => roomsService.joinRoom({
       id: id
-      // callback: {
+      // callbacks: {
       //   successJoinRoom: data => {
       //     me.buttonsDisabled = false; //TODO not needed?
       //   }
@@ -29,6 +29,6 @@ module.exports = [
     };
 
     // TODO:
-    appTalkService.createRoomSuccess(me.updateRooms);
+    roomsSocket.createRoomSuccess(me.updateRooms);
   }
 ];

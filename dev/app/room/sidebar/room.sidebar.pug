@@ -1,21 +1,23 @@
-//- div(id="gamePanel" class="room__sidebar")
-//- span(ng-bind="")
+p {{room.name}}
 div(class="room__sidebar--players")
-  div(ng-repeat="place in places track by $index" class="room__sidebar--place")
-    button(ng-bind="place.login" ng-click="takePlace({placeId: place.id, login: login})" ng-disabled="place.login || !place.isOpened | seated" ng-class="" class="button button__player")
+  div(ng-repeat="place in room.places track by $index" class="room__sidebar--place")
+    button(ng-bind="place.login" ng-click="takePlace({placeId: place.id})" ng-disabled="place.login || !place.isOpened" ng-class="" class="button button__player")
     p(ng-bind="place.points")
-div(ng-repeat="tile in tiles")
+div(ng-repeat="tile in tiles" class ="room__sidebar--tiles")
   span(tile="{letter: tile.letter, points: tile.points}" draggable="true")
 div(class="room__sidebar--controls" id="gameControls")
-  round-controls(ng-if="player.state === round")
-  exchange-control(ng-if="player.state === exchange")
-  verify-controls(ng-if="player.state === verify")
-  //- TODO not here get up
-  button(ng-click="getUp()" ng-show="seated") Get up
-  a(href="/rooms") back
+  controls-start(ng-if="state === 'start'")
+  controls-leave(ng-if="state === ''")
+  controls-getup(ng-if="state === 'wait'")
+  controls-round(ng-if="state === 'round'")
+  controls-exchange(ng-if="state === 'exchange'")
+  controls-verify(ng-if="state === 'verify'")
+  controls-room()
 div(id="gameOptions")
   label(for="numberPlaces") number of players
-  select(ng-model="numberPlaces" ng-options="placesOption for placesOption in defaults.placesOptions track by placesOption" ng-change="numberPlacesChanged(numberPlaces)" class="form__input--narrow")
+  select(ng-model="room.numberPlaces" ng-options="placesOption for placesOption in defaults.placesOptions track by placesOption" ng-change="numberPlacesChanged(room.numberPlaces)" class="form__input--narrow")
   label(for="time") time
-  select(ng-model="time" ng-options="timeOption for timeOption in defaults.timeOptions track by timeOption" class="form__input--narrow")
-startGamePopup(acceptPopup="acceptGame" ng-show="askForAcceptance")
+  select(ng-model="room.time" ng-options="timeOption for timeOption in defaults.timeOptions track by timeOption" ng-change="timeChanged(room.time)" class="form__input--narrow")
+div(id="gameUsers")
+  ul(ng-repeat="user in room.users")
+    li user.login

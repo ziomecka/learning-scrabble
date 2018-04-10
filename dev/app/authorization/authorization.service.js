@@ -4,8 +4,8 @@ angular
 .service("authorizationService", [
   "$state",
   "authorizationStates",
-  "authorizationCookiesService",
-  function ($state, authorizationStates, authorizationCookiesService) {
+  "cookiesService",
+  function ($state, authorizationStates, cookiesService) {
     this.authorized = false;
     this.guest = false;
     this.login = "";
@@ -29,7 +29,7 @@ angular
       this.login = "";
       // TODO change name of the below service
       /** Destroy cookies */
-      authorizationCookiesService.removeAuthorizationCookies();
+      cookiesService.removeAuthorizationCookies();
       /** Go back to authorization state */
       this.go({state: authorizationStates.authorization});
     };

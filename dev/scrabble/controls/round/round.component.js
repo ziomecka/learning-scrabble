@@ -2,6 +2,6 @@
 angular
   .module("controlsModule")
   .component("controlsRound", {
-    templateUrl: "../room.controls.exchange.html",
+    templateUrl: "../room.controls.round.html",
     controller: require("./round.controller")
   });

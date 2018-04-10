@@ -1,18 +1,18 @@
 /* jshint esversion: 6 */
 /** Authorize user via the cookies. */
 module.exports = [
-  "authorizationCookiesService",
+  "cookiesService",
   "authorizationService",
   "$q",
   "$timeout",
   "$transition$",
   "$stateParams",
   "authorizationStates",
-  (authorizationCookiesService, authorizationService, $q, $timeout, $transition$, $stateParams, authorizationStates) => {
+  (cookiesService, authorizationService, $q, $timeout, $transition$, $stateParams, authorizationStates) => {
     if (!authorizationService.authorized) {
       const deferred = $q.defer();
       // TODO stop listnening when received
-      authorizationCookiesService.sendAuthorizationCookies({
+      cookiesService.sendAuthorizationCookies({
         callbacks: {
           resolve: () => {
             $timeout(() => {

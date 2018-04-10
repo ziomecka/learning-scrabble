@@ -3,10 +3,10 @@ angular
   .module("roomsModule")
   .service("newroomService", [
     "roomsService",
-    "appTalkService",
+    "roomsSocket",
     "authorizationService",
     "authorizationStates",
-    function (roomsService, appTalkService, authorizationService, authorizationStates) {
+    function (roomsService, roomsSocket, authorizationService, authorizationStates) {
       // me.changeName = () => {
       //   if (!me.nameUnique) {
       //     me.nameUnique = true;
@@ -16,12 +16,12 @@ angular
       this.createRoom = (options) => {
         options.data = Object(Object(options).data);
         let {data: {name, numberPlaces}, callbacks: {success, failure}} = options;
-        appTalkService.createRoom({
+        roomsSocket.createRoom({
           name: name,
           numberPlaces: numberPlaces,
           createGame: true, // game will be created
           joinRoom: true, // user will join the room
-          callback: {
+          callbacks: {
             success: data => {
               /** If the room is created:
                   - call success callback.

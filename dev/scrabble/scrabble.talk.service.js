@@ -55,7 +55,7 @@ angular
 
       this.listenRoundEnded = options => {
         options.callbacks = Object(Object(options).callbacks);
-        let {callback: {getTiles}} = options;
+        let {callbacks: {getTiles}} = options;
 
         let eventName = scrabbleEvents.resWordRejected;
         socketService.on(eventName, data => {

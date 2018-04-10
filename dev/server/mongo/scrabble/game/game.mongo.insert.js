@@ -1,12 +1,12 @@
 /* jshint esversion: 6 */
-const mongo = require("../../mongo.client");
+// const mongo = require("../../mongo.client");
 const crud = require("../../mongo.crud");
 
 const ObjectID = require("mongodb").ObjectID;
 
 const createGame = require("./create.document").create;
 
-let dbName = mongo.name;
+// let dbName = mongo.name;
 
 let result = {
   insert:  insert

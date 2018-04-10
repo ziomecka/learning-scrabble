@@ -51,11 +51,11 @@ angular
             controller: require("../rooms/rooms.controller")
           },
           [`navigation@${authorizationStates.rooms}`]: {
-            templateUrl: "../navigation.html",
+            templateUrl: "../rooms.navigation.html",
             controller: require("../navigation/navigation.controller")
           },
           [`newroom@${authorizationStates.rooms}`]: {
-            templateUrl: "../newroom.html",
+            templateUrl: "../rooms.newroom.html",
             controller: require("../rooms/newroom/newroom.controller")
           }
         }

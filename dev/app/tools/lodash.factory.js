@@ -2,6 +2,7 @@
 import has from "lodash/has";
 import findKey from "lodash/findKey";
 import remove from "lodash/remove";
+import differenceWith from "lodash/differenceWith";
 
 angular
   .module("app")
@@ -12,7 +13,8 @@ angular
         return {
           has: has,
           findKey: findKey,
-          remove: remove
+          remove: remove,
+          differenceWith: differenceWith
         };
       } else {
         return $window._;

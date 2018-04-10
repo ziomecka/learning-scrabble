@@ -6,7 +6,7 @@
     Creates room.
     */
 const UUID = require("uuid");
-const Place = require("./app.place");
+const Place = require("./place.class");
 const statusGame = require("../../maps/server.status.game");
 const accessMap = require("../handlers/app.access.map");
 
@@ -42,13 +42,45 @@ class Room {
   }
 
   addPlaces(num) {
-    for(let i = 0; i < num; i ++) {
+    let n = this.numberPlaces;
+    for(let i = n, len = num + n; i < len; i ++) {
       /** Places' ids === indexes in array */
       this.places.push(new Place({id: i}));
     }
     let len = this.places.length;
     /* return added places */
     return this.places.slice(len - num, len + 1);
+  }
+
+  /** Return ids of openedPlaces, sorted ascending */
+  get openedPlaces () {
+    return this.places
+    .reduce((acc, currVal, currInd, arr) => {
+      if (currVal.isOpened) {
+        acc.push(currVal.id);
+      }
+      return acc;
+    }, [])
+    .sort((a, b) => {
+      return a - b;
+    });
+  }
+
+  removePlaces(num) {
+    let j = 0;
+    let index;
+    let result = [];
+    // console.log(`places opened: ${JSON.stringify(this.openedPlaces)}`);
+    while (num) {
+      index = this.openedPlaces[this.openedPlaces.length - 1 - j];
+      result = [...result, ...this.places.splice(index, 1)];
+      // console.log(`index: ${index}`);
+      num--;
+      j++;
+    }
+    /** TODO garbage collect */
+    // console.log(`places to be removed: ${JSON.stringify(result)}`);
+    return result;
   }
 
   get numberPlaces() {
@@ -59,28 +91,24 @@ class Room {
     return this.places.every((place) => !place.isOpened);
   }
 
-  /** player's login, roomID, placeId */
+  /** Data = player's login, placeId. */
   setPlaceOwner(data) {
-    /** Find place by index (id === index).
-        Set its owner.
-        */
-    let id = this.places[data.placeId].setOwner({
+    /** Find place by index (id === index) and set its owner. */
+    return this.places[data.placeId].setOwner({
           login: data.login
         }).id;
-
-    return id;
   }
 
   setNumberPlaces(num) {
     if (num < this.numberPlaces) {
       return {
-        action: "places removed",
-        places: [] // TODO
+        action: "removed",
+        places: this.removePlaces(this.numberPlaces - num)
       };
     } else if (num > this.numberPlaces) {
       return {
-        action: "places added",
-        places: this.addPlaces(num - this.places.length)
+        action: "added",
+        places: this.addPlaces(num - this.numberPlaces)
       };
     } else {
       return null;

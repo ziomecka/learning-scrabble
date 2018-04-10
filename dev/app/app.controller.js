@@ -7,12 +7,12 @@ angular
   .controller("appController", [
     "$scope",
     "$rootScope",
-    "appTalkService",
+    "appSocket",
     "authorizationService",
     "$timeout",
     "authorizationGlobals",
     "$state",
-    ($scope, $rootScope, appTalkService, authorizationService, $timeout, authorizationGlobals, $state) => {
+    ($scope, $rootScope, appSocket, authorizationService, $timeout, authorizationGlobals, $state) => {
       let me = $scope;
       me.$state = $state;
       $rootScope.narrowTitle = false;
@@ -29,6 +29,6 @@ angular
         me.shortTitle = true;
       }, authorizationGlobals.shorterTitleTime);
       me.logout = () => authorizationService.clear();
-      appTalkService.connection();
+      appSocket.connection();
     }
   ]);

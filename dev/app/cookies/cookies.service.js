@@ -3,7 +3,7 @@
 // TODO memory leaks
 angular
   .module("cookiesModule")
-  .service("authorizationCookiesService", [
+  .service("cookiesService", [
     "socketService",
     "cookiesEvents",
     "cookiesNames",
@@ -56,7 +56,9 @@ angular
       let {event, cookies, callbacks} = options;
       socketService.emit(event, cookies);
       callbacks.forEach(callback => {
-        socketService.on(callback.event, data => callback.callback(data));
+        socketService.on(callback.event, data => {
+          callback.callback(data);
+        });
       });
     };
 
@@ -70,7 +72,9 @@ angular
           name: cookiesEvents.reqAuthorizationCookies,
           response: cookiesEvents.resAuthorizationCookies,
           listen: cookiesEvents.resAuthorizedCookiesSuccess,
-          callback: data => callback(data)
+          callback: data => {
+            callback(data);
+          }
         }]
       });
     };
@@ -99,11 +103,15 @@ angular
           "callbacks": [
             {
               "event": cookiesEvents.resAuthorizedCookiesFailure,
-              "callback": data => resolve(data)
+              "callback": data => {
+                resolve(data);
+              }
             },
             {
               "event": cookiesEvents.resAuthorizedCookiesSuccess,
-              "callback": data => reject(data)
+              "callback": data => {
+                reject(data);
+              }
             }
           ]
         });

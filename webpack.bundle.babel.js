@@ -10,12 +10,14 @@ import path from "path";
 import webpack from "webpack";
 
 const htmlIndex = {
-  title: "Welcome",
-  myPageHeader: "Scrabble",
+  title: "Let's play scrabble",
   template: path.join("./app/index.pug"),
   chunks: ["app"],
   filename: "./index.html",
-  inject: "head"
+  inject: "head",
+  // meta: "", // TODO
+  // favicon: "",
+  // minify: ""
 };
 
 const htmlIndexAssets = {
@@ -24,88 +26,72 @@ const htmlIndexAssets = {
 };
 
 const htmlTitle = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
-  template: path.join("./app/title/title.pug"),
-  filename: "./title.html",
+  template: path.join("./app/constants/title/title.pug"),
+  filename: "./index.title.html",
   inject: false
 };
 
 const htmlNavigation = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
   template: path.join("./app/navigation/navigation.pug"),
-  filename: "./navigation.html",
+  filename: "./rooms.navigation.html",
   inject: false
 };
 
 const htmlRoomSidebar = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
   template: path.join("./app/room/sidebar/room.sidebar.pug"),
   filename: "./room.sidebar.html",
   inject: false
 };
 
+const htmlRoomControls = {
+  template: path.join("./app/room/controls/controls.pug"),
+  filename: "./room.controls.html",
+  inject: false
+};
+
 const htmlRooms = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
   template: path.join("./app/rooms/rooms.pug"),
   filename: "./rooms.html",
   inject: false
 };
 
 const htmlAuth = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
   template: path.join("./app/authorization/authorization.pug"),
   filename: "./authorization.html",
   inject: false
 };
 
-const htmlNewUser = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
+const htmlNewuser = {
   template: path.join("./app/newuser/newuser.pug"),
   filename: "./newuser.html",
   inject: false
 };
 
-const htmlNewRoom = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
+const htmlNewroom = {
   template: path.join("./app/rooms/newroom/newroom.pug"),
-  filename: "./newroom.html",
+  filename: "./rooms.newroom.html",
   inject: false
 };
 
 const htmlRoom = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
   template: path.join("./app/room/room.pug"),
   filename: "./room.html",
   inject: false
 };
 
 const htmlControlsRound = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
   template: path.join("./scrabble/controls/round/round.pug"),
   filename: "./room.controls.round.html",
   inject: false
 };
 
 const htmlControlsExchange = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
   template: path.join("./scrabble/controls/exchange/exchange.pug"),
   filename: "./room.controls.exchange.html",
   inject: false
 };
 
 const htmlControlsVerify = {
-  title: "Scrabble room",
-  myPageHeader: "Let's play scrabble",
   template: path.join("./scrabble/controls/verify/verify.pug"),
   filename: "./room.controls.verify.html",
   inject: false
@@ -135,8 +121,9 @@ const settings = merge (common, {
     new HtmlWebpackPlugin(htmlRoomSidebar),
     new HtmlWebpackPlugin(htmlRooms),
     new HtmlWebpackPlugin(htmlAuth),
-    new HtmlWebpackPlugin(htmlNewUser),
-    new HtmlWebpackPlugin(htmlNewRoom),
+    new HtmlWebpackPlugin(htmlNewuser),
+    new HtmlWebpackPlugin(htmlNewroom),
+    new HtmlWebpackPlugin(htmlRoomControls),
     new HtmlWebpackPlugin(htmlControlsRound),
     new HtmlWebpackPlugin(htmlControlsExchange),
     new HtmlWebpackPlugin(htmlControlsVerify),

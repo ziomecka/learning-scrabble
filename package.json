@@ -24,7 +24,7 @@
     "nodeInspectBundle": "SET NODE_ENV=development && SET DEBUG=express:* && babel-node --inspect-brk ./bundle/server/server.js --presets es2015",
     "nodemon": "SET NODE_ENV=development && nodemon bundle/server/server.js --exec babel-node",
     "start": "SET DEBUG=* && node ./bundle/server.js",
-    "redisFactory": "rdcli -h a-redisFactory-address -p 22839 -a p2e369183f7f2da12e70035f77868e324f1c02537b5288e906b05b6213b0b8471"
+    "redis": "rdcli -h a-redis-address -p 22839 -a p2e369183f7f2da12e70035f77868e324f1c02537b5288e906b05b6213b0b8471"
   },
   "author": "Katarzyna Ziomek-Zdanowicz <katarzyna.ziomek.zdanowicz@gmail.com> (letsbitebytes.com)",
   "repository": {
@@ -105,6 +105,7 @@
     "express": "^4.16.2",
     "extract-loader": "^1.0.2",
     "ioredis": "^3.2.2",
+    "lodash.differencewith": "^4.5.0",
     "lodash.findkey": "^4.6.0",
     "lodash.has": "^4.5.2",
     "lodash.includes": "^4.3.0",
@@ -112,7 +113,7 @@
     "mongodb": "^3.0.5",
     "mongoose": "^5.0.12",
     "ng-resource": "^1.3.2",
-    "redisFactory": "^2.8.0",
+    "redis": "^2.8.0",
     "socket.io": "^2.1.0",
     "socket.io-client": "^2.1.0",
     "uuid": "^3.2.1"

@@ -1,9 +1,10 @@
 /* jshint esversion: 6 */
 // TODO add off events
-const redisFactory = require("../app/authorization/app.redis");
+const redisFactory = require("../authorization/authorization.redis");
 const cookiesEvents = require("./cookies.events");
-const socketsManagerFactory = require("../app/authorization/app.sockets.manager");
-const messages = require("../app/app.messages");
+const socketsManagerFactory = require("../authorization/authorization.sockets.manager");
+const cookiesMessages = require("./cookies.messages");
+const roomsSocketFactory = require("../rooms/rooms.socket");
 
 const reqCookies = options => {
   let {events, socket} = options;
@@ -35,6 +36,7 @@ const sendCookies =  options => {
       cookie.time = time;
       cookie.path = path;
     });
+    console.log(`event ${event}`);
     socket.emit(event, cookies);
   };
 
@@ -55,13 +57,17 @@ const reqAuthorizationCookies = options => {
   };
 
 const listenAuthorizationCookies = options => {
-  let {socket} = options;
+  let {socket, io} = options;
   let callback = data => {
     authorizeCookies(data)
     .then(msg => {
       console.log(msg);
       socketsManagerFactory().register({login: data.login, socket: data.socket});
       socket.emit(cookiesEvents.resAuthorizedCookiesSuccess, {"login": data.login});
+
+      /** Listen rooms events */
+      roomsSocketFactory.roomsSocket({"socket": socket, "io": io}).listen();
+
       let redis = redisFactory();
       redis.refreshCookies(data)
       .then(data => {
@@ -113,7 +119,7 @@ const stopListenAuthorizationCookies = options => {
 const sendAuthorizationCookies = options => {
   options.event = cookiesEvents.setAuthorizationCookies;
   sendCookies(options);
-  console.log(messages.authorizeCookiesSent(options.cookies[0].value));
+  console.log(cookiesMessages.authorizeCookiesSent(options.cookies[0].value));
 };
 
 const authorizeCookies = data => {
@@ -132,18 +138,18 @@ const authorizeCookies = data => {
         option: "number"
       })
       .then(msg => {
-        res(messages.authorizeCookiesSuccess(login));
+        res(cookiesMessages.authorizeCookiesSuccess(login));
       })
       .catch(reason => {
         // TODO
-        rej(messages.authorizeCookiesFailure(login));
+        rej(cookiesMessages.authorizeCookiesFailure(login));
       })
       .finally(() => {
         /** Collect garbage */
         redis = null;
       });
     } else {
-      rej(messages.authorizeCookiesFailure(login));
+      rej(cookiesMessages.authorizeCookiesFailure(login));
     }
   });
   return promise;

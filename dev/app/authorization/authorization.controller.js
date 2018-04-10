@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 module.exports = [
   "$scope",
-  "appTalkService",
+  "authorizationSocket",
   "authorizationService",
   "authorizationStates",
-  function ($scope, appTalkService, authorizationService, authorizationStates) {
+  function ($scope, authorizationSocket, authorizationService, authorizationStates) {
     const me = $scope;
 
     // TODO move to authorizationService?
@@ -27,9 +27,9 @@ module.exports = [
       me.resNoLogin = false;
       me.resAuthorizeFailure = false;
       me.buttonsDisabled = true;
-      appTalkService.authorize({
+      authorizationSocket.authorize({
         data: data,
-        callback: {
+        callbacks: {
           success: data => authorize(data),
           failureLogin: () => {
             me.buttonsDisabled = false;

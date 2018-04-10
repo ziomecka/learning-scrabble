@@ -7,10 +7,10 @@ const redis = () => {
   const redis_url = "redis://h:p15bad823b7a21c1e59a561d7bb247897f65e3982800c10198d6207864761776d@ec2-34-243-134-85.eu-west-1.compute.amazonaws.com:28329";
   const redis = Client.createClient(redis_url);
 
-  const sha512 = require("./app.password").sha512;
-  const salt = require("./app.password").generateSalt;
+  const sha512 = require("./authorization.password").sha512;
+  const salt = require("./authorization.password").generateSalt;
 
-  const messages = require("../app.messages");
+  const authorizationMessages = require("./authorization.messages");
 
   const flush = () => {
     redis.flushdb();
@@ -28,7 +28,7 @@ const redis = () => {
           .then(data => res({"login": data.login, "longNumber": data.longNumber}))
           .catch(reason => rej(reason));
         } else {
-          rej(messages.loginAlreadyExists(login));
+          rej(authorizationMessages.loginAlreadyExists(login));
         }
       });
     });
@@ -108,7 +108,7 @@ const redis = () => {
         "keys": keys
       })
       .then(login => res({"login": login, "longNumber": longNumber}))
-      .catch(reason => rej(messages.userCreateFailure(login)))
+      .catch(reason => rej(authorizationMessages.userCreateFailure(login)))
       .finally(() => {
         /** Collect garbage */ // TODO
         keys = null;
@@ -137,7 +137,7 @@ const redis = () => {
     } else {
       option = "Password";
     }
-    console.log(messages.authorizeOption({"login": login, "option": option}));
+    console.log(authorizationMessages.authorizeOption({"login": login, "option": option}));
 
     let promise = new Promise((res, rej) => {
       redis.exists(login, (err, result) => {
@@ -152,16 +152,16 @@ const redis = () => {
               let enteredPasswordHashed = sha512({"password": password, "salt": result[1]}).hashed;
               /** If the hashed entered password === hashed pasword in db */
               if (enteredPasswordHashed === result[0]) {
-                res(messages.authorizeSuccess(login));
+                res(authorizationMessages.authorizeSuccess(login));
               } else {
-                rej(messages.authorizePasswordFailure(login));
+                rej(authorizationMessages.authorizePasswordFailure(login));
               }
             } else {
-              rej(messages.authorizeDataFailure());
+              rej(authorizationMessages.authorizeDataFailure());
             }
           });
         } else {
-          rej(messages.authorizeLoginFailure(login));
+          rej(authorizationMessages.authorizeLoginFailure(login));
         }
       });
     });

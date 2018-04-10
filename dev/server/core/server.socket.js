@@ -4,12 +4,14 @@
 const socketIO = require("socket.io");
 const server = require("./server.start").server;
 const io = socketIO(server);
-
+// const appSocketFactory = require("../app/app.socket");
+const authorizationSocketFactory = require("../app/authorization/authorization.socket");
+const newuserSocketFactory = require("../app/newuser/newuser.socket");
 const serverEvents = require("./server.events");
 
-// const redisFactory = require("../app/authorization/app.redis");
-const cookies = require("../cookies/cookies");
-const socketsManagerFactory = require("../app/authorization/app.sockets.manager");
+// const redisFactory = require("../app/authorization/authorization.redis");
+const cookies = require("../app/cookies/cookies");
+const socketsManagerFactory = require("../app/authorization/authorization.sockets.manager");
 
 io.on("connection", socket => {
   // redisFactory.flush();
@@ -21,20 +23,19 @@ io.on("connection", socket => {
   /** Listen authorization cookies. */
   cookies.listenAuthorizationCookies({
     success: data => socketsManagerFactory().update(data),
-    socket: socket
+    socket: socket,
+    io: io
   });
 
   /** Register socket. */
   socketsManagerFactory().register({socket: socket.id});
 
-  let serverApp = require("../app/app.socket").serverApp;
-
-  serverApp(socket);
+  authorizationSocketFactory.authorizationSocket({socket: socket, io: io}).listen();
+  newuserSocketFactory.newuserSocket({socket: socket, io: io}).listen();
 
   socket.on("disconnect", () => {
     socketsManagerFactory().unregister({socket: socket.id});
     console.log("User disconnected.");
     /** Garbage collection */ // TODO
-    serverApp = null;
   });
 });

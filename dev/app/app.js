@@ -1,12 +1,12 @@
 /* jshint esversion: 6 */
 import "./app.module";
 import "./app.controller";
+import "./app.socket";
 
-import "./title/title";
+/** Constants */
+import "./constants/title/title";
+import "./constants/app.events";
 
-import "./app.events";
-
+/** Tools */
 import "./socket/socket.service";
-import "./app.talk.service";
-
 import "./tools/lodash.factory";
