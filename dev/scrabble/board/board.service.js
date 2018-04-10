@@ -4,8 +4,6 @@ angular
 .service("boardService", ["fieldFactory", "boardOptions", function (fieldFactory, boardOptions) {
   let {size: size, bonuses: bonuses} = boardOptions;
 
-  this.fields = new Array(size).fill(new Array(size));
-
   this.directions = ["row", "column"];
   this.side = [-1, 1];
 
@@ -27,22 +25,26 @@ angular
   };
 
   this.createFields = () => {
+    let result = [];
     for (let i = 0; i < size; i++) {
+      let row = result[i] = [];
       for (let j = 0; j < size; j++) {
-        this.fields[i][j] = new fieldFactory({row: i, column: j});
-        // column = field;
+        row[j] = new fieldFactory({"row": i, "column": j});
       }
     }
+    return result;
   };
 
   this.setBonuses = () => {
-    Object.keys(bonuses).forEach(bonus => {
-      bonuses[bonus].forEach(field => {
-        this.fields[field[0] - 1][field[1] - 1].bonus = bonus;
+    Object.keys(bonuses).forEach(type => {
+      bonuses[type].forEach(bonus => {
+        let row = bonus[0] - 1;
+        let column = bonus[1] - 1;
+        this.fields[row][column].bonus = type;
       });
     });
   };
 
-  this.createFields();
+  this.fields = this.createFields();
   this.setBonuses();
 }]);
