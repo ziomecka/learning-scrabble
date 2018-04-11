@@ -2,21 +2,21 @@
 angular
   .module("playerModule")
   .factory("playerFactory", [
-    "scrabbleTalk",
+    "scrabbleSocket",
     "lodashFactory",
-    function (scrabbleTalk, lodashFactory) {
+    function (scrabbleSocket, lodashFactory) {
       class Player {
         constructor (playerOptions) {
           ({name: this.name, time: this.time, id: this.id} = playerOptions);
           this.points = 0;
           this.tiles = [];
 
-          scrabbleTalk.listenInitialTiles({
+          scrabbleSocket.listenInitialTiles({
             callbacks: {
               initialTiles: data => player.getTiles(data)
             }
           });
-          scrabbleTalk.listenRoundStarted({
+          scrabbleSocket.listenRoundStarted({
             callbacks: {
               roundStarted: data => player.roundStarted(data)
             }
@@ -38,7 +38,7 @@ angular
         }
 
         exchangeTiles (data) {
-          scrabbleTalk.exchangeTiles({
+          scrabbleSocket.exchangeTiles({
             callbacks: {
               exchangedTiles: data => getTiles(data)
             },

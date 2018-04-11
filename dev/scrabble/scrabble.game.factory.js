@@ -2,10 +2,10 @@
 angular
 .module("scrabbleModule")
 .factory("scrabbleGameFactory", [
-  "scrabbleTalk",
+  "scrabbleSocket",
   "playerFactory",
   "$q",
-  (scrabbleTalk, playerFactory, $q) => {
+  (scrabbleSocket, playerFactory, $q) => {
 
     class ScrabbleGame {
       constructor (options) {
@@ -16,7 +16,7 @@ angular
 
       drawTiles (options) {
         let deferred = $q.defer();
-        scrabbleTalk.drawTiles({
+        scrabbleSocket.drawTiles({
           gameId: this.id,
           number: options.number,
           callbacks: {
@@ -32,7 +32,7 @@ angular
       ({data: {id: data.id}} = options);
       let deferred = $q.defer();
 
-      scrabbleTalk.createScrabble({
+      scrabbleSocket.createScrabble({
         callbacks: {
           success: data => {
             console.log(`resolved here`);
