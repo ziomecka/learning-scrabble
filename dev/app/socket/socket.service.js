@@ -67,16 +67,13 @@ angular
           {
             emit: {
               event: string,
-              data: object,
-              success: "",
-              failure: ""
+              data: object
             },
             events: [
               {
-                eventName: "",
-                method: "",
-                callback: callback,
-                offEvents: []
+                eventName: string,
+                callback: function,
+                offEvents: string[]
               }
             ]
           }
