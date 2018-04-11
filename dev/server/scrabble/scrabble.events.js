@@ -1,15 +1,23 @@
 /* jshint esversion: 6 */
 module.exports = {
-  "reqCreateScrabble": "scrabble: create",
-  "resCreateScrabbleSuccess": "scrabble: created",
+  // "reqCreateScrabble": "scrabble: create",
+  // "resCreateScrabbleSuccess": "scrabble: created",
   "resInitialTiles": "scrabble: your initial tiles",
-  "resRoundStarted": "scrabble: your round has started",
+  "resRoundStarted": "scrabble: your round starts",
   "reqExchangeTiles": "scrabble: exchange tiles",
-  "resExchangeTilesSuccess": "scrabble: tiles have been exchanged",
-  "resWordRejected": "",
-  "resRoundEnded": "",
-  "reqVerifyWord": "",
+  "resExchangeTilesSuccess": "scrabble: tiles exchanged",
+  "reqResign": "scrabble: I resign",
+  "resResignSuccess": "scrabble: resignation accepted",
   "reqEndRound": "scrabble: end round",
-  "reqDrawTiles": "scrabble: draw tiles",
-  "resDrawTilesSuccess": "scrabble: tiles drawn"
+  "resRoundEnded": "scrabble: word accepted",
+  "resWordRejected": "scrabble: word rejected",
+  "resOpponentWord": "scrabble: opponent placed word",
+  "reqVerifyWord": "scrabble: verify opponent's word",
+  "resVerifyWordAccepted": "scrabble: opponent's word correct",
+  "resVerifyWordRejected": "scrabble: opponent's word incorrect",
+  "reqAcceptWord": "scrabble: I accept opponent's word",
+  "resAcceptWordSuccess": "scrabble: opponent's word accepted",
+  "resAcceptWordFailure": "scrabble: opponent's word rejected",
+  "resOpponentExchange": "scrabble: opponent exchanged tiles",
+  "resOpponentResign": "scrabble: opponent resigned"
 };
