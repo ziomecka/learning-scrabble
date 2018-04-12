@@ -3,7 +3,8 @@ angular
   .module("app")
   .service("socketService", [
     "$rootScope",
-    function ($rootScope) {
+    "authorizationService",
+    function ($rootScope, authorizationService) {
 
       /** io is avaialable thanks to socket.io-client */
       let socket = io();
@@ -85,6 +86,10 @@ angular
           emit,
           events
         } = options;
+
+        /** Emit roomID and login */
+        ({login: emit.data.login, roomId: emit.data.roomId} = authorizationService);
+
         this.emit(emit.eventName, emit.data);
         if (Array.isArray(events)) {
           events.forEach(event => {
