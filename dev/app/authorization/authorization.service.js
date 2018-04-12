@@ -7,15 +7,17 @@ angular
   "cookiesService",
   function ($state, authorizationStates, cookiesService) {
     this.authorized = false;
-    this.guest = false;
+    // this.guest = false;
     this.login = "";
-    this.lastTo = "";
+    this.roomId = "";
+    // this.lastTo = "";
 
     this.clear = () => {
       this.authorized = false;
       $state.go(authorizationStates.authorization);
     };
 
+    /** Store login in authorization service. */
     this.authorize = data => {
       ({
         authorized: this.authorized = true,
@@ -37,7 +39,9 @@ angular
     // TODO some bullshit when trying to enter room that does not exist
     this.go = data => {
       data = Object(data);
-      let {state: state = this.authorized? authorizationStates.rooms: authorizationStates.home, roomId: roomId = ""} = data;
+      let state;
+      /** Store roomId in authorization service. */
+      ({state: state = this.authorized? authorizationStates.rooms: authorizationStates.home, roomId: this.roomId = ""} = data);
       $state.go(state, {"roomId": roomId});
     };
   }]
