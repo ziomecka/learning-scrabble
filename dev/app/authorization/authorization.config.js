@@ -28,7 +28,10 @@ angular
       const newuser = {
         url: "/newuser",
         templateUrl: "../newuser.html",
-        controller: require("../newuser/newuser.controller")
+        controller: require("../newuser/newuser.controller"),
+        resolve: {
+          loadNewUserModule: require("./resolve/resolve.authorization.load.newuser.module")
+        }
       };
 
       const games = {
@@ -66,6 +69,9 @@ angular
         resolve: {
           roomData: require("./resolve/resolve.room.roomdata"),
           narrowTitle: require("./resolve/resolve.room.narrowtitle")
+        },
+        params: {
+          newroom: false
         },
         views: {
           "": {
