@@ -32,7 +32,7 @@ const newuserSocket = data => {
         });
         socket.emit(newuserEvents.resNewuserSuccess, {"login": data.login});
         /** Listen rooms events */
-        roomsSocketFactory({"socket": socket, "io": io}).listen();
+        roomsSocketFactory.roomsSocket({"socket": socket, "io": io}).listen();
         console.log(newuserMessages.userCreateSuccess(login));
       })
       .catch(reason => {
