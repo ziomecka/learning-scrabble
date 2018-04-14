@@ -6,6 +6,6 @@
     ["syntax-dynamic-import"],
     ["add-module-exports"]
   ],
-  "ignore": ["node_modules/**.js"],
+  "ignore": ["../../node_modules/**.js"],
   "compact": false
 }

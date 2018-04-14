@@ -1,11 +1,13 @@
 {
   "presets": [
-    ["es2015"]
+    ["es2015", {
+      "targets": {"node": true}
+      }]
   ],
 	"plugins": [
     ["syntax-dynamic-import"],
     ["add-module-exports"]
   ],
-  "ignore": ["node_modules/**.js"],
+  "ignore": ["../node_modules/**.js"],
   "compact": false
 }
