@@ -52,6 +52,7 @@ const roomSocket = function(data) {
   // PLACES  //
   /////////////
   /** If initiated by CLient.*/
+  /** TODO to be removed. */
   let listenCreateNewgame = () => {
     socket.on(scrabbleEvents.reqCreateNewgame, data => {
       createScrabble(data).then(game => createScrabbleSuccess(game));
@@ -78,9 +79,23 @@ const roomSocket = function(data) {
 
       /** If all places taken ask users to click 'start' */
       if (allRooms.getOne(data.roomID).allPlacesTaken) {
-        socket.emit(roomEvents.resAskPlayerStart);
+        askPlayerStart();
       }
     });
+  };
+
+  let askPlayerStart = () => {
+    socket.emit(roomEvents.resAskPlayerStart);
+    socket.emit(roomEvents.resAskPlayerStart);
+    listenPlayerStart();
+  };
+
+  let listenPlayerStart = () => {
+    socket.emit(roomEvents.resAskPlayerStart);
+    if (allRooms.getOne(data.roomID).allPlayersReady) { // TODO allPlayersReady
+      // TODO start ScrabbleSocket
+      // TODO sent initial tiles via game
+    }
   };
 
   let stopListenTakePlace = () => {
