@@ -14,6 +14,9 @@ module.exports = [
       roomId: $stateParams.roomId,
       callbacks: {
         success: data => {
+          /** Is the room new ? */
+          data = JSON.parse(data);
+          data.newroom = $stateParams.newroom;
           resolve(data);
         },
         failure: () => reject()
