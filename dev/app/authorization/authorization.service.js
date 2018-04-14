@@ -5,44 +5,55 @@ angular
   "$state",
   "authorizationStates",
   "cookiesService",
-  function ($state, authorizationStates, cookiesService) {
-    this.authorized = false;
-    // this.guest = false;
-    this.login = "";
-    this.roomId = "";
-    // this.lastTo = "";
+  "authorizationUserData",
+  function ($state, authorizationStates, cookiesService, authorizationUserData) {
+    // this.authorized = false;
+    // this.login = "";
+    // this.roomId = "";
 
     this.clear = () => {
-      this.authorized = false;
+      authorizationUserData.authorized = false;
       $state.go(authorizationStates.authorization);
     };
 
     /** Store login in authorization service. */
     this.authorize = data => {
       ({
-        authorized: this.authorized = true,
-        guest: this.guest = false,
-        login:  this.login = ""
+        authorized: authorizationUserData.authorized = true,
+        login:  authorizationUserData.login = ""
       } = data);
+      this.go();
     };
 
     this.unauthorize = () => {
-      this.authorized = false;
-      this.login = "";
+      authorizationUserData.authorized = false;
+      authorizationUserData.login = "";
       // TODO change name of the below service
       /** Destroy cookies */
       cookiesService.removeAuthorizationCookies();
+      // TODO off all or some sockets???
       /** Go back to authorization state */
       this.go({state: authorizationStates.authorization});
     };
 
     // TODO some bullshit when trying to enter room that does not exist
+    /** Passes roomId and information if the room is new. */
     this.go = data => {
       data = Object(data);
-      let state;
-      /** Store roomId in authorization service. */
-      ({state: state = this.authorized? authorizationStates.rooms: authorizationStates.home, roomId: this.roomId = ""} = data);
-      $state.go(state, {"roomId": roomId});
+      /** Get data */
+      let {
+            state: state = authorizationUserData.authorized? authorizationStates.rooms: authorizationStates.home,
+            roomId: roomId,
+            newroom: newroom = false
+          } = data;
+
+      /** Store roomId in user's data. */
+      authorizationUserData.roomId = roomId;
+
+      $state.go(state, {
+        "roomId": roomId,
+        "newroom": newroom
+      });
     };
   }]
 );
