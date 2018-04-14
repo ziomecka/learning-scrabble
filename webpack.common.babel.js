@@ -48,6 +48,9 @@ const settings = {
         exclude: /(node_modules)|(\.spec\.js$)|(angular\.min\.js$)/,
         use: [
           {
+            loader: "ng-annotate-loader"
+          },
+          {
             loader: "babel-loader",
             options: {
               /** For error: the code generator has deoptimised styling
