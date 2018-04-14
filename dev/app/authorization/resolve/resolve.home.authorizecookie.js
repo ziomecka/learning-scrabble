@@ -8,8 +8,9 @@ module.exports = [
   "$transition$",
   "$stateParams",
   "authorizationStates",
-  (cookiesService, authorizationService, $q, $timeout, $transition$, $stateParams, authorizationStates) => {
-    if (!authorizationService.authorized) {
+  "authorizationUserData",
+  (cookiesService, authorizationService, $q, $timeout, $transition$, $stateParams, authorizationStates, authorizationUserData) => {
+    if (!authorizationUserData.authorized) {
       const deferred = $q.defer();
       // TODO stop listnening when received
       cookiesService.sendAuthorizationCookies({
