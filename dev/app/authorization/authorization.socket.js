@@ -4,8 +4,7 @@ angular
   .service("authorizationSocket", [
     "socketService",
     "authorizationEvents",
-    "authorizationService",
-    function (socketService, authorizationEvents, authorizationService) {
+    function (socketService, authorizationEvents) {
       this.authorize = options => {
         let {data, callbacks: {success, failureLogin, failurePassword}} = options;
 
