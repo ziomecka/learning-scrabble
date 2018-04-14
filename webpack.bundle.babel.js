@@ -111,7 +111,7 @@ const copyOptions = [
 const settings = merge (common, {
   output: {
     path: path.resolve(__dirname, "bundle"),
-    filename: "./app/app.bundle.js"
+    filename: "./app/[name].bundle.js"
   },
   plugins: [
     new HtmlWebpackPlugin(htmlIndex),
