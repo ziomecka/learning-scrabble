@@ -3,7 +3,7 @@ module.exports = {
   // "reqCreateScrabble": "scrabble: create",
   // "resCreateScrabbleSuccess": "scrabble: created",
   "resInitialTiles": "scrabble: your initial tiles",
-  "resRoundStarted": "scrabble: your round starts",
+  "resStartRound": "scrabble: your round starts",
   "reqExchangeTiles": "scrabble: exchange tiles",
   "resExchangeTilesSuccess": "scrabble: tiles exchanged",
   "reqResign": "scrabble: I resign",
