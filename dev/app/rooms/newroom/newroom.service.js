@@ -30,7 +30,8 @@ angular
               success(data);
               authorizationService.go({
                 state: authorizationStates.room,
-                roomId: data.roomId
+                roomId: data.roomId,
+                newroom: true
               });
             }
           }
