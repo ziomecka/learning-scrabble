@@ -20,7 +20,6 @@ angular
         socketService.on(newuserEvents.resNewuserSuccess, data => {
           off();
           authorizationService.authorize(data);
-          authorizationService.go();
         });
       };
     }
