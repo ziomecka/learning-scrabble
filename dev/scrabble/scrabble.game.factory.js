@@ -6,44 +6,34 @@ angular
   "playerFactory",
   "$q",
   (scrabbleSocket, playerFactory, $q) => {
-
+    /** only one */
     class ScrabbleGame {
       constructor (options) {
-        let {tiles: tiles} = options;
-        this.player = new playerFactory({tiles: tiles});
-        options.resolve();
+        this.player = new playerFactory();
+        this.opponents = [];
+        // options.resolve();
       }
 
-      drawTiles (options) {
+      // TODO not here because done once only by some players???
+      prepare (options) {
         let deferred = $q.defer();
-        scrabbleSocket.drawTiles({
-          gameId: this.id,
-          number: options.number,
-          callbacks: {
-            success: data => deferred.resolve(this.player.getTiles(data))
+
+        const socketOptions = {
+          success: data => {
+            deferred.resolve(data);
           }
-        });
+        };
+        scrabbleSocket.createScrabble(socketOptions);
         return deferred.promise;
+      }
+
+
+      addOponent (options) {
+      }
+      removeOpponent () {
       }
     }
 
-    const prepare = function(options) {
-      let data = {};
-      ({data: {id: data.id}} = options);
-      let deferred = $q.defer();
-
-      scrabbleSocket.createScrabble({
-        callbacks: {
-          success: data => {
-            console.log(`resolved here`);
-            deferred.resolve(data);
-          },
-          failure: data => {} // TODO
-        },
-        data: data
-      });
-      return deferred.promise;
-    };
 
     const start = function(options) {
       options = Object(options);
@@ -55,7 +45,6 @@ angular
     let destroy = null; // TODO ?
 
     return {
-      prepare: prepare,
       start: options => {
         options = Object(options);
         start(options);
