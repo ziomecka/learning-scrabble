@@ -1,7 +1,8 @@
 /* jshint esversion: 6 */
-import angular from "angular";
 import scrabbleModule from "../../scrabble/scrabble";
 
-angular.module("roomModule", [
+const mod = angular.module("roomModule", [
   "scrabbleModule"
 ]);
+
+module.exports = mod;
