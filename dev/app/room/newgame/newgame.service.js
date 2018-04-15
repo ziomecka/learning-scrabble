@@ -10,34 +10,49 @@ angular
       this.createGame = data => {
         let deferred = $q.defer();
 
-        socketService.emit(scrabbleEvents.reqCreateScrabble, {roomId: data.roomId});
-        this.listenCreateGame({
-          callbacks: {
-            success: data => {
-              scrabbleGameFactory.prepare({
-                data: {
-                  id: data.id // TODO
-                }
-              });
+        /** The roomId will be provided by the authorizationService.
+            What if player in the meantime changes the roomId????
+            Authorization service should store the roomId only of the seated player!!!
+            TODO
+            */
+        let emitOptions = {
+          emit: {
+            event: scrabbleEvents.reqCreateScrabble
+          },
+          events: [
+            {
+              eventName: scrabbleEvents.resCreateScrabbleSuccess, // TODO add event
+              callback: data => {
+                console.log(`Game with id: ${data.id} created.`);
+                deferred.resolve(data);
+              }
             }
-          }
-        })
-        .then(data => {
-          console.log(`Game with id: ${data.id} created.`);
-          deferred.resolve(data.id);
-        });
-        return deferred.promise;
+          ]
+        };
+        socketHandlers.emitHandler(emitOptions);
+        emitOptions = null;
       };
 
-      this.listenCreateGame = options => {
-        let {callbacks: {success}} = options;
+      this.getGame = data => {
         let deferred = $q.defer();
-        let eventName = scrabbleEvents.reqCreateScrabbleSuccess;
-        socketService.on(eventName, data => {
-          deferred.resolve(data);
-          socketService.off(eventName);
-        });
-        return deferred.promise;
+
+        /** The roomId will be provided by the authorizationService. */
+        let emitOptions = {
+          emit: {
+            event: scrabbleEvents.reqGetScrabble
+          },
+          events: [
+            {
+              eventName: scrabbleEvents.resGetScrabbleSuccess, // TODO add event
+              callback: data => {
+                console.log(`Game with id: ${data.id} received.`);
+                deferred.resolve(data);
+              }
+            }
+          ]
+        };
+        socketHandlers.emitHandler(emitOptions);
+        emitOptions = null;
       };
     }
   ]);
