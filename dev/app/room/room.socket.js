@@ -7,8 +7,8 @@ angular
     "playerStates",
     "$timeout",
     "$q",
-    "authorizationService",
-    function (socketService, roomEvents, playerStates, $timeout, $q, authorizationService) {
+    "authorizationUserData",
+    function (socketService, roomEvents, playerStates, $timeout, $q, authorizationUserData) {
 
       //////////////////
       // ROOM DETAILS //
@@ -17,7 +17,7 @@ angular
         let {callbacks: {success}} = options;
         socketService.emit(roomEvents.reqJoinedRoomDetails, {
           roomId: options.roomId,
-          login: authorizationService.login
+          login: authorizationUserData.login
         });
 
         this.listenGetRoomDetails({
@@ -43,7 +43,7 @@ angular
         let {callbacks: {success}} = options;
         socketService.emit(roomEvents.reqLeaveRoom, {
           roomId: options.roomId,
-          login: authorizationService.login
+          login: authorizationUserData.login
         });
 
         this.listenleaveRoom({
@@ -162,14 +162,13 @@ angular
       //////////
       // USER //
       //////////
-
       this.takePlace = options => {
         let {roomId, placeId, callbacks: {success}} = options;
         this.data.player.placeId = placeId;
         socketService.emit(roomEvents.reqTakePlace, {
           roomID: roomId,
           placeId: placeId,
-          login: authorizationService.login
+          login: authorizationUserData.login
         });
 
         this.listenTakePlace({
@@ -200,7 +199,7 @@ angular
         socketService.emit(roomEvents.reqGetUp, {
           roomID: roomId,
           placeId: placeId,
-          login: authorizationService.login
+          login: authorizationUserData.login
         });
         this.listenGetUp({
           callbacks: {
@@ -227,6 +226,7 @@ angular
         });
       };
 
+      // all players started - create game factory
       this.listenNotStarted = options => {
         let {callbacks: {success}} = options;
         let eventName = roomEvents.resNotStarted;
@@ -245,6 +245,146 @@ angular
           success();
           socketService.off(eventName);
         });
+      };
+
+      this.start = options => {
+        // TODO emit started
+
+      };
+
+      this.listenGameStarted = options => {
+
+      };
+
+      ////////////////
+      // AGGREGATED //
+      ////////////////
+      this.observeOtherUsers = () => {
+        const listen = () => {
+          this.listenOtherUserJoinedRoom(
+            {
+              callbacks: {
+                success: data => {
+                  this.data.room.users.push({"login": data.login});
+                  console.log(`User ${data.login} joined the room`);
+                }
+              }
+            }
+          );
+
+          /** Listen if other users left the room. */
+          this.listenOtherUserLeftRoom(
+            {
+              callbacks: {
+                success: data => {
+                  let users = this.data.room.users;
+                  users.splice(users.indexOf(data.login), 1);
+                  console.log(`User ${data.login} left the room`);
+                  users = "";
+                }
+              }
+            }
+          );
+        };
+
+        const stopListen = () => {
+        };
+
+        return {
+          listen: listen,
+          stopListen: stopListen
+        };
+      };
+
+      this.observeWaitForPlayers = () => {
+        const listen = () => {
+          /** Listen if other users take places */
+          this.listenOtherUserTookPlace(
+            {
+              callbacks: {
+                success: data => {
+                  this.data.game.players.push({"login": data.login});
+                  this.data.room.places[data.placeId].
+                  console.log(`User ${data.login} took place ${data.placeId}`);
+                  // TODO
+                  // roomSocket.listenOtherUserGotUp
+                  // TODO set place's owner
+                }
+              }
+            }
+          );
+
+          /** Listen if other players get up */
+          this.listenOtherPlayerGotUp(
+            {
+              callbacks: {
+                success: data => {
+                  // TODO remove player
+                  if (this.data.game.players.length <= 1) {
+                    // TODO
+                    // roomSocket.stopListenOtherUserGotUp
+                  }
+                }
+              }
+            }
+          );
+
+          /** Listen for changes in number of places */
+          roomSocket.listenNumberPlacesChanged({
+            callbacks: {
+              success: data => {
+                let places = this.data.room.places;
+                if (data.action === "added") {
+                  this.data.room.places = [...places, ...data.places];
+                } else if (data.action === "removed") {
+                  this.data.room.places = lodashFactory.differenceWith(places, data.places, (arrVal, othVal) => {
+                    return arrVal.id === othVal.id;
+                  });
+                }
+                places = null;
+              }
+            }
+          });
+
+          /** Listen for changes in game's */
+          roomSocket.listenTimeChanged(
+            {
+              callbacks: {
+                success: data => {
+                  this.data.room.time = data.time;
+                }
+              }
+            }
+          );
+        };
+
+        const stopListen = () => {
+        };
+
+        return {
+          listen: listen,
+          stopListen: stopListen
+        };
+      };
+
+
+      this.playGame = () => {
+        const listen = () => {
+          roomSocket.listenPlayerLost();
+          roomSocket.listenPlayerGetBack();
+        };
+
+        const stopListen = () => {
+        };
+
+        return {
+          listen: listen,
+          stopListen: stopListen
+        };
+      };
+
+      this.observeGame = () => {
+
       };
     }
   ]);
