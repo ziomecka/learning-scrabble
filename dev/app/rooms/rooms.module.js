@@ -1,4 +1,6 @@
 /* jshint esversion: 6 */
-import angular from "angular";
+// import angular from "angular";
 
-angular.module("roomsModule", []);
+const mod = angular.module("roomsModule", []);
+
+module.exports = mod;
