@@ -6,7 +6,8 @@ angular
     "roomsEvents",
     "$stateParams",
     "authorizationService",
-    function (socketService, roomsEvents, $stateParams, authorizationService) {
+    "authorizationUserData",
+    function (socketService, roomsEvents, $stateParams, authorizationService, authorizationUserData) {
       this.getAllRooms = options => {
         let {callback} = options;
         socketService.emit(roomsEvents.reqAllRooms);
@@ -19,7 +20,7 @@ angular
         socketService.emit(roomsEvents.reqCreateNewroom, {
           name: name,
           numberPlaces: numberPlaces,
-          login: authorizationService.login,
+          login: authorizationUserData.login,
           createGame: createGame,
           joinRoom: joinRoom
         });
