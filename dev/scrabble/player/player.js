@@ -2,3 +2,5 @@
 import "./player.module";
 import "./player.factory";
 import "./player.directive";
+/** Constants */
+import "./constants/player.states";

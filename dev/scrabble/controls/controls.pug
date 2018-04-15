@@ -1,0 +1,10 @@
+controls-round(ng-if="data.state === 'yourRound' && !exchange")
+  button(ng-click="roundOk()") Ok
+  button(ng-click="roundExchange()") Exchange
+  button(ng-click="roundResign()") Resign
+controls-exchange(ng-if="data.state === 'yourRound' && exchange")
+  button(ng-click="exchangeOK()") Ok
+  button(ng-click="exchangeResign()") Resign
+controls-verify(ng-if="data.state === 'verifyWord'")
+  button(ng-click="verifyNo()") Ok
+  button(ng-click="verifyYes()") Verify
