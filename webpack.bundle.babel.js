@@ -56,7 +56,7 @@ const htmlRooms = {
 };
 
 const htmlAuth = {
-  template: path.join("./app/authorization/authorization.pug"),
+  template: path.join("./app/authorization/templates/authorization.pug"),
   filename: "./authorization.html",
   inject: false
 };

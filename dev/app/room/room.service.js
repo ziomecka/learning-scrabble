@@ -4,14 +4,14 @@ angular
   .service("roomService", [
     "roomSocket",
     "newgameService",
-    "authorizationUserData",
+    "userData",
     "newroomDefaults",
     "lodashFactory",
     "roomStates",
     "scrabbleGameFactory",
     "userStates",
     function (
-      roomSocket, newgameService, authorizationUserData,
+      roomSocket, newgameService, userData,
       newroomDefaults, lodashFactory, roomStates, scrabbleGameFactory, userStates) {
       const clearData = () => {
         /** Data shared with controller. */
@@ -19,7 +19,7 @@ angular
           user: {
             state: undefined,
             placeId: undefined,
-            login: authorizationUserData.login,
+            login: userData.login,
             ownsRoom: false
           },
           player: scrabbleGameFactory.player,
@@ -78,7 +78,7 @@ angular
           this.observeWaitForPlayers.listen();
 
           /** Check if I own the room TODO not needed */
-          this.data.player.ownsRoom = (room.owner === authorizationUserData.login);
+          this.data.player.ownsRoom = (room.owner === userData.login);
 
           /** Create new game */
           newgameService
@@ -171,7 +171,7 @@ angular
         roomSocket.takePlace({
           roomID: this.data.room.id,
           placeId: data.placeId,
-          login: authorizationUserData.login,
+          login: userData.login,
           callbacks: {
             successTakePlace: data => {
               this.assignUserToPlace(data);

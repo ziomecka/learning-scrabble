@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 module.exports = [
   "$scope",
-  "authorizationService",
   "roomSocket",
   "roomService",
-  ($scope, authorizationService, roomSocket, roomService) => {
+  "routerGoService",
+  ($scope, roomSocket, roomService, routerGoService) => {
     const me = $scope;
     me.getup = () => {};
     me.start = () => {};
@@ -12,7 +12,7 @@ module.exports = [
       roomSocket.leaveRoom({
         callbacks: {
           success: () => {
-            authorizationService.go();
+            routerGoService.go();
           }
         },
         roomId: roomService.data.room.id

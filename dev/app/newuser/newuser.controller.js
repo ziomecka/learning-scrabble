@@ -3,15 +3,16 @@ module.exports = [
   "$scope",
   "newuserSocket",
   "authorizationService",
-  "authorizationStates",
-  ($scope, newuserSocket, authorizationService, authorizationStates) => {
+  "routerStates",
+  "routerGoService",
+  ($scope, newuserSocket, authorizationService, routerStates, routerGoService) => {
     const me = $scope;
     let loginNotUnique = false;
     me.login = "";
     me.password = "";
 
     me.goAuthorization = () => {
-      authorizationService.go({state: authorizationStates.authorization});
+      routerGoService.go({state: routerStates.authorization});
     };
 
     me.createUser = data => {

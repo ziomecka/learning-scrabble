@@ -1,14 +1,13 @@
 /* jshint esversion: 6 */
 // TODO what if url address is incorrect
 angular
-  .module("authorizationModule")
+  .module("routerModule")
   .config([
     "$routeProvider",
     "$locationProvider",
     "$stateProvider",
-    "authorizationStates",
-    ($routeProvider, $locationProvider, $stateProvider, authorizationStates) => {
-
+    "routerStates",
+    ($routeProvider, $locationProvider, $stateProvider, routerStates) => {
       const home = {
         url: "/",
         resolve: {
@@ -19,7 +18,7 @@ angular
       const authorization = {
         url: "/authorization",
         templateUrl: "../authorization.html",
-        controller: require("./authorization.controller"),
+        controller: require("../authorization/controllers/authorization.controller"),
         resolve: {
           fromApp: require("./resolve/resolve.authorization.fromhome")
         }
@@ -53,11 +52,11 @@ angular
             templateUrl: "../rooms.html",
             controller: require("../rooms/rooms.controller")
           },
-          [`navigation@${authorizationStates.rooms}`]: {
+          [`navigation@${routerStates.rooms}`]: {
             templateUrl: "../rooms.navigation.html",
             controller: require("../navigation/navigation.controller")
           },
-          [`newroom@${authorizationStates.rooms}`]: {
+          [`newroom@${routerStates.rooms}`]: {
             templateUrl: "../rooms.newroom.html",
             controller: require("../rooms/newroom/newroom.controller")
           }
@@ -78,7 +77,7 @@ angular
             templateUrl: "../room.html",
             controller: require("../room/room.controller")
           },
-          [`roomsidebar@${authorizationStates.room}`]: {
+          [`roomsidebar@${routerStates.room}`]: {
             templateUrl: "../room.sidebar.html",
             controller: require("../room/sidebar/room.sidebar.controller")
           }
@@ -87,12 +86,12 @@ angular
 
       $routeProvider.otherwise({templateUrl: "../index.html"});
 
-      $stateProvider.state(authorizationStates.home, home);
-      $stateProvider.state(authorizationStates.authorization, authorization);
-      $stateProvider.state(authorizationStates.newuser, newuser);
-      $stateProvider.state(authorizationStates.games, games);
-      $stateProvider.state(authorizationStates.rooms, gamesRooms);
-      $stateProvider.state(authorizationStates.room, gamesRoom);
+      $stateProvider.state(routerStates.home, home);
+      $stateProvider.state(routerStates.authorization, authorization);
+      $stateProvider.state(routerStates.newuser, newuser);
+      $stateProvider.state(routerStates.games, games);
+      $stateProvider.state(routerStates.rooms, gamesRooms);
+      $stateProvider.state(routerStates.room, gamesRoom);
 
       $locationProvider.html5Mode({enabled: true});
     }

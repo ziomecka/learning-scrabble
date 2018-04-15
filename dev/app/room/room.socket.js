@@ -7,8 +7,8 @@ angular
     "playerStates",
     "$timeout",
     "$q",
-    "authorizationUserData",
-    function (socketService, roomEvents, playerStates, $timeout, $q, authorizationUserData) {
+    "userData",
+    function (socketService, roomEvents, playerStates, $timeout, $q, userData) {
 
       //////////////////
       // ROOM DETAILS //
@@ -17,7 +17,7 @@ angular
         let {callbacks: {success}} = options;
         socketService.emit(roomEvents.reqJoinedRoomDetails, {
           roomId: options.roomId,
-          login: authorizationUserData.login
+          login: userData.login
         });
 
         this.listenGetRoomDetails({
@@ -43,7 +43,7 @@ angular
         let {callbacks: {success}} = options;
         socketService.emit(roomEvents.reqLeaveRoom, {
           roomId: options.roomId,
-          login: authorizationUserData.login
+          login: userData.login
         });
 
         this.listenleaveRoom({
@@ -168,7 +168,7 @@ angular
         socketService.emit(roomEvents.reqTakePlace, {
           roomID: roomId,
           placeId: placeId,
-          login: authorizationUserData.login
+          login: userData.login
         });
 
         this.listenTakePlace({
@@ -199,7 +199,7 @@ angular
         socketService.emit(roomEvents.reqGetUp, {
           roomID: roomId,
           placeId: placeId,
-          login: authorizationUserData.login
+          login: userData.login
         });
         this.listenGetUp({
           callbacks: {

@@ -5,9 +5,9 @@ angular
     "socketService",
     "roomsEvents",
     "$stateParams",
-    "authorizationService",
-    "authorizationUserData",
-    function (socketService, roomsEvents, $stateParams, authorizationService, authorizationUserData) {
+    "routerGoService",
+    "userData",
+    function (socketService, roomsEvents, $stateParams, routerGoService, userData) {
       this.getAllRooms = options => {
         let {callback} = options;
         socketService.emit(roomsEvents.reqAllRooms);
@@ -20,7 +20,7 @@ angular
         socketService.emit(roomsEvents.reqCreateNewroom, {
           name: name,
           numberPlaces: numberPlaces,
-          login: authorizationUserData.login,
+          login: userData.login,
           createGame: createGame,
           joinRoom: joinRoom
         });
@@ -45,7 +45,7 @@ angular
         socketService.emit(roomsEvents.reqJoinRoom, {"id": id});
         socketService.on(roomsEvents.resRoomJoinedSuccess, data => {
           successJoinRoom();
-          authorizationService.go({
+          routerGoService.go({
             state: auhtorizationStates.room,
             roomId: data.roomId
           });

@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 angular
-  .module("authorizationModule")
-  .value("authorizationUserData", {
+  .module("userModule")
+  .value("userData", {
     login: undefined,
     roomId: undefined,
     authorized: false

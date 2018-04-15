@@ -3,12 +3,12 @@
     TODO can be removed?
     */
 module.exports = [
-  "authorizationUserData",
+  "userData",
   "$q",
-  (authorizationUserData, $q) => {
+  (userData, $q) => {
     const deferred = $q.defer();
-    if (authorizationUserData.authorized) {
-      deferred.resolve(authorizationUserData.login); // TODO correct?
+    if (userData.authorized) {
+      deferred.resolve(userData.login); // TODO correct?
     } else {
       deferred.reject("not authorized");
     }

@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 module.exports = [
   "$scope",
-  "authorizationService",
   "authorizationLoginService",
-  "authorizationStates",
-  function ($scope, authorizationService, authorizationLoginService, authorizationStates) {
+  "routerStates",
+  "routerGoService",
+  function ($scope, authorizationLoginService, routerStates, routerGoService) {
     const me = $scope;
 
     me.login = "";
@@ -16,7 +16,7 @@ module.exports = [
     }, true);
 
     me.goNewuser = () => {
-      authorizationService.go({state: authorizationStates.newuser});
+      routerGoService.go({state: routerStates.newuser});
     };
 
     me.loginUser = data => {

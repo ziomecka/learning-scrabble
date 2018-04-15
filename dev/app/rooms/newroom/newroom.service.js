@@ -4,9 +4,9 @@ angular
   .service("newroomService", [
     "roomsService",
     "roomsSocket",
-    "authorizationService",
-    "authorizationStates",
-    function (roomsService, roomsSocket, authorizationService, authorizationStates) {
+    "routerGoService",
+    "routerStates",
+    function (roomsService, roomsSocket, routerGoService, routerStates) {
       // me.changeName = () => {
       //   if (!me.nameUnique) {
       //     me.nameUnique = true;
@@ -28,8 +28,8 @@ angular
                   - transfer user to room's state.
                   */
               success(data);
-              authorizationService.go({
-                state: authorizationStates.room,
+              routerGoService.go({
+                state: routerStates.room,
                 roomId: data.roomId,
                 newroom: true
               });

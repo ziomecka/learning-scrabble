@@ -7,10 +7,11 @@ module.exports = [
   "$timeout",
   "$transition$",
   "$stateParams",
-  "authorizationStates",
-  "authorizationUserData",
-  (cookiesService, authorizationService, $q, $timeout, $transition$, $stateParams, authorizationStates, authorizationUserData) => {
-    if (!authorizationUserData.authorized) {
+  "routerStates",
+  "userData",
+  "routerGoService",
+  (cookiesService, authorizationService, $q, $timeout, $transition$, $stateParams, routerStates, userData, routerGoService) => {
+    if (!userData.authorized) {
       const deferred = $q.defer();
       // TODO stop listnening when received
       cookiesService.sendAuthorizationCookies({
@@ -18,7 +19,7 @@ module.exports = [
           resolve: () => {
             $timeout(() => {
               deferred.resolve();
-              authorizationService.go({state: authorizationStates.authorization});
+              routerGoService.go({state: routerStates.authorization});
             }, 1000 * 1.5, false);
           },
           reject: data => {
@@ -34,12 +35,12 @@ module.exports = [
                   */
               const state = $transition$.to().name;
               const roomId = $stateParams.roomId;
-              if (state !== authorizationStates.home) {
+              if (state !== routerStates.home) {
                 const to = {"state": state};
                 if (roomId) to.roomId = roomId;
-                authorizationService.go(to);
+                routerGoService.go(to);
               } else {
-                authorizationService.go();
+                routerGoService.go();
               }
             }, 1000 * 1.5, false);
           },
