@@ -1,4 +1,4 @@
 /* jshint esversion: 6 */
-import angular from "angular";
+const mod = angular.module("newuserModule", []);
 
-angular.module("newuserModule", []);
+module.exports = mod;
