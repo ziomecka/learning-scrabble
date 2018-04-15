@@ -22,6 +22,31 @@ angular
 
       this.acceptTiles = () => {}; //TODO
 
+      /////////////////
+      // CREATE GAME //
+      /////////////////
+      this.createGame = options => {
+        options = Object(options);
+        options.emit = {
+          eventName: scrabbleEvents.reqCreateScrabble
+          // data: options.tiles
+        };
+        options.events = [
+          {
+            eventName: scrabbleEvents.resCreateScrabbleSuccess,
+            callback: options.success,
+            // offEvents: [scrabbleEvents.resWordRejected]
+          },
+          // {
+          //   eventName: scrabbleEvents.resWordRejected,
+          //   callback: options.failure,
+          //   offEvents: [scrabbleEvents.resRoundEnded]
+          // }
+        ];
+        socketService.emitHandler(options);
+        this.listenRegisterOpponent();
+      };
+
       ////////////////////
       // INITIAL TILES  //
       ////////////////////
@@ -39,7 +64,7 @@ angular
       ///////////
       this.listenStartRound = () => {
         let options = {
-          eventName: scrabbleEvents.resRoundStarted,
+          eventName: scrabbleEvents.resStartRound,
           callback: this.changeStatus.roundStarted,
           offEvents: [
             scrabbleEvents.resOpponentWord,
