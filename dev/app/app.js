@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-import "./app.module";
+import * as mod from "./app.module";
 import "./app.controller";
 import "./app.socket";
 
@@ -10,3 +10,8 @@ import "./constants/app.events";
 /** Tools */
 import "./socket/socket.service";
 import "./tools/lodash.factory";
+
+const domain = "http://localhost:5000";
+// angular.module("app").value("route", domain);
+
+module.exports = mod;
