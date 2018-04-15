@@ -11,13 +11,20 @@ module.exports = [
     /** Watch rommService's data */
     me.room = roomService.data.room;
     me.game = roomService.data.game;
-    me.player = roomService.data.player;
+    me.user = roomService.data.user;
 
     ////////////////
     // INITIALIZE //
     ////////////////
     this.$onInit = () => {
       roomService.initializeRoom(roomData);
+    };
+
+    /////////////
+    // DESTROY //
+    /////////////
+    this.$onDestroy = () => {
+      roomService.destroyRoom();
     };
 
     /////////////
