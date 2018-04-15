@@ -3,6 +3,11 @@ angular
   .module("roomModule")
   .constant("playerStates", new Map(
     [
-      ["wait", Symbol("wait")]
+      ["waitingForGame", "waitingForGame"],
+      ["observingRoom", "observingRoom"],
+      ["waitingForRound", "waitingForRound"],
+      ["placingWord", "placingWord"],
+      ["exchangingTiles", "exchanginTiles"],
+      ["acceptingWord", "acceptingWord"]
     ]
   ));
