@@ -1,17 +1,17 @@
 /* jshint esversion: 6 */
-import "./room.module";
+import * as mod from  "./room.module";
 import "./room.service";
 import "./room.socket";
 import "./newgame/newgame.service";
 
 /** Constants */
 import "./constants/room.events";
-import "./constants/player.states";
+import "./constants/player.states"; // TODO out
+import "./constants/user.states";
 import "./constants/room.states";
 import "./constants/room.messages";
 
 /** Controls */
-// import "./controlls/start/start";
-// import "./controlls/leave/leave";
-// import "./controlls/getup/getup";
 import "./controls/controls";
+
+module.exports = mod;
