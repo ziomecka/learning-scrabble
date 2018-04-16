@@ -1,11 +1,8 @@
 /* jshint esversion: 6 */
 angular
   .module("app")
-  .service("socketService", [
-    "$rootScope",
-    "userData",
-    function ($rootScope, userData) {
-
+  .service("socketService", function ($rootScope, userData) {
+      "ngInject";
       /** io is avaialable thanks to socket.io-client */
       let socket = io();
 
@@ -102,4 +99,4 @@ angular
 
       this.getSocket = () => this.socket;
   }
-]);
+);

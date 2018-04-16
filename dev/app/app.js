@@ -1,17 +1,24 @@
 /* jshint esversion: 6 */
-import * as mod from "./app.module";
-import "./app.controller";
-import "./app.socket";
+import * as mod from "./home/app.module";
+
+/** Controllers */
+/**Initialised in resolve */
+
+/** Services */
+import "./home/services/app.authorization.service";
+import "./home/services/socket.service";
+import "./home/services/app.socket";
 
 /** Constants */
-import "./constants/title/title";
-import "./constants/app.events";
+import "./home/constants/title/title";
+import "./home/constants/app.events";
+import "./home/constants/app.globals";
 
-/** Tools */
-import "./socket/socket.service";
-import "./tools/lodash.factory";
+/** Factories */
+import "./home/factories/lodash.factory";
 
 const domain = "http://localhost:5000";
+// mod.run($trace => $trace.enable());
 // angular.module("app").value("route", domain);
 
 module.exports = mod;

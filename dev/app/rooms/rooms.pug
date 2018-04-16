@@ -1,9 +1,9 @@
 //- TODO correct links to rooms
 nav(ui-view="navigation")
 h2 List of rooms
-p(ng-show="rooms.length === 0") There are no opened rooms.
+p(ng-show="roomsCtrl.rooms.length === 0") There are no opened rooms.
 ul
-  li(ng-repeat="room in rooms track by room.id")
+  li(ng-repeat="room in roomsCtrl.rooms track by room.id")
     a(ui-sref="private.room({roomId:room.id})") {{room.name}}
-button(class="button__link" ng-click="showForm=!showForm") create new room
-div(ui-view="newroom" ng-show="showForm")
+button(class="button__link" ng-click="roomsCtrl.showForm=!roomsCtrl.showForm") create new room
+div(ui-view="newroom" ng-show="roomsCtrl.showForm")

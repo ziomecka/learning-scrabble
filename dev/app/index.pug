@@ -2,12 +2,11 @@ html
   head
     title Let's play scrabble
     base(href="/")
-  //- body(ng-app="app")
-  body(ng-app="app" ng-controller="appController as appCtrl")
-    header(ng-class="{'title__box--narrow': narrowTitle}")
-      div(title class="title__box" ng-class="{'title__box--short': appCtrl.shortTitle, 'title__box--narrow': narrowTitle}")
+  body(ng-app="app" ui-view)
+    header(ng-class="{'title__box--narrow': appCtrl.narrowTitle}")
+      div(title class="title__box" ng-class="{'title__box--short': appCtrl.shortTitle, 'title__box--narrow': appCtrl.narrowTitle}")
     main
-      div(class="main__content" ng-class="" ui-view)
+      div(class="main__content" ng-class="" ui-view="main")
     footer
       p
         a(href="") Katarzyna Ziomek-Zdanowicz

@@ -8,12 +8,6 @@ angular
     "routerGoService",
     "userData",
     function (socketService, roomsEvents, $stateParams, routerGoService, userData) {
-      this.getAllRooms = options => {
-        let {callback} = options;
-        socketService.emit(roomsEvents.reqAllRooms);
-        socketService.on(roomsEvents.resAllRooms, data => callback(data));
-      };
-
       this.createRoom = options => {
         let {name, numberPlaces, createGame = true, joinRoom = true, callbacks: {success}} = options;
         $stateParams.numberPlaces = numberPlaces;
