@@ -12,7 +12,7 @@ angular
         url: "/",
         controller: require("../app.controller"),
         resolve: {
-          loadAuthorizationModule: require("./resolve/resolve.authorization.load.authorization.module"),
+          loadAuthorizationModule: require("./resolve/resolve.load.authorization.module"),
           authorizeCookie: require("./resolve/resolve.home.authorizecookie")
         },
       };
@@ -23,7 +23,7 @@ angular
         controller: require("../authorization/controllers/authorization.controller"),
         controllerAs: "authorizationCtrl",
         resolve: {
-          fromApp: require("./resolve/resolve.authorization.fromhome")
+          fromApp: require("./resolve/resolve.fromhome")
         }
       };
 
@@ -32,7 +32,7 @@ angular
         templateUrl: "../newuser.html",
         controller: require("../newuser/newuser.controller"),
         resolve: {
-          loadNewUserModule: require("./resolve/resolve.authorization.load.newuser.module")
+          loadNewUserModule: require("./resolve/resolve.load.newuser.module")
         }
       };
 
