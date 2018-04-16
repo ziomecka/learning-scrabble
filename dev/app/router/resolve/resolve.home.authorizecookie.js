@@ -1,16 +1,8 @@
 /* jshint esversion: 6 */
 /** Authorize user via the cookies. */
-module.exports = [
-  "cookiesService",
-  "authorizationService",
-  "$q",
-  "$timeout",
-  "$transition$",
-  "$stateParams",
-  "routerStates",
-  "userData",
-  "routerGoService",
+module.exports =
   (cookiesService, authorizationService, $q, $timeout, $transition$, $stateParams, routerStates, userData, routerGoService) => {
+    "ngInject";
     if (!userData.authorized) {
       const deferred = $q.defer();
       // TODO stop listnening when received
@@ -47,5 +39,4 @@ module.exports = [
         }
       });
     }
-  }
-];
+  };
