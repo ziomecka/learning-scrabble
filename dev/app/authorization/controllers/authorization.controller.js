@@ -6,11 +6,18 @@ module.exports = class AuthorizationController {
     this.routerGoService = routerGoService;
     this.authorizationLoginService = authorizationLoginService;
     this.routerStates = routerStates;
+  }
 
-    // me.loginData = authorizationLoginService.data;
-    // me.$watch("loginState", newValue => {
-    //   me.loginState = newValue;
-    // }, true);
+  get isWaiting () {
+    return this.authorizationLoginService.isWaiting;
+  }
+
+  get isFailureLogin () {
+    return this.authorizationLoginService.isFailureLogin;
+  }
+
+  get isFailurePassword () {
+    return this.authorizationLoginService.isFailurePassword;
   }
 
   goNewuser () {

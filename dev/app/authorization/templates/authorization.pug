@@ -10,6 +10,6 @@ form(name="authorizationForm" class="form" novalidate)
     button(ng-click="authorizationCtrl.goNewuser()" class="button__link"  ng-disabled="buttonsDisabled") create user
     button(ui-sref="guest" ui-sref-active="active" class="button__link" ng-disabled="buttonsDisabled") be a guest
   fieldset
-p(ng-show="loginData.state.failureLogin" class="form__message--error") Login does not exist
-p(ng-show="loginData.state.failurePassword" class="form__message--error") Incorrect password
-p(ng-show="loginData.state.waiting" class="form__message--error") Please wait for authorization
+p(ng-show="authorizationCtrl.isFailureLogin" class="form__message--error") Login does not exist
+p(ng-show="authorizationCtrl.isFailurePassword" class="form__message--error") Incorrect password
+p(ng-show="authorizationCtrl.isWaiting" class="form__message--error") Please wait for authorization

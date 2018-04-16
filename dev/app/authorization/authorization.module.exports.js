@@ -9,6 +9,7 @@ import "./services/authorization.socket";
 /** Constants */
 import "./constants/authorization.globals";
 import "./constants/authorization.events";
+import "./constants/authorization.states";
 
 /** Controllers */
 /** Initialised via router resolve */
