@@ -11,6 +11,7 @@ angular
       const home = {
         url: "/",
         resolve: {
+          loadAuthorizationModule: require("./resolve/resolve.authorization.load.authorization.module"),
           authorizeCookie: require("./resolve/resolve.home.authorizecookie")
         },
       };

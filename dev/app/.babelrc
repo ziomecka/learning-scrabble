@@ -4,7 +4,8 @@
   ],
 	"plugins": [
     ["syntax-dynamic-import"],
-    ["add-module-exports"]
+    ["add-module-exports"],
+    ["angularjs-annotate", {"explicitOnly": true}]
   ],
   "ignore": ["../../node_modules/**.js"],
   "compact": false

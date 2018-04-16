@@ -9,6 +9,7 @@ import "./router.errorhandler.run";
 
 /** Services */
 import "./services/router.go.service";
+import "./services/router.lazyload.service";
 
 /** Constants */
 import "./constants/router.states";
