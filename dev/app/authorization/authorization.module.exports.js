@@ -7,7 +7,6 @@ import "./services/authorization.service";
 import "./services/authorization.socket";
 
 /** Constants */
-import "./constants/authorization.globals";
 import "./constants/authorization.events";
 import "./constants/authorization.states";
 

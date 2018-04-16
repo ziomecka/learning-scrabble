@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 class appController {
-  constructor($scope, $timeout, appSocket, authorizationGlobals) {
+  constructor($scope, $timeout, appSocket, appGlobals) {
       "ngInject";
       $timeout(() => {
         this.shortTitle = true;
-      }, authorizationGlobals.shorterTitleTime);
+      }, appGlobals.shorterTitleTime);
       appSocket.connection();
   }
   // TODO not here

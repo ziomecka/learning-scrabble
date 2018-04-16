@@ -3,8 +3,8 @@ module.exports = [
   "$transition$",
   "$q",
   "$timeout",
-  "authorizationGlobals",
-  ($transition$, $q, $timeout, authorizationGlobals) => {
+  "appGlobals",
+  ($transition$, $q, $timeout, appGlobals) => {
     const deferred = $q.defer();
     /** If the previous state was 'home' then
         ui-router resolves the 'authorization' state with 3s delay.
@@ -14,7 +14,7 @@ module.exports = [
     if ($transition$.from().name === "home") {
       $timeout(() => {
         deferred.resolve();
-      }, authorizationGlobals.delayedViewTime);
+      }, appGlobals.delayedViewTime);
     } else {
         deferred.resolve();
     }
