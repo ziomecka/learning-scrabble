@@ -1,26 +1,23 @@
 /* jshint esversion: 6 */
-module.exports = [
-  "$scope",
-  "authorizationLoginService",
-  "routerStates",
-  "routerGoService",
-  function ($scope, authorizationLoginService, routerStates, routerGoService) {
-    const me = $scope;
+module.exports = class AuthorizationController {
+  constructor(authorizationLoginService, routerStates, routerGoService) {
+    "ngInject";
 
-    me.login = "";
-    me.password = "";
+    this.routerGoService = routerGoService;
+    this.authorizationLoginService = authorizationLoginService;
+    this.routerStates = routerStates;
 
-    me.loginData = authorizationLoginService.data;
-    me.$watch("loginState", newValue => {
-      me.loginState = newValue;
-    }, true);
-
-    me.goNewuser = () => {
-      routerGoService.go({state: routerStates.newuser});
-    };
-
-    me.loginUser = data => {
-      authorizationLoginService.login(data);
-    };
+    // me.loginData = authorizationLoginService.data;
+    // me.$watch("loginState", newValue => {
+    //   me.loginState = newValue;
+    // }, true);
   }
-];
+
+  goNewuser () {
+    this.routerGoService.go({state: this.routerStates.newuser});
+  }
+
+  loginUser (data) {
+    this.authorizationLoginService.login(data);
+  }
+};

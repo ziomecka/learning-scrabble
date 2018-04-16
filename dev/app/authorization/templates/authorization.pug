@@ -6,8 +6,8 @@ form(name="authorizationForm" class="form" novalidate)
     label(for="password") password
     input(type="password" ng-model="password" required)
   fieldset(class="box__buttons")
-    button(ng-click="loginUser({login: login, password: password})" class="button button__main" ng-disabled="buttonsDisabled") login
-    button(ng-click="goNewuser()" class="button__link"  ng-disabled="buttonsDisabled") create user
+    button(ng-click="authorizationCtrl.loginUser({login: login, password: password})" class="button button__main" ng-disabled="buttonsDisabled") login
+    button(ng-click="authorizationCtrl.goNewuser()" class="button__link"  ng-disabled="buttonsDisabled") create user
     button(ui-sref="guest" ui-sref-active="active" class="button__link" ng-disabled="buttonsDisabled") be a guest
   fieldset
 p(ng-show="loginData.state.failureLogin" class="form__message--error") Login does not exist

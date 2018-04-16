@@ -10,6 +10,7 @@ angular
     ($routeProvider, $locationProvider, $stateProvider, routerStates) => {
       const home = {
         url: "/",
+        controller: require("../app.controller"),
         resolve: {
           loadAuthorizationModule: require("./resolve/resolve.authorization.load.authorization.module"),
           authorizeCookie: require("./resolve/resolve.home.authorizecookie")
@@ -20,6 +21,7 @@ angular
         url: "/authorization",
         templateUrl: "../authorization.html",
         controller: require("../authorization/controllers/authorization.controller"),
+        controllerAs: "authorizationCtrl",
         resolve: {
           fromApp: require("./resolve/resolve.authorization.fromhome")
         }
