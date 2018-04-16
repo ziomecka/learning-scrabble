@@ -1,13 +1,9 @@
 /* jshint esversion: 6 */
 angular
-.module("authorizationModule")
-.service("authorizationService", [
-  "$state",
-  "routerStates",
-  "cookiesService",
-  "userData",
-  "routerGoService",
+.module("app")
+.service("authorizationService",
   function ($state, routerStates, cookiesService, userData, routerGoService) {
+    "ngInject";
     this.clear = () => {
       userData.authorized = false;
       $state.go(routerStates.authorization);
@@ -32,5 +28,5 @@ angular
       /** Go back to authorization state */
       routerGoService.go({state: routerStates.authorization});
     };
-  }]
+  }
 );
