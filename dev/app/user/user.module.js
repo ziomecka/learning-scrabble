@@ -1,8 +1,4 @@
 /* jshint esversion: 6 */
-import authorizationModule from "../authorization/authorization.module.exports";
-
-const mod = angular.module("userModule", [
-  "authorizationModule"
-]);
+const mod = angular.module("userModule", []);
 
 module.exports = mod;
