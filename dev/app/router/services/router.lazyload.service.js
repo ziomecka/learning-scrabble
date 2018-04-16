@@ -18,6 +18,14 @@ angular
             authorization: {
                 mod: () => require.context("../../authorization/", true, /authorization.module.exports.js$/),
                 files: () => require.context("../../authorization/", true, /^(?!.*\bexports\b).+js$/)
+            },
+            rooms: {
+                mod: () => require.context("../../rooms/", true, /rooms.module.exports.js$/),
+                files: () => require.context("../../room/", true, /^(?!.*\bexports\b).+js$/)
+            },
+            room: {
+                mod: () => require.context("../../room/", true, /room.module.exports.js$/),
+                files: () => require.context("../../room/", true, /^(?!.*\bexports\b).+js$/)
             }
           };
 

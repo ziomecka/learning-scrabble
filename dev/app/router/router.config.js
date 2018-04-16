@@ -45,6 +45,7 @@ angular
     const gamesRooms = {
       url: "/rooms",
       resolve: {
+        loadRoomsModule: require("./resolve/resolve.load.rooms.module"),
         roomsList: require("./resolve/resolve.rooms.roomslist"),
       },
       views: {
@@ -66,6 +67,7 @@ angular
     const gamesRoom = {
       url: "/rooms/room/:roomId",
       resolve: {
+        loadRoomModule: require("./resolve/resolve.load.room.module"),
         roomData: require("./resolve/resolve.room.roomdata"),
         narrowTitle: require("./resolve/resolve.room.narrowtitle")
       },
