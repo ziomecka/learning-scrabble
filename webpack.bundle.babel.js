@@ -26,7 +26,7 @@ const htmlIndexAssets = {
 };
 
 const htmlTitle = {
-  template: path.join("./app/constants/title/title.pug"),
+  template: path.join("./app/home/templates/title.pug"),
   filename: "./index.title.html",
   inject: false
 };
@@ -80,19 +80,19 @@ const htmlRoom = {
 };
 
 const htmlControlsRound = {
-  template: path.join("./scrabble/controls/round/round.pug"),
+  template: path.join("./app/scrabble/controls/round/round.pug"),
   filename: "./room.controls.round.html",
   inject: false
 };
 
 const htmlControlsExchange = {
-  template: path.join("./scrabble/controls/exchange/exchange.pug"),
+  template: path.join("./app/scrabble/controls/exchange/exchange.pug"),
   filename: "./room.controls.exchange.html",
   inject: false
 };
 
 const htmlControlsVerify = {
-  template: path.join("./scrabble/controls/verify/verify.pug"),
+  template: path.join("./app/scrabble/controls/verify/verify.pug"),
   filename: "./room.controls.verify.html",
   inject: false
 };
