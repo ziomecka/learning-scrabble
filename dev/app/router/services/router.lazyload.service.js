@@ -21,7 +21,7 @@ angular
             },
             rooms: {
                 mod: () => require.context("../../rooms/", true, /rooms.module.exports.js$/),
-                files: () => require.context("../../room/", true, /^(?!.*\bexports\b).+js$/)
+                files: () => require.context("../../rooms/", true, /^(?!.*\bexports\b).+js$/)
             },
             room: {
                 mod: () => require.context("../../room/", true, /room.module.exports.js$/),
