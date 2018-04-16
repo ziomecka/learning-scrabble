@@ -10,9 +10,12 @@ import "./home/services/socket.service";
 import "./home/services/app.socket";
 
 /** Constants */
-import "./home/constants/title/title";
+import "./home/constants/title.letters";
 import "./home/constants/app.events";
 import "./home/constants/app.globals";
+
+/** Directives */
+import "./home/directives/title.directive";
 
 /** Factories */
 import "./home/factories/lodash.factory";
