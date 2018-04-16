@@ -3,7 +3,6 @@ import * as mod from "./authorization.module";
 
 /** Services */
 import "./services/authorization.login";
-import "./services/authorization.service";
 import "./services/authorization.socket";
 
 /** Constants */
