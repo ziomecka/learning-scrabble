@@ -26,6 +26,10 @@ angular
             room: {
                 mod: () => require.context("../../room/", true, /room.module.exports.js$/),
                 files: () => require.context("../../room/", true, /^(?!.*\bexports\b).+js$/)
+            },
+            scrabble: {
+                mod: () => require.context("../../scrabble/", true, /scrabble.module.exports.js$/),
+                files: () => require.context("../../scrabble/", true, /^(?!.*\bexports\b).+js$/)
             }
           };
 
