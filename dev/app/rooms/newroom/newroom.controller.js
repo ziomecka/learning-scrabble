@@ -1,25 +1,23 @@
 /* jshint esversion: 6 */
-module.exports = [
-  "$scope",
-  "newroomDefaults",
-  "newroomService",
-  "roomsService",
-  function ($scope, newroomDefaults, newroomService, roomsService) {
-    let me = $scope;
-    me.defaults = newroomDefaults;
-    me.nameUnique = true;
-    me.name = "scrabble";
-    me.numberPlaces = me.defaults.placesOptions[0];
-    me.buttonsDisabled = false;
+module.exports = class NewroomController {
+  constructor (newroomDefaults, newroomService) {
+    "ngInject";
+    this.defaults = newroomDefaults;
+    this.newroomService = newroomService;
 
-    me.createRoom = data => {
-      newroomService.createRoom({
-        data: data,
-        callbacks: {
-          success: data => data, // TODO not needed
-          failure: () => {} //TODO
-        }
-      });
-    };
+    this.nameUnique = true;
+    this.name = "scrabble";
+    this.numberPlaces = this.defaults.placesOptions[0];
+    this.buttonsDisabled = false;
   }
-];
+
+  createRoom (data) {
+    this.newroomService.createRoom({
+      data: data,
+      callbacks: {
+        success: data => data, // TODO not needed
+        failure: () => {} //TODO
+      }
+    });
+  }
+};
