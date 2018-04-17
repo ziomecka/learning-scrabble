@@ -33,6 +33,7 @@ class NewGameService {
     };
     this.socketService.emitHandler(emitOptions);
     emitOptions = null;
+    return deferred.promise;
   }
 
   getGame (data) {
@@ -56,6 +57,7 @@ class NewGameService {
     };
     this.socketService.emitHandler(emitOptions);
     emitOptions = null;
+    return deferred.promise;
   }
 }
 
