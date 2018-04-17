@@ -7,6 +7,8 @@ const scrabbleSocket = require("../../scrabble/scrabble.socket").scrabbleSocket;
 const createRoomFactory = require("./room.create");
 const createGameFactory = require("./game.create");
 
+const allScrabbles = require("../../scrabble/scrabble.game").allScrabbles;
+
 const roomsEvents = require("./rooms.events");
 const roomsMessages = require("./rooms.messages");
 
@@ -75,10 +77,10 @@ const roomsSocket = function(data) {
             let roomSocket = require("../room/room.socket").roomSocket({socket:socket, io: io});
             console.log(`stringify roomSocket ${JSON.stringify(roomSocket)}`);
             roomSocket.listenWaitForGame();
-            roomSocket.listenGameDetails();
+            // roomSocket.listenGameDetails();
             roomSocket = null;
             /** Stop listen to rooms events */ // TODO do I want to do this?
-            stopListen();
+            // stopListen(); //TODO stopListen is needed but not here because room data is not send
             console.log(roomsMessages.joinRoomSuccess({login: data.login, roomId: data.roomId}));
           });
         }
@@ -117,10 +119,10 @@ const roomsSocket = function(data) {
         /** Listen to room events */
         let roomSocket = require("../room/room.socket").roomSocket({socket:socket, io: io});
         roomSocket.listenWaitForGame();
-        roomSocket.listenGameDetails();
+        // roomSocket.listenGameDetails();
         roomSocket = null;
         /** Stop listen to rooms events */ // TODO
-        stopListen();
+        // stopListen(); // TODO stop listen is needed but not here
       });
     });
   };
@@ -129,16 +131,49 @@ const roomsSocket = function(data) {
     socket.removeAllListeners(roomsEvents.reqJoinRoom);
   };
 
+  //////////////////
+  // ROOM DETAILS //
+  //////////////////
+  /** Send room's details */
+  let listenSendRoomDetails = () => {
+    socket.on(roomsEvents.reqJoinedRoomDetails, data => {
+      let {roomId, login} = data;
+      let result = {};
+      console.log(roomsMessages.roomDetailsRequested({
+        roomId: roomId,
+        socket: socket.id,
+        login: login
+      }));
+      /** Get room and game details */
+      result.room = allRooms.getOne(roomId);
+      result.game =  allScrabbles.getOne(roomId);
+
+      socket.emit(roomsEvents.resJoinedRoomDetails, JSON.stringify(result));
+      console.log(roomsMessages.roomDetailsSent({
+        roomId: roomId,
+        socket: socket.id,
+        login: login
+      }));
+      result = null;
+    });
+  };
+
+  let stopListenSendRoomDetails = () => {
+    socket.removeAllListeners(roomsEvents.reqJoinedRoomDetails);
+  };
+
   const listen = () => {
     listenAllRooms();
     listenCreateNewroom();
     listenJoinRoom();
+    listenSendRoomDetails();
   };
 
   const stopListen = () => {
     stopListenAllRooms();
     stopListenCreateNewroom();
     stopListenJoinRoom();
+    stopListenSendRoomDetails();
   };
 
   const destroy = () => {

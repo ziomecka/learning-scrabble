@@ -1,5 +1,7 @@
 /* jshint esversion: 6 */
 module.exports = {
+  "reqJoinedRoomDetails": "rooms: send details of joined room",
+  "resJoinedRoomDetails": "rooms: details of joined room sent",
   "reqCreateNewroom": "rooms: create new room",
   "resCreateNewroom": "rooms: new room created",
   "resNewroomAdded": "rooms: new room added to list",

@@ -15,37 +15,6 @@ const allScrabbles = require("../../scrabble/scrabble.game").allScrabbles;
 const roomSocket = function(data) {
   let {socket, io} = data;
 
-  //////////////////
-  // ROOM DETAILS //
-  //////////////////
-  /** Send room's details */
-  let listenSendRoomDetails = () => {
-    socket.on(roomEvents.reqJoinedRoomDetails, data => {
-      let {roomId, login} = data;
-      let result = {};
-      console.log(roomMessages.roomDetailsRequested({
-        roomId: roomId,
-        socket: socket.id,
-        login: login
-      }));
-      /** Get room and game details */
-      result.room = allRooms.getOne(roomId);
-      result.game =  allScrabbles.getOne(roomId);
-
-      socket.emit(roomEvents.resJoinedRoomDetails, JSON.stringify(result));
-      console.log(roomMessages.roomDetailsSent({
-        roomId: roomId,
-        socket: socket.id,
-        login: login
-      }));
-      result = null;
-    });
-  };
-
-  let stopListenSendRoomDetails = () => {
-    socket.removeAllListeners(roomEvents.reqJoinedRoomDetails);
-  };
-
   let initializeScrabbleSocket = () => scrabbleSocket(socket);
 
   /////////////
@@ -206,12 +175,12 @@ const roomSocket = function(data) {
   };
 
   let listenGameDetails = () => {
-    listenSendRoomDetails();
+    // listenSendRoomDetails();
     return this;
   };
 
   let stopListenGameDetails = () => {
-    stopListenSendRoomDetails();
+    // stopListenSendRoomDetails();
   };
 
   let listenWaitForGame = () => {
@@ -235,7 +204,7 @@ const roomSocket = function(data) {
 
   let stopListenAll = () => {
     stopListenWaitForGame();
-    stopListenGameDetails();
+    // stopListenGameDetails();
     stopListenUsers();
   };
 
@@ -249,10 +218,10 @@ const roomSocket = function(data) {
 
   return {
     listenWaitForGame: listenWaitForGame,
-    listenGameDetails: listenGameDetails,
+    // listenGameDetails: listenGameDetails,
     listenUsers: listenUsers,
     stopListenWaitForGame: stopListenWaitForGame,
-    stopListenGameDetails: stopListenGameDetails,
+    // stopListenGameDetails: stopListenGameDetails,
     stopListenUsers: stopListenUsers,
     stopListenAll: stopListenAll,
     destroy: destroy

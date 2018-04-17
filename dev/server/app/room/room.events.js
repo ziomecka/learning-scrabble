@@ -1,6 +1,4 @@
 module.exports = {
-  "reqJoinedRoomDetails": "room: send details of joined room",
-  "resJoinedRoomDetails": "room: details of joined room sent",
   "reqTakePlace": "room: take place",
   "resTakePlaceSuccess": "room: player took place",
   "resOtherUserTookPlace": "room: other player took place",
