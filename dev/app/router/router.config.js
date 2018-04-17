@@ -83,8 +83,8 @@ angular
       url: "rooms/room/:roomId",
       resolve: {
         loadRoomModule: require("./resolve/resolve.load.room.module"),
-        loadScrabbleModule: require("./resolve/resolve.load.scrabble.module")
-        // roomData: require("./resolve/resolve.room.roomdata"),
+        loadScrabbleModule: require("./resolve/resolve.load.scrabble.module"),
+        roomData: require("./resolve/resolve.room.roomdata"),
         // narrowTitle: require("./resolve/resolve.room.narrowtitle")
       },
       params: {
