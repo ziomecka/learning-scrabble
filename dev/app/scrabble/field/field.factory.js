@@ -1,8 +1,5 @@
 /* jshint esversion: 6 */
-angular
-.module("boardModule")
-.factory("fieldFactory", () => {
-
+const fieldFactory = () => {
   class Field {
     constructor(options) {
       ({row: this.row, column: this.column, drawOptions: this.drawOptions} = options);
@@ -21,4 +18,8 @@ angular
   }
 
   return Field;
-});
+};
+
+angular
+  .module("boardModule")
+  .factory("fieldFactory", fieldFactory);
