@@ -351,4 +351,4 @@ class RoomSocket {
 
 angular
   .module("roomModule")
-  .service("roomSocket", roomSocket);
+  .service("roomSocket", RoomSocket);
