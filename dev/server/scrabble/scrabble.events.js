@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 module.exports = {
-  // "reqCreateScrabble": "scrabble: create",
-  // "resCreateScrabbleSuccess": "scrabble: created",
+  "reqCreateScrabble": "scrabble: create",
+  "resCreateScrabbleSuccess": "scrabble: created",
   "resInitialTiles": "scrabble: your initial tiles",
   "resStartRound": "scrabble: your round starts",
   "reqExchangeTiles": "scrabble: exchange tiles",
