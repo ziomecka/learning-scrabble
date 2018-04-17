@@ -1,14 +1,19 @@
 /* jshint esversion: 6 */
-angular
-.module("boardModule")
-.service("boardService", ["fieldFactory", "boardOptions", function (fieldFactory, boardOptions) {
-  let {size: size, bonuses: bonuses} = boardOptions;
+class Board {
+  constructor(fieldFactory, boardOptions) {
+    "ngInject";
+    let {size: size, bonuses: bonuses} = boardOptions;
 
-  this.directions = ["row", "column"];
-  this.side = [-1, 1];
+    this.directions = ["row", "column"];
+    this.side = [-1, 1];
 
 
-  this.getNeighbor = (field, direction, side) => {
+
+    this.fields = this.createFields();
+    this.setBonuses();
+  }
+
+  getNeighbor(field, direction, side) {
     let row = field.row;
     let column = field.column;
     if (direction === "column") {
@@ -18,13 +23,13 @@ angular
     } else {
       throw Error("");
     }
-  };
+  }
 
-  this.isNeighborOf = (tile, tiles) => {
+  isNeighborOf (tile, tiles) {
     return tiles.some((item) => item.column === tile.column || item.row === tile.row);
-  };
+  }
 
-  this.createFields = () => {
+  createFields () {
     let result = [];
     for (let i = 0; i < size; i++) {
       let row = result[i] = [];
@@ -33,9 +38,9 @@ angular
       }
     }
     return result;
-  };
+  }
 
-  this.setBonuses = () => {
+  setBonuses() {
     Object.keys(bonuses).forEach(type => {
       bonuses[type].forEach(bonus => {
         let row = bonus[0] - 1;
@@ -43,8 +48,7 @@ angular
         this.fields[row][column].bonus = type;
       });
     });
-  };
+  }
+}
 
-  this.fields = this.createFields();
-  this.setBonuses();
-}]);
+angular.module("boardModule", Board);
