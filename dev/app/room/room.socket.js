@@ -2,13 +2,19 @@
 class RoomSocket {
   constructor (socketService, roomEvents, playerStates, $timeout, $q, userData) {
     "ngInject";
+    this.socketService = socketService;
+    this.roomEvents = roomEvents;
+    // this.playerStates = playerStates;
+    // this.$timeout = $timeout;
+    // this.$q = $q;
+    this.userData = userData;
   }
 
   leaveRoom(options) {
     let {callbacks: {success}} = options;
-    socketService.emit(roomEvents.reqLeaveRoom, {
+    this.socketService.emit(this.roomEvents.reqLeaveRoom, {
       roomId: options.roomId,
-      login: userData.login
+      login: this.userData.login
     });
 
     this.listenleaveRoom({
@@ -20,18 +26,18 @@ class RoomSocket {
 
   listenLeaveRoom(options) {
     let {callbacks: {success}} = options;
-    let eventName= roomEvents.resLeaveRoomSuccess;
-    socketService.on(eventName, data => {
+    let eventName= this.roomEvents.resLeaveRoomSuccess;
+    this.socketService.on(eventName, data => {
       success(data);
-      socketService.off(eventName);
+      this.socketService.off(eventName);
     });
   }
 
   /** Listen if other users joined the room. */
   listenOtherUserJoinedRoom(options) {
     let {callbacks: {success}} = options;
-    let eventName = roomEvents.resOtherUserJoinedRoom;
-    socketService.on(eventName, data => {
+    let eventName = this.roomEvents.resOtherUserJoinedRoom;
+    this.socketService.on(eventName, data => {
       success();
       // Do not stop listening as long as in the room
     });
@@ -39,8 +45,8 @@ class RoomSocket {
 
   /** Listen if other users left the room. */
   listenOtherUserLeftRoom(options) {
-    let eventName = roomEvents.resOtherUserLeftRoom;
-    socketService.on(eventName, data => {
+    let eventName = this.roomEvents.resOtherUserLeftRoom;
+    this.socketService.on(eventName, data => {
       success();
       // Do not stop listening as long as in the room
     });
@@ -48,8 +54,8 @@ class RoomSocket {
 
   listenOtherUserTookPlace(options) {
     let {callbacks: {success}} = options;
-    let eventName = roomEvents.resOtherUserTookPlace;
-    socketService.on(eventName, data => {
+    let eventName = this.roomEvents.resOtherUserTookPlace;
+    this.socketService.on(eventName, data => {
       success(data);
       // Do not stop listening, unless the game is started
     });
@@ -58,18 +64,18 @@ class RoomSocket {
   // TODO can be listened only if more than one players
   listenOtherPlayerGotUp(options) {
     let {callbacks: {success}} = options;
-    let eventName = roomEvents.resOtherPlayerGotUp;
-    socketService.on(eventName, data => {
+    let eventName = this.roomEvents.resOtherPlayerGotUp;
+    this.socketService.on(eventName, data => {
       success(data);
     });
   }
 
   listenAllPlayersStarted(options) {
     let {callbacks: {success}} = options;
-    let eventName = roomEvents.resAllPlayersStarted;
+    let eventName = this.roomEvents.resAllPlayersStarted;
     socektService.on(eventName, data => {
       success();
-      socketService.off(eventName);
+      this.socketService.off(eventName);
     });
   }
 
@@ -78,8 +84,8 @@ class RoomSocket {
   //////////////////
   changeNumberPlaces(options) {
     let {roomId, number} = options;
-    let eventName = roomEvents.reqChangeNumberPlaces;
-    socketService.emit(eventName, {
+    let eventName = this.roomEvents.reqChangeNumberPlaces;
+    this.socketService.emit(eventName, {
       roomId: roomId,
       number: number
     });
@@ -87,17 +93,17 @@ class RoomSocket {
 
   /** Listen if number places changes. */
   listenNumberPlacesChanged(options) {
-    let eventName = roomEvents.resChangeNumberPlacesSuccess;
+    let eventName = this.roomEvents.resChangeNumberPlacesSuccess;
     let {callbacks: {success}} = options;
-    socketService.on(eventName, data => {
+    this.socketService.on(eventName, data => {
       success(data);
     });
   }
 
   changeTime(options) {
     let {roomId, number} = options;
-    let eventName = roomEvents.reqChangeTime;
-    socketService.emit(roomEvents.eventName, {
+    let eventName = this.roomEvents.reqChangeTime;
+    this.socketService.emit(this.roomEvents.eventName, {
       roomId: roomId,
       number: number
     });
@@ -106,18 +112,18 @@ class RoomSocket {
   /** Listen if time changes. */
   listenTimeChanged (options) {
     // TODO success and failure
-    let eventName = roomEvents.resChangeTimeSuccess;
+    let eventName = this.roomEvents.resChangeTimeSuccess;
     let {callbacks: {success}} = options;
-    socketService.on(eventName, data => {
+    this.socketService.on(eventName, data => {
       success(data);
     });
   }
 
   /** When game started options cannot change, so stop listening. */
   stopListenOptionsChanged() {
-    socketService.off(roomEvents.resChangeNumberPlacesSuccess);
-    socketService.off(roomEvents.resChangeTimeSuccess);
-    socketService.off(roomEvents.resOtherUserTookPlace);
+    this.socketService.off(this.roomEvents.resChangeNumberPlacesSuccess);
+    this.socketService.off(this.roomEvents.resChangeTimeSuccess);
+    this.socketService.off(this.roomEvents.resOtherUserTookPlace);
     // TODO got up?
   }
 
@@ -127,10 +133,10 @@ class RoomSocket {
   takePlace(options) {
     let {roomId, placeId, callbacks: {success}} = options;
     this.data.player.placeId = placeId;
-    socketService.emit(roomEvents.reqTakePlace, {
+    this.socketService.emit(this.roomEvents.reqTakePlace, {
       roomID: roomId,
       placeId: placeId,
-      login: userData.login
+      login: this.userData.login
     });
 
     this.listenTakePlace({
@@ -142,8 +148,8 @@ class RoomSocket {
 
   listenTakePlace(options) {
     let {callbacks: {success}} = options;
-    let eventName = roomEvents.resTakePlaceSuccess;
-    socketService.on(eventName, data => {
+    let eventName = this.roomEvents.resTakePlaceSuccess;
+    this.socketService.on(eventName, data => {
       success(data);
       this.listenAskForStart({
         callbacks: {
@@ -152,16 +158,16 @@ class RoomSocket {
           }
         }
       });
-      socketService.off(eventName);
+      this.socketService.off(eventName);
     });
   }
 
   getUp(options) {
     let {roomId, placeId, callbacks: {success}} = options;
-    socketService.emit(roomEvents.reqGetUp, {
+    this.socketService.emit(this.roomEvents.reqGetUp, {
       roomID: roomId,
       placeId: placeId,
-      login: userData.login
+      login: this.userData.login
     });
     this.listenGetUp({
       callbacks: {
@@ -171,29 +177,29 @@ class RoomSocket {
   }
 
   listenGetUp(options) {
-    let eventName = roomEvents.resGetUp;
-    socketService.on(eventName, data => {
+    let eventName = this.roomEvents.resGetUp;
+    this.socketService.on(eventName, data => {
       this.data.player.placeId = undefined;
       success(data);
-      socketService.off(eventName);
+      this.socketService.off(eventName);
     });
   }
 
   listenAskForStart(options) {
     let {callbacks: {success}} = options;
-    let eventName = roomEvents.resAskPlayerStart;
-    socketService.on(eventName, data => {
+    let eventName = this.roomEvents.resAskPlayerStart;
+    this.socketService.on(eventName, data => {
       success();
-      socketService.off(eventName);
+      this.socketService.off(eventName);
     });
   }
 
   // all players started - create game factory
   listenNotStarted(options) {
     let {callbacks: {success}} = options;
-    let eventName = roomEvents.resNotStarted;
-    socketService.on(eventName, data => {
-      socketService.off(roomEvents.resAllPlayersStarted);
+    let eventName = this.roomEvents.resNotStarted;
+    this.socketService.on(eventName, data => {
+      this.socketService.off(this.roomEvents.resAllPlayersStarted);
       /** If user seats then listen to askForStart */
       if (this.data.player.placeId) {
         this.listenAskForStart({
@@ -205,7 +211,7 @@ class RoomSocket {
         });
       }
       success();
-      socketService.off(eventName);
+      this.socketService.off(eventName);
     });
   }
 
@@ -269,7 +275,7 @@ class RoomSocket {
               this.data.room.places[data.placeId].
               console.log(`User ${data.login} took place ${data.placeId}`);
               // TODO
-              // roomSocket.listenOtherUserGotUp
+              // this.listenOtherUserGotUp
               // TODO set place's owner
             }
           }
@@ -284,7 +290,7 @@ class RoomSocket {
               // TODO remove player
               if (this.data.game.players.length <= 1) {
                 // TODO
-                // roomSocket.stopListenOtherUserGotUp
+                // this.stopListenOtherUserGotUp
               }
             }
           }
@@ -292,7 +298,7 @@ class RoomSocket {
       );
 
       /** Listen for changes in number of places */
-      roomSocket.listenNumberPlacesChanged({
+      this.listenNumberPlacesChanged({
         callbacks: {
           success: data => {
             let places = this.data.room.places;
@@ -309,7 +315,7 @@ class RoomSocket {
       });
 
       /** Listen for changes in game's */
-      roomSocket.listenTimeChanged(
+      this.listenTimeChanged(
         {
           callbacks: {
             success: data => {
@@ -332,8 +338,8 @@ class RoomSocket {
 
   playGame() {
     const listen = () => {
-      roomSocket.listenPlayerLost();
-      roomSocket.listenPlayerGetBack();
+      this.listenPlayerLost();
+      this.listenPlayerGetBack();
     };
 
     const stopListen = () => {
