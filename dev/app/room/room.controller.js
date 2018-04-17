@@ -1,52 +1,42 @@
 /* jshint esversion: 6 */
-module.exports = [
-  "$scope",
-  "newroomDefaults",
-  "roomData",
-  "roomService",
-  function ($scope, newroomDefaults, roomData, roomService) {
-    let me = $scope;
-    me.defaults = newroomDefaults;
+module.exports = class RoomController {
+  constructor (newroomDefaults, roomData, roomService) {
+    "ngInject";
+
+    // this.newroomDefaults = newRoomDefaults;
+    this.defaults = newroomDefaults;
+    this.roomData = roomData;
+    this.roomService = roomService;
+
+    // let me = $scope;
 
     /** Watch rommService's data */
-    me.room = roomService.data.room;
-    me.game = roomService.data.game;
-    me.user = roomService.data.user;
+    this.room = roomService.data.room;
+    this.game = roomService.data.game;
+    this.user = roomService.data.user;
 
-    ////////////////
-    // INITIALIZE //
-    ////////////////
     this.$onInit = () => {
-      roomService.initializeRoom(roomData);
+      this.roomService.initializeRoom(roomData);
     };
 
-    /////////////
-    // DESTROY //
-    /////////////
     this.$onDestroy = () => {
-      roomService.destroyRoom();
-    };
-
-    /////////////
-    // OPTIONS //
-    /////////////
-    me.numberPlacesChanged = number => {
-      roomService.numberPlacesChanged(number);
-    };
-
-    me.timeChanged = time => {
-      roomService.timeChanged(time);
-    };
-
-    ////////////
-    // PLACES //
-    ////////////
-    me.takePlace = data => {
-      roomService.takePlace(data);
-    };
-
-    me.getUp = () => {
-      roomService.getUp();
+      this.roomService.destroyRoom();
     };
   }
-];
+
+  numberPlacesChanged(number) {
+    roomService.numberPlacesChanged(number);
+  }
+
+  timeChanged(time) {
+    roomService.timeChanged(time);
+  }
+
+  takePlace(data) {
+    this.roomService.takePlace(data);
+  }
+
+  getUp() {
+    this.roomService.getUp();
+  }
+};
