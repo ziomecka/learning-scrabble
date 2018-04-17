@@ -4,29 +4,6 @@ class RoomSocket {
     "ngInject";
   }
 
-  getRoomDetails(options) {
-    let {callbacks: {success}} = options;
-    socketService.emit(roomEvents.reqJoinedRoomDetails, {
-      roomId: options.roomId,
-      login: userData.login
-    });
-
-    this.listenGetRoomDetails({
-      callbacks: {
-        success: success
-      }
-    });
-  }
-
-  listenGetRoomDetails(options) {
-    let {callbacks: {success}} = options;
-    let eventName= roomEvents.resJoinedRoomDetails;
-    socketService.on(eventName, data => {
-      success(data);
-      socketService.off(eventName);
-    });
-  }
-
   leaveRoom(options) {
     let {callbacks: {success}} = options;
     socketService.emit(roomEvents.reqLeaveRoom, {
