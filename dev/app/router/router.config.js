@@ -58,29 +58,20 @@ angular
 
     const gamesRooms = {
       url: "rooms",
+      templateUrl: "../rooms.html",
+      controller: require("../rooms/rooms.controller"),
+      controllerAs: "roomsCtrl",
       resolve: {
         loadRoomsModule: require("./resolve/resolve.load.rooms.module"),
         roomsList: require("./resolve/resolve.rooms.roomslist")
       },
-      views: {
-        "": {
-          templateUrl: "../rooms.html",
-          controller: require("../rooms/rooms.controller"),
-          controllerAs: "roomsCtrl"
-        },
-        [`navigation@${routerStates.rooms}`]: {
-          templateUrl: "../rooms.navigation.html",
-          controller: require("../navigation/navigation.controller")
-        },
-        [`newroom@${routerStates.rooms}`]: {
-          templateUrl: "../rooms.newroom.html",
-          controller: require("../rooms/newroom/newroom.controller")
-        }
-      }
     };
 
     const gamesRoom = {
       url: "rooms/room/:roomId",
+      templateUrl: "../room.html",
+      controller: require("../room/room.controller"),
+      controllerAs: "roomCtrl",
       resolve: {
         loadRoomModule: require("./resolve/resolve.load.room.module"),
         loadScrabbleModule: require("./resolve/resolve.load.scrabble.module"),
@@ -89,16 +80,6 @@ angular
       },
       params: {
         newroom: false
-      },
-      views: {
-        "": {
-          templateUrl: "../room.html",
-          controller: require("../room/room.controller")
-        },
-        [`roomsidebar@${routerStates.room}`]: {
-          templateUrl: "../room.sidebar.html",
-          controller: require("../room/sidebar/room.sidebar.controller")
-        }
       }
     };
 
