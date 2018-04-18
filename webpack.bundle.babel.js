@@ -34,16 +34,6 @@ const htmlsOptions = {
     filename: "./rooms.navigation.html",
     inject: false
   },
-  htmlRoomSidebar: {
-    template: path.join("./app/room/sidebar/room.sidebar.pug"),
-    filename: "./room.sidebar.html",
-    inject: false
-  },
-  htmlRoomControls: {
-    template: path.join("./app/room/controls/controls.pug"),
-    filename: "./room.controls.html",
-    inject: false
-  },
   htmlRooms: {
     template: path.join("./app/rooms/rooms.pug"),
     filename: "./rooms.html",
@@ -69,24 +59,29 @@ const htmlsOptions = {
     filename: "./room.html",
     inject: false
   },
-  htmlControlsRound: {
-    template: path.join("./app/scrabble/controls/round/round.pug"),
-    filename: "./room.controls.round.html",
+  htmlRoomGame: {
+    template: path.join("./app/room/game/room.game.pug"),
+    filename: "./room.game.html",
     inject: false
   },
-  htmlControlsExchange: {
-    template: path.join("./app/scrabble/controls/exchange/exchange.pug"),
-    filename: "./room.controls.exchange.html",
+  htmlRoomControls: {
+    template: path.join("./app/room/controls/controls.pug"),
+    filename: "./room.controls.html",
     inject: false
   },
-  htmlControlsVerify: {
-    template: path.join("./app/scrabble/controls/verify/verify.pug"),
-    filename: "./room.controls.verify.html",
+  htmlRoomSidebar: {
+    template: path.join("./app/room/sidebar/room.sidebar.pug"),
+    filename: "./room.sidebar.html",
     inject: false
   },
   htmlScrabble: {
     template: path.join("./app/scrabble/scrabble.pug"),
     filename: "./scrabble.html",
+    inject: false
+  },
+  htmlScrabbleControls: {
+    template: path.join("./app/scrabble/controls/controls.pug"),
+    filename: "./scrabble.controls.html",
     inject: false
   },
   htmlBoard: {
