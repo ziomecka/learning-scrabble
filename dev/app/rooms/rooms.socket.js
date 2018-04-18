@@ -10,7 +10,7 @@ angular
     function (socketService, roomsEvents, $stateParams, routerGoService, userData) {
       this.getRoomDetails = (options) => {
         let {callbacks: {success}} = options;
-        socketService.emit(roomEvents.reqJoinedRoomDetails, {
+        socketService.emit(roomsEvents.reqJoinedRoomDetails, {
           roomId: options.roomId,
           login: userData.login
         });
@@ -24,7 +24,7 @@ angular
 
       this.listenGetRoomDetails = (options) => {
         let {callbacks: {success}} = options;
-        let eventName= roomEvents.resJoinedRoomDetails;
+        let eventName= roomsEvents.resJoinedRoomDetails;
         socketService.on(eventName, data => {
           success(data);
           socketService.off(eventName);
