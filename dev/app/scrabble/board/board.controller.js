@@ -1,5 +1,7 @@
 /* jshint esversion: 6 */
-angular
-.module("boardModule")
-.controller("scrabbleBoardController", [($scope, boardOptions) => {
-}]);
+module.exports = class BoardController {
+  constructor(boardService) {
+    "ngInject";
+    this.rows = boardService.rows;
+  }
+};
