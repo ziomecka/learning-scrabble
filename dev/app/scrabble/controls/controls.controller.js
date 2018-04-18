@@ -1,42 +1,43 @@
 /* jshint esversion: 6 */
-module.exports = [
-  "$scope",
-  "scrabbleGameFactory",
-  ($scope, scrabbleGameFactory) => {
-    const me = $scope;
+module.exports = class ScrabbleConstrolsController {
+  constructor (scrabbleGameFactory) {
+    "ngInject";
+    this.scrabbleGameFactory = scrabbleGameFactory;
+    this.exchange = false;
 
     /** Data shared by scrabbleGameFactory */
-    me.data = scrabbleGameFactory.data;
-
-    /** Round */
-    me.roundOK = () => {
-      scrabbleGameFactory.tilesPlaced();
-    };
-
-    me.roundExchange = () => {
-      me.exchange = true;
-    };
-
-    me.roundResign = () => {
-      scrabbleGameFactory.playerResigned();
-    };
-
-    /** Exchange tiles */
-    me.exchangeOK = () => {
-      scrabbleGameFactory.tilesExchanged();
-    };
-
-    me.exchangeResign = () => {
-      me.exchange = false;
-    };
-
-    /** Accept word */
-    me.verifyNo = () => {
-      scrabbleGameFactory.acceptsWord();
-    };
-
-    me.verifyYes = () => {
-      scrabbleGameFactory.verifiesWord();
-    };
+    // TODO out
+    this.data = scrabbleGameFactory.data;
   }
-];
+
+  /** Round */
+  roundOK () {
+    this.scrabbleGameFactory.tilesPlaced();
+  }
+
+  roundExchange () {
+    this.exchange = true;
+  }
+
+  roundResign () {
+    this.scrabbleGameFactory.playerResigned();
+  }
+
+  /** Exchange tiles */
+  exchangeOK () {
+    this.scrabbleGameFactory.tilesExchanged();
+  }
+
+  exchangeResign () {
+    this.exchange = false;
+  }
+
+  /** Accept word */
+  verifyNo ()  {
+    this.scrabbleGameFactory.acceptsWord();
+  }
+
+  verifyYes () {
+    this.scrabbleGameFactory.verifiesWord();
+  }
+};
