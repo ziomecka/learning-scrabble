@@ -1,4 +1,3 @@
 div(id="game" class="room")
-  div(id="gameBoard" class="room__board")
-    div(id="scrabbleBoard" board-directive)
-  div(ui-view="roomsidebar" class="room__sidebar")
+  room-game(class="room__game")
+  room-sidebar(class="room__sidebar")
