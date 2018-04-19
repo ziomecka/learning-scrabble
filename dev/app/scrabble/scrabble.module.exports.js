@@ -4,6 +4,11 @@ import "./scrabble.game.factory";
 import "./scrabble.socket";
 import "./scrabble.events";
 
+import "./sidebar/sidebar";
+
+/** Constants */
+import "./scrabble.game.options";
+
 /** Directives */
 import "./scrabble.directive";
 
