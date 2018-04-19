@@ -10,4 +10,4 @@ const controlsDirective = () => {
 
 angular
   .module("scrabbleModule")
-  .directive("scrabbleSidebar", controlsDirective);
+  .directive("scrabbleControls", controlsDirective);
