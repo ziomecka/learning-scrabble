@@ -9,7 +9,9 @@ import boardService from "./board.service";
 
 /** Directives */
 import "./directives/board.directive";
-import "./directives/field.directive";
 
-/** Factories */
-import fieldFactory from "../field/field.factory.js";
+/** Field */
+import "../field/field";
+
+/** Tile */
+import "../tile/tile";
