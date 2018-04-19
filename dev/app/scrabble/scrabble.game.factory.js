@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 class ScrabbleGame {
-  constructor (scrabbleSocket, playerFactory, $q) {
+  constructor (scrabbleSocket, playerFactory, $q, scrabbleGameOptions) {
     "ngInject";
     this.player = new playerFactory();
     this.opponents = [];
