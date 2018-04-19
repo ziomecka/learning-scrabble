@@ -1,17 +1,36 @@
 /* jshint esversion: 6 */
 class PlayerService {
-  constructor (playerOptions, scrabbleSocket, lodashFactory) {
+  constructor (playerOptions, scrabbleSocket, lodashFactory, tileFactory, rackService) {
     "ngInject";
 
     this.scrabbleSocket = scrabbleSocket;
     this.lodashFactory = lodashFactory;
+    this.rack = rackService;
 
     ({name: this.name, time: this.time, id: this.id} = playerOptions);
     this.points = 0;
-    this.tiles = [];
+    this._tiles = [];
+
+    // this.tiles = [
+    //   {letter:"A", points: "7"},
+    //   {letter:"B", points: "6"},
+    //   {letter:"D", points: "5"},
+    //   {letter:"E", points: "4"},
+    //   {letter:"F", points: "3"},
+    //   {letter:"G", points: "2"},
+    //   {letter:"H", points: "1"}
+    // ];
 
     this.getInitialTiles();
     this.listenRoundStarted();
+  }
+
+  get tiles () {
+    return this.rack.tiles;
+  }
+
+  set tiles (tiles) {
+    this.rack.tiles = Array.from(tiles);
   }
 
   getInitialTiles () {

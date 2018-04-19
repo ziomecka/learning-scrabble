@@ -3,10 +3,12 @@ angular.module("scrabbleModule", [
   "boardModule",
   "playerModule",
   "controlsModule",
-  "tileModule"
+  "tileModule",
+  "rackModule"
 ]);
 
 import controlsModule from "./controls/controls";
 import playerModule from "./player/player";
 import boardModule from "./board/board";
 import tileModule from "./tile/tile";
+import rackModule from "./rack/rack";

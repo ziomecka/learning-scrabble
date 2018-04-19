@@ -1,0 +1,3 @@
+ul
+  li(ng-repeat="place in rackCtrl.places" class="scrabble__rack--field")
+    scrabble-tile(ng-if="place.tile" tile="place.tile", draggable="{{place.tile.draggable}}")
