@@ -1,54 +1,46 @@
 /* jshint esversion: 6 */
-angular
-.module("scrabbleModule")
-.factory("scrabbleGameFactory", [
-  "scrabbleSocket",
-  "playerFactory",
-  "$q",
-  (scrabbleSocket, playerFactory, $q) => {
-    /** only one */
-    class ScrabbleGame {
-      constructor (options) {
-        this.player = new playerFactory();
-        this.opponents = [];
-        // options.resolve();
-      }
-
-      // TODO not here because done once only by some players???
-      prepare (options) {
-        let deferred = $q.defer();
-
-        const socketOptions = {
-          success: data => {
-            deferred.resolve(data);
-          }
-        };
-        scrabbleSocket.createScrabble(socketOptions);
-        return deferred.promise;
-      }
-
-
-      addOponent (options) {
-      }
-      removeOpponent () {
-      }
-    }
-
-
-    const start = function(options) {
-      options = Object(options);
-      let deferred = $q.defer();
-      deferred.resolve(new ScrabbleGame(options));
-      return deferred.promise;
-    };
-
-    let destroy = null; // TODO ?
-
-    return {
-      start: options => {
-        options = Object(options);
-        start(options);
-      }
-    };
+class ScrabbleGame {
+  constructor (scrabbleSocket, playerFactory, $q) {
+    "ngInject";
+    this.player = new playerFactory();
+    this.opponents = [];
+    this.scrabbleSocket = scrabbleSocket;
+    this.playerFactory = playerFactory;
+    this.$q = $q;
+    // options.resolve();
   }
-]);
+
+  // TODO not here because done once only by some players???
+  prepare (options) {
+    let deferred = this.$q.defer();
+
+    const socketOptions = {
+      success: data => {
+        deferred.resolve(data);
+      }
+    };
+    this.scrabbleSocket.createScrabble(socketOptions);
+    return deferred.promise;
+  }
+
+  addOponent (options) {
+  }
+
+  removeOpponent () {
+  }
+}
+
+const scrabbleGameFactory = () => {
+  const start = () => {
+    return new ScrabbleGame();
+  };
+
+  const destroy = () => {
+    // TODO ?
+  };
+
+};
+
+angular
+  .module("scrabbleModule")
+  .service("scrabbleGameFactory", scrabbleGameFactory);
