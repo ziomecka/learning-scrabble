@@ -1,5 +1,4 @@
 /* jshint esversion: 6 */
-// TODO: html spec correct
 // TODO change names of html files
 import merge from "webpack-merge";
 import common from "./webpack.common.babel";
@@ -84,14 +83,34 @@ const htmlsOptions = {
     filename: "./scrabble.controls.html",
     inject: false
   },
+  htmlScrabbleSidebar: {
+    template: path.join("./app/scrabble/sidebar/sidebar.pug"),
+    filename: "./scrabble.sidebar.html",
+    inject: false
+  },
+  htmlScrabblePlayer: {
+    template: path.join("./app/scrabble/player/player.pug"),
+    filename: "./scrabble.player.html",
+    inject: false
+  },
+  htmlScrabbleRack: {
+    template: path.join("./app/scrabble/rack/rack.pug"),
+    filename: "./scrabble.rack.html",
+    inject: false
+  },
   htmlBoard: {
     template: path.join("./app/scrabble/board/templates/board.pug"),
     filename: "./scrabble.board.html",
     inject: false
   },
   htmlField: {
-    template: path.join("./app/scrabble/board/templates/field.pug"),
+    template: path.join("./app/scrabble/field/field.pug"),
     filename: "./scrabble.field.html",
+    inject: false
+  },
+  htmlTile: {
+    template: path.join("./app/scrabble/tile/tile.pug"),
+    filename: "./scrabble.tile.html",
     inject: false
   }
 };
