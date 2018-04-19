@@ -1,4 +1,4 @@
 div(class="scrabble__board")
   div(id="" class="scrabble__row" ng-repeat="row in boardCtrl.rows")
     div(class="scrabble__field scrabble__field--{{field.bonus}}" ng-repeat="field in row")
-      scrabble-field(field="field")
+      scrabble-field(ng-model="field" field="field" tile="field.tile" field-droppable="{{field.droppable}}")
