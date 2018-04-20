@@ -1,11 +1,17 @@
 /* jshint esversion: 6 */
 module.exports = class AuthorizationController {
-  constructor(authorizationLoginService, routerStates, routerGoService) {
+  constructor(
+    authorizationLoginService,
+    routerStates,
+    routerGoService
+  ) {
     "ngInject";
 
-    this.routerGoService = routerGoService;
-    this.authorizationLoginService = authorizationLoginService;
-    this.routerStates = routerStates;
+    Object.assign(this, {
+      authorizationLoginService,
+      routerStates,
+      routerGoService
+    });
   }
 
   get isWaiting () {
