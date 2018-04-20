@@ -1,12 +1,18 @@
 /* jshint esversion: 6 */
 
 class AuthorizationLoginService {
-  constructor(authorizationSocket, authorizationService, authorizationStates) {
+  constructor(
+    authorizationSocket,
+    authorizationService,
+    authorizationStates
+  ) {
     "ngInject";
 
-    this.authorizationSocket = authorizationSocket;
-    this.authorizationService = authorizationService;
-    this.authorizationStates = authorizationStates;
+    Object.assign(this, {
+      authorizationSocket,
+      authorizationService,
+      authorizationStates
+    });
 
     this._state = "";
   }
