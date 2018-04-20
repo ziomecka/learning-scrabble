@@ -39,7 +39,7 @@ const htmlsOptions = {
     inject: false
   },
   htmlAuth: {
-    template: path.join("./app/authorization/templates/authorization.pug"),
+    template: path.join("./app/authorization/authorization.pug"),
     filename: "./authorization.html",
     inject: false
   },

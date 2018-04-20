@@ -27,7 +27,7 @@ const routerConfig = (
     views: {
       "main": {
         templateUrl: "../authorization.html",
-        controller: require("../authorization/controllers/authorization.controller"),
+        controller: require("../authorization/authorization.controller"),
         controllerAs: "authorizationCtrl",
       }
     }
