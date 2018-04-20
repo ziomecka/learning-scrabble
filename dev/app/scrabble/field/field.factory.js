@@ -4,11 +4,9 @@ const fieldFactory = () => {
   class Field {
     constructor(options) {
       ({row: this.row, column: this.column, drawOptions: this.drawOptions} = options);
-      this.row = String(this.row);
       this._tile = null;
       this.bonus = "none";
       this._droppable = true;
-      this.txt = "dupa";
     }
 
     get droppable () {
