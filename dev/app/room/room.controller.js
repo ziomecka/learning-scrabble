@@ -1,35 +1,34 @@
 /* jshint esversion: 6 */
+/** Initialised via ui-router */
 module.exports = class RoomController {
-  constructor (newroomDefaults, roomData, roomService) {
+  constructor (
+    newroomDefaults,
+    roomData,
+    roomService
+  ) {
     "ngInject";
 
-    // this.newroomDefaults = newRoomDefaults;
-    this.defaults = newroomDefaults;
-    this.roomData = roomData;
-    this.roomService = roomService;
+    Object.assign(this, {
+      newroomDefaults,
+      roomData,
+      roomService
+    });
+  }
 
-    // let me = $scope;
+  $onInit () {
+    this.roomService.initializeRoom(this.roomData);
+  }
 
-    /** Watch rommService's data */
-    this.room = roomService.data.room;
-    this.game = roomService.data.game;
-    this.user = roomService.data.user;
-
-    this.$onInit = () => {
-      this.roomService.initializeRoom(roomData);
-    };
-
-    this.$onDestroy = () => {
-      this.roomService.destroyRoom();
-    };
+  $onDestroy () {
+    this.roomService.destroyRoom();
   }
 
   numberPlacesChanged(number) {
-    roomService.numberPlacesChanged(number);
+    this.roomService.numberPlacesChanged(number);
   }
 
   timeChanged(time) {
-    roomService.timeChanged(time);
+    this.roomService.timeChanged(time);
   }
 
   takePlace(data) {
