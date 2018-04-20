@@ -90,7 +90,7 @@ angular
         this.emit(emit.eventName, emit.data);
         if (Array.isArray(events)) {
           events.forEach(event => {
-            this.onHandler(event.eventName, event.callback, event.offEvents);
+            this.onHandler(event);
           });
         }
       };
