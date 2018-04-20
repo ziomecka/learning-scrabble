@@ -79,7 +79,7 @@ const htmlsOptions = {
     inject: false
   },
   htmlScrabbleControls: {
-    template: path.join("./app/scrabble/controls/controls.pug"),
+    template: path.join("./app/scrabble/player/controls/controls.pug"),
     filename: "./scrabble.controls.html",
     inject: false
   },
@@ -94,7 +94,7 @@ const htmlsOptions = {
     inject: false
   },
   htmlScrabbleRack: {
-    template: path.join("./app/scrabble/rack/rack.pug"),
+    template: path.join("./app/scrabble/player/rack/rack.pug"),
     filename: "./scrabble.rack.html",
     inject: false
   },
