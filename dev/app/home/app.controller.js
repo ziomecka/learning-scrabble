@@ -1,19 +1,27 @@
 /* jshint esversion: 6 */
+/** Initialised in ui-router */
 module.exports = class AppController {
-  constructor($timeout, appSocket, appGlobals) {
+  constructor(
+    $timeout,
+    appSocket,
+    appGlobals
+  ) {
     "ngInject";
-    this.shortTitle = false;
-    $timeout(() => {
-      this.shortTitle = true;
-    }, appGlobals.shorterTitleTime);
-    appSocket.connection();
-  }
-  // TODO not here
-  // logout () {
-  //   // authorizationService.clear();
-  // }
-};
 
-// angular
-//   .module("app")
-//   .controller("appController", appController);
+    Object.assign(this, {
+      $timeout,
+      appSocket,
+      appGlobals
+    });
+
+    this.shortTitle = false;
+    this.makeTitleShort();
+  }
+
+  makeTitleShort () {
+    this.$timeout(() => {
+      this.shortTitle = true;
+    }, this.appGlobals.shorterTitleTime);
+    this.appSocket.connection();
+  }
+};
