@@ -2,12 +2,19 @@
 // TODO remove listeners where neeeded
 // TODO memory leaks
 class CookiesService {
-  constructor (socketService, cookiesEvents, cookiesNames, $cookies) {
+  constructor (
+    socketService,
+    cookiesEvents,
+    cookiesNames,
+    $cookies
+  ) {
     "ngInject";
-    this.socketService = socketService;
-    this.cookiesEvents = cookiesEvents;
-    this.cookiesNames = cookiesNames;
-    this.$cookies = $cookies;
+    Object.assign(this, {
+      socketService,
+      cookiesEvents,
+      cookiesNames,
+      $cookies
+    });
   }
   /**
   * [listenReqCookies description]
