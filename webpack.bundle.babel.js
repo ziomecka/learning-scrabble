@@ -74,7 +74,7 @@ const htmlsOptions = {
     inject: false
   },
   htmlScrabble: {
-    template: path.join("./app/scrabble/scrabble.pug"),
+    template: path.join("./app/scrabble/core/scrabble.pug"),
     filename: "./scrabble.html",
     inject: false
   },
@@ -84,7 +84,7 @@ const htmlsOptions = {
     inject: false
   },
   htmlScrabbleSidebar: {
-    template: path.join("./app/scrabble/sidebar/sidebar.pug"),
+    template: path.join("./app/scrabble/core/sidebar/sidebar.pug"),
     filename: "./scrabble.sidebar.html",
     inject: false
   },
@@ -99,17 +99,17 @@ const htmlsOptions = {
     inject: false
   },
   htmlBoard: {
-    template: path.join("./app/scrabble/board/templates/board.pug"),
+    template: path.join("./app/scrabble/core/board/templates/board.pug"),
     filename: "./scrabble.board.html",
     inject: false
   },
   htmlField: {
-    template: path.join("./app/scrabble/field/field.pug"),
+    template: path.join("./app/scrabble/core/field/field.pug"),
     filename: "./scrabble.field.html",
     inject: false
   },
   htmlTile: {
-    template: path.join("./app/scrabble/tile/tile.pug"),
+    template: path.join("./app/scrabble/core/tile/tile.pug"),
     filename: "./scrabble.tile.html",
     inject: false
   }

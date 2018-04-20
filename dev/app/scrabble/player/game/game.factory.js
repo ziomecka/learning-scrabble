@@ -42,5 +42,5 @@ const scrabbleGameFactory = () => {
 };
 
 angular
-  .module("scrabbleModule")
+  .module("gameModule")
   .service("scrabbleGameFactory", scrabbleGameFactory);

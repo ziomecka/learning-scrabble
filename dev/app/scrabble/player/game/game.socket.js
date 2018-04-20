@@ -1,5 +1,5 @@
 /* jshint esversion: 6 */
-class NewGameService {
+class ScrabbleGameSocket {
   constructor (scrabbleGameFactory, $q, socketService, scrabbleEvents) {
     "ngInject";
     this.scrabbleGameFactory = scrabbleGameFactory;
@@ -62,5 +62,5 @@ class NewGameService {
 }
 
 angular
-  .module("roomModule")
-  .service("newgameService", NewGameService);
+.module("gameModule")
+.service("scrabbleGameSocket", ScrabbleGameSocket);

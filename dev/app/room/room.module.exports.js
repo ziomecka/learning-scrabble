@@ -3,7 +3,6 @@ import * as mod from  "./room.module";
 
 /** Services */
 import "./room.service";
-import "./newgame/newgame.service";
 import "./room.socket";
 
 /** Constants */
