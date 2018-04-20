@@ -1,35 +1,53 @@
 /* jshint esversion: 6 */
+class AuthorizationSocket {
+  constructor (
+    socketService,
+    authorizationEvents
+  ) {
+    "ngInject";
+    Object.assign(this, {
+      socketService,
+      authorizationEvents
+    });
+  }
+
+  authorize (options) {
+    let {data, callbacks: {success, failureLogin, failurePassword}} = options;
+    let events = this.authorizationEvents;
+
+    let off = () => {
+      let events = this.authorizationEvents;
+      [
+        events.resAuthorizeSuccess,
+        events.resNoLogin,
+        events.resAuthorizeFailure
+      ].forEach(event => {
+        this.socketService.off(event);
+      });
+      events = null;
+    };
+
+    this.socketService.emit(events.reqAuthorize, data);
+
+    this.socketService.on(events.resAuthorizeSuccess, data => {
+      success(data);
+      off();
+    });
+
+    this.socketService.on(events.resNoLogin, () => {
+      failureLogin();
+      off();
+    });
+
+    this.socketService.on(events.resAuthorizeFailure, () => {
+      failurePassword();
+      off();
+    });
+
+    events = null;
+  }
+}
+
 angular
   .module("authorizationModule")
-  .service("authorizationSocket", [
-    "socketService",
-    "authorizationEvents",
-    function (socketService, authorizationEvents) {
-      this.authorize = options => {
-        let {data, callbacks: {success, failureLogin, failurePassword}} = options;
-
-        let off = () => {
-          socketService.off(authorizationEvents.resAuthorizeSuccess);
-          socketService.off(authorizationEvents.resNoLogin);
-          socketService.off(authorizationEvents.resAuthorizeFailure);
-        };
-
-        socketService.emit(authorizationEvents.reqAuthorize, data);
-
-        socketService.on(authorizationEvents.resAuthorizeSuccess, data => {
-          success(data);
-          off();
-        });
-
-        socketService.on(authorizationEvents.resNoLogin, () => {
-          failureLogin();
-          off();
-        });
-
-        socketService.on(authorizationEvents.resAuthorizeFailure, () => {
-          failurePassword();
-          off();
-        });
-      };
-    }
-  ]);
+  .service("authorizationSocket", AuthorizationSocket);
