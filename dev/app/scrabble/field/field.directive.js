@@ -1,26 +1,20 @@
 /* jshint esversion: 6 */
-const fieldDirective = () => {
+const fieldDirective = (dragAndDropService) => {
+  "ngInject";
   const link = (scope, element, attrs) => {
-    const read = tile => {
-      scope.fieldInfo.tile = JSON.parse(tile);
-    };
-
-    const addListeners = (element) => {
-      element.on("drop", e => {
-        e.preventDefault();
-        scope.$apply(() => {
-          read(e.originalEvent.dataTransfer.getData("tile"));
-        });
-      });
-
-      element.on("dragover", e => {
-        e.preventDefault();
+    const addListeners = () => {
+      dragAndDropService.drop.addListeners({
+        scope: scope,
+        element: element,
+        parent: "fieldInfo",
+        data: "tile"
       });
     };
 
-    const removeListeners = element => {
-      element.off("drop");
-      element.off("dragover");
+    const removeListeners = () => {
+      dragAndDropService.drop.removeListeners({
+        element: element
+      });
     };
 
     /** If field is droppable add drag&drop event listeners.
@@ -29,9 +23,9 @@ const fieldDirective = () => {
         */
     attrs.$observe("fieldDroppable", newvalue => {
       if (newvalue === "true") {
-        addListeners(element);
+        addListeners();
       } else {
-        removeListeners(element);
+        removeListeners();
       }
     });
   };

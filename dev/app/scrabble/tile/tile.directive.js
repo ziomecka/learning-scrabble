@@ -1,26 +1,32 @@
 /* jshint esversion: 6 */
 
 // TODO - improve so it works for scrabble rack as well
-const ScrabbleTileDirective = () => {
+const ScrabbleTileDirective = (dragAndDropService) => {
   "ngInject";
   const link = (scope, element, attrs) => {
-    const addListeners = element => {
-      element.on("dragstart", e => {
-        e.originalEvent.dataTransfer.setData("tile", JSON.stringify(scope.tile));
-      });
-      element.on("drag", e => {
-        e.preventDefault();
-      });
-      element.on("dragend", e => {
-        /** If drag was successful remove the tile from field. */
-        if (e.originalEvent.dataTransfer.dropEffect != "none") {
-          // TODO change to more flexible
-          scope.$apply(() => scope.$parent.$parent.fieldInfo.tile = null);
-        }
+
+    const addListeners = () => {
+      dragAndDropService.drag.addListeners({
+        scope: scope,
+        element: element,
+        parent: "fieldInfo",
+        data: "tile"
       });
     };
 
-    addListeners(element);
+    const removeListeners = () => {
+      dragAndDropService.drag.removeListeners({
+        element: element
+      });
+    };
+
+    attrs.$observe("draggable", newvalue => {
+      if (newvalue === "true") {
+        addListeners();
+      } else {
+        removeListeners();
+      }
+    });
   };
 
   return {
