@@ -1,23 +1,26 @@
 /* jshint esversion: 6 */
 module.exports = class NewroomController {
-  constructor (newroomDefaults, newroomService) {
+  constructor (
+    newroomDefaults,
+    newroomService
+  ) {
     "ngInject";
-    this.defaults = newroomDefaults;
-    this.newroomService = newroomService;
 
-    this.nameUnique = true;
+    Object.assign(this, {
+      newroomDefaults,
+      newroomService
+    });
+
+    this.nameUnique = true; // TODO
     this.name = "scrabble";
-    this.numberPlaces = this.defaults.placesOptions[0];
-    this.buttonsDisabled = false;
+    this.numberPlaces = this.newroomDefaults.placesOptions[0];
+    this.buttonsDisabled = false; // TODO
   }
 
   createRoom (data) {
     this.newroomService.createRoom({
       data: data,
-      callbacks: {
-        success: data => data, // TODO not needed
-        failure: () => {} //TODO
-      }
+      failure: () => {} //TODO
     });
   }
 };
