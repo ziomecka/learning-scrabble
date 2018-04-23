@@ -19,15 +19,24 @@ const plugins = [
   "karma-chrome-launcher",
   "karma-firefox-launcher",
   "karma-sourcemap-loader",
-  "karma-babel-preprocessor"
+  "karma-babel-preprocessor",
+  "karma-ng-html2js-preprocessor"
 ];
 const preprocessors = {
   "./spec/js/index.js": ["webpack", "sourcemap"],
+  "./bundle/**/*.html": "ng-html2js"
+};
+
+const ngHtml2JsPreprocessor = {
+  stripPrefix: "bundle/",
+  prependPrefix: "../",
+  moduleName: "my.templates"
 };
 
 options.reporters = reporters;
 options.plugins = plugins;
 options.preprocessors = preprocessors;
+options.ngHtml2JsPreprocessor = ngHtml2JsPreprocessor;
 options.webpack = webpack;
 
 const settings = function(config) {

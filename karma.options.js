@@ -2,6 +2,9 @@
 const settings = {
   basePath: "",
   files: [
+    "node_modules/angular/angular.min.js",
+    "node_modules/angular-mocks/angular-mocks.js",
+    "bundle/*.html",
     {pattern: "app/*.js", watched: true, served: false, included: false, nocache: false},
     {pattern: "spec/js/index.js", watched: true, served: true, included: true}
   ],
