@@ -1,7 +1,11 @@
 /* jshint esversion: 6 */
 // TODO correct
 /** Gets room's details */
-module.exports = (roomsSocket, $q, $stateParams) => {
+module.exports = (
+  roomsSocket,
+  $q,
+  $stateParams
+) => {
   "ngInject";
   const deferred = $q.defer();
   const resolve = data => deferred.resolve(data);
@@ -9,15 +13,13 @@ module.exports = (roomsSocket, $q, $stateParams) => {
 
   roomsSocket.getRoomDetails({
     roomId: $stateParams.roomId,
-    callbacks: {
-      success: data => {
-        /** Is the room new ? */
-        data = JSON.parse(data);
-        data.newroom = $stateParams.newroom;
-        resolve(data);
-      },
-      failure: () => reject()
-    }
+    success: data => {
+      /** find out if is the room new ? */
+      data = JSON.parse(data);
+      data.newroom = $stateParams.newroom;
+      resolve(data);
+    },
+    failure: () => reject()
   });
 
   return deferred.promise;
