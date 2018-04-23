@@ -8,17 +8,15 @@ import CopyWebpackPlugin from "copy-webpack-plugin";
 import path from "path";
 import webpack from "webpack";
 
-const htmlIndexAssets = {
-  assets: [path.join("./app/css/index.css")],
-  append: true
-};
 const htmlsOptions = {
   htmlIndex: {
     title: "Let's play scrabble",
     template: path.join("./app/index.pug"),
-    chunks: ["app"],
-    filename: "./index.html",
-    inject: "head",
+    chunks: ["app", "vendors"],
+    inject: true,
+    chunksSortMode: (a, b) => {
+      return (a.names[0] < b.names[0])? 1 : -1;
+    }
     // meta: "", // TODO
     // favicon: "",
     // minify: ""
@@ -126,10 +124,6 @@ const copyOptions = [
   {
     from: "./server/",
     to: "../bundle/server"
-  },
-  {
-    from: "./css/*.css",
-    to: "../bundle/css"
   }
 ];
 
@@ -138,10 +132,34 @@ const settings = merge (common, {
     path: path.resolve(__dirname, "bundle"),
     filename: "./app/[name].bundle.js"
   },
+  target: "web", // To get CommonsChunkPlugin work
   plugins: [
     ...htmlPlugins,
-    new HtmlWebpackIncludeAssetsPlugin(htmlIndexAssets),
-    new CopyWebpackPlugin(copyOptions)
+    new CopyWebpackPlugin(copyOptions),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "vendors",
+      chunks: ["vendors", "app"],
+      optimization: {
+        splitChunks: {
+          cacheGroups: {
+            vendors: {
+              test: /node_modules/,
+              chunks: ["vendors", "app"],
+              name: "vendors",
+              priority: 10,
+              enforce: true,
+              minChunks: function (module) {
+                return module.context && module.context.includes("node_modules");
+              }
+            },
+            app: {
+              chunks: ["vendors", "app"],
+              name: "app"
+            }
+          }
+        }
+      }
+    }),
   ]
 });
 
