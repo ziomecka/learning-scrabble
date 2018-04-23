@@ -1,23 +1,17 @@
 /* jshint esversion: 6 */
-module.exports = class RoomControlsController {
+class RoomControlsService {
   constructor (
     roomSocket,
-    roomService,
-    routerGoService
+    routerGoService,
+    userData
   ) {
     "ngInject";
 
     Object.assign(this, {
       roomSocket,
-      roomService,
-      routerGoService
+      routerGoService,
+      userData
     });
-  }
-
-  getup () {
-  }
-
-  start () {
   }
 
   leave () {
@@ -27,7 +21,11 @@ module.exports = class RoomControlsController {
           this.routerGoService.go();
         }
       },
-      roomId: this.roomService.data.room.id
+      roomId: this.userData.roomId
     });
   }
-};
+}
+
+angular
+  .module("roomModule")
+  .service("roomControlsService", RoomControlsService);

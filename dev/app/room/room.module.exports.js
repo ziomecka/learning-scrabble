@@ -17,6 +17,6 @@ import "./game/room.game.directive";
 import "./sidebar/room.sidebar.directive";
 
 /** Controls */
-import "./controls/controls";
+import "./controls/room.controls";
 
 module.exports = mod;
