@@ -1,12 +1,12 @@
 /* jshint esversion: 6 */
 class AuthorizationSocket {
   constructor (
-    socketService,
+    socketFactory,
     authorizationEvents
   ) {
     "ngInject";
     Object.assign(this, {
-      socketService,
+      socketFactory,
       authorizationEvents
     });
   }
@@ -22,27 +22,27 @@ class AuthorizationSocket {
         events.resNoLogin,
         events.resAuthorizeFailure
       ].forEach(event => {
-        this.socketService.off(event);
+        this.socketFactory.off(event);
       });
       events = null;
     };
 
-    this.socketService.on(events.resAuthorizeSuccess, data => {
+    this.socketFactory.on(events.resAuthorizeSuccess, data => {
       success(data);
       off();
     });
 
-    this.socketService.on(events.resNoLogin, () => {
+    this.socketFactory.on(events.resNoLogin, () => {
       failureLogin();
       off();
     });
 
-    this.socketService.on(events.resAuthorizeFailure, () => {
+    this.socketFactory.on(events.resAuthorizeFailure, () => {
       failurePassword();
       off();
     });
 
-    this.socketService.emit(events.reqAuthorize, data);
+    this.socketFactory.emit(events.reqAuthorize, data);
 
     events = null;
   }

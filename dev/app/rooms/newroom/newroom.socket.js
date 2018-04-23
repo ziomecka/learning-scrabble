@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 class NewroomSocket {
   constructor (
-    socketService,
+    socketFactory,
     roomsEvents,
     $stateParams,
     userData
@@ -9,7 +9,7 @@ class NewroomSocket {
     "ngInject";
 
     Object.assign(this, {
-      socketService,
+      socketFactory,
       roomsEvents,
       $stateParams,
       userData
@@ -49,7 +49,7 @@ class NewroomSocket {
       // TODO failure
     ];
 
-    this.socketService.emitHandler(options);
+    this.socketFactory.emitHandler(options);
   }
 }
 

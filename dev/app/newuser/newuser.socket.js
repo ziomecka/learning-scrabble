@@ -2,22 +2,22 @@
 angular
   .module("newuserModule")
   .service("newuserSocket", [
-    "socketService",
+    "socketFactory",
     "newuserEvents",
     "authorizationService",
-    function (socketService, newuserEvents, authorizationService) {
+    function (socketFactory, newuserEvents, authorizationService) {
       this.createUser = options => {
         let {data, callbacks: {failureLogin}} = options;
         let off = () => {
-          socketService.off(newuserEvents.resDuplicatedLogin);
-          socketService.off(newuserEvents.resNewuserSuccess);
+          socketFactory.off(newuserEvents.resDuplicatedLogin);
+          socketFactory.off(newuserEvents.resNewuserSuccess);
         };
-        socketService.emit(newuserEvents.reqNewuser, data);
-        socketService.on(newuserEvents.resDuplicatedLogin, () => {
+        socketFactory.emit(newuserEvents.reqNewuser, data);
+        socketFactory.on(newuserEvents.resDuplicatedLogin, () => {
           loginNotUnique = true;
           off();
         });
-        socketService.on(newuserEvents.resNewuserSuccess, data => {
+        socketFactory.on(newuserEvents.resNewuserSuccess, data => {
           off();
           authorizationService.authorize(data);
         });

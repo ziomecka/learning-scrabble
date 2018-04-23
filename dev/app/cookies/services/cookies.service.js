@@ -3,13 +3,13 @@
 // TODO memory leaks
 class CookiesService {
   constructor (
-    socketService,
+    socketFactory,
     cookiesEvents,
     $cookies
   ) {
     "ngInject";
     Object.assign(this, {
-      socketService,
+      socketFactory,
       cookiesEvents,
       $cookies
     });
@@ -21,7 +21,7 @@ class CookiesService {
   listenReqCookies (options) {
     let {events} = options;
     events.forEach(event => {
-      this.socketService.on(event.name, data => {
+      this.socketFactory.on(event.name, data => {
         let {cookies} = data;
         let answer = {};
         cookies.forEach(cookie => {
@@ -44,7 +44,7 @@ class CookiesService {
   listenSetCookies (options) {
     let {events} = options;
     events.forEach(event => {
-      this.socketService.on(event.name, data => {
+      this.socketFactory.on(event.name, data => {
         data.forEach(cookie => {
           this.$cookies.put(cookie.name, cookie.value, cookie.time, cookie.path);
         });
@@ -69,9 +69,9 @@ class CookiesService {
   */
   sendCookie (options) {
     let {event, cookies, callbacks} = options;
-    this.socketService.emit(event, cookies);
+    this.socketFactory.emit(event, cookies);
     callbacks.forEach(callback => {
-      this.socketService.on(callback.event, data => {
+      this.socketFactory.on(callback.event, data => {
         callback.callback(data);
       });
     });
@@ -88,7 +88,7 @@ class CookiesService {
   removeListeners (options) {
     let {events = Object.keys(this.cookiesEvents)} = options;
     events.forEach(event => {
-      this.socketService.off(event);
+      this.socketFactory.off(event);
     });
   }
 }

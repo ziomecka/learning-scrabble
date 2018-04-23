@@ -14,6 +14,7 @@ const routerConfig = (
     controller: require("../home/app.controller"),
     controllerAs: "appCtrl",
     resolve: {
+      socketIo: require("./resolve/resolve.home.socketio"),
       authorizeCookie: require("./resolve/resolve.home.authorizecookie")
     }
   };

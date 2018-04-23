@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 class ScrabbleGameSocket {
-  constructor (scrabbleGameFactory, $q, socketService, scrabbleEvents) {
+  constructor (scrabbleGameFactory, $q, socketFactory, scrabbleEvents) {
     "ngInject";
     this.scrabbleGameFactory = scrabbleGameFactory;
     this.$q = $q;
-    this.socketService = socketService;
+    this.socketFactory = socketFactory;
     this.scrabbleEvents = scrabbleEvents;
   }
 
@@ -31,7 +31,7 @@ class ScrabbleGameSocket {
         }
       ]
     };
-    this.socketService.emitHandler(emitOptions);
+    this.socketFactory.emitHandler(emitOptions);
     emitOptions = null;
     return deferred.promise;
   }
@@ -55,7 +55,7 @@ class ScrabbleGameSocket {
         }
       ]
     };
-    this.socketService.emitHandler(emitOptions);
+    this.socketFactory.emitHandler(emitOptions);
     emitOptions = null;
     return deferred.promise;
   }

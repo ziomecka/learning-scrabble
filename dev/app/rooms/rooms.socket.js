@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 class RoomsSocket {
   constructor (
-    socketService,
+    socketFactory,
     roomsEvents,
     $stateParams,
     routerGoService,
@@ -10,7 +10,7 @@ class RoomsSocket {
     "ngInject";
 
     Object.assign(this, {
-      socketService,
+      socketFactory,
       roomsEvents,
       $stateParams,
       routerGoService,
@@ -35,7 +35,7 @@ class RoomsSocket {
       // TODO failure
     ];
 
-    this.socketService.emitHandler(options);
+    this.socketFactory.emitHandler(options);
   }
 
   /** Join room and listen to room details */
@@ -64,7 +64,7 @@ class RoomsSocket {
       // TODO failure
     ];
 
-    this.socketService.emitHandler(options);
+    this.socketFactory.emitHandler(options);
   }
 }
 

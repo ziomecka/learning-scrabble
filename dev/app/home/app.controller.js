@@ -22,6 +22,5 @@ module.exports = class AppController {
     this.$timeout(() => {
       this.shortTitle = true;
     }, this.appGlobals.shorterTitleTime);
-    this.appSocket.connection();
   }
 };

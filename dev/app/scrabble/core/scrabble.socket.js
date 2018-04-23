@@ -2,9 +2,9 @@
 angular
   .module("scrabbleModule")
   .service("scrabbleSocket", [
-    "socketService",
+    "socketFactory",
     "scrabbleEvents",
-    function (socketService, scrabbleEvents) {
+    function (socketFactory, scrabbleEvents) {
 
       /** Data shared with controller */
       this.data = {
@@ -43,7 +43,7 @@ angular
           //   offEvents: [scrabbleEvents.resRoundEnded]
           // }
         ];
-        socketService.emitHandler(options);
+        socketFactory.emitHandler(options);
         this.listenRegisterOpponent();
       };
 
@@ -56,7 +56,7 @@ angular
           callback: this.acceptTiles,
           offEvents: []
         };
-        socketService.onHandler(options);
+        socketFactory.onHandler(options);
       };
 
       ///////////
@@ -72,7 +72,7 @@ angular
             scrabbleEvents.resOpponentResign
           ]
         };
-        socketService.onHandler(options);
+        socketFactory.onHandler(options);
       };
 
       /////////////////
@@ -96,7 +96,7 @@ angular
             offEvents: [scrabbleEvents.resRoundEnded]
           }
         ];
-        socketService.emitHandler(options);
+        socketFactory.emitHandler(options);
         this.listenStartRound();
         this.listenOpponentWord();
         this.listenOpponentExchange();
@@ -118,7 +118,7 @@ angular
             callback: options.success
           }
         ];
-        socketService.emitHandler(options);
+        socketFactory.emitHandler(options);
         this.listenStartRound();
         this.listenOpponentWord();
         this.listenOpponentExchange();
@@ -139,7 +139,7 @@ angular
             callback: () => {} //TODO
           }
         ];
-        socketService.emitHandler(options);
+        socketFactory.emitHandler(options);
       };
 
       /////////////////////
@@ -151,7 +151,7 @@ angular
           callback: this.changeStatus.verifyWord,
           offEvents: []
         };
-        socketService.onHandler(options);
+        socketFactory.onHandler(options);
       };
 
       /** User verifies opponent's word. */
@@ -173,7 +173,7 @@ angular
             offEvents: [scrabbleEvents.resVerifyWordRejected]
           }
         ];
-        socketService.emitHandler(options);
+        socketFactory.emitHandler(options);
       };
 
       /** User accepts opponent's word. */
@@ -194,7 +194,7 @@ angular
             offEvents: [scrabbleEvents.resAcceptWordSuccess]
           }
         ];
-        socketService.emitHandler(options);
+        socketFactory.emitHandler(options);
       };
 
       this.listenOpponentExchange = () => {
@@ -203,7 +203,7 @@ angular
           callback: this.display.opponentExchange,
           offEvents: []
         };
-        socketService.onHandler(options);
+        socketFactory.onHandler(options);
       };
 
       this.listenOpponentResign = () => {
@@ -212,7 +212,7 @@ angular
           callback: this.display.opponentResign,
           offEvents: []
         };
-        socketService.onHandler(options);
+        socketFactory.onHandler(options);
       };
     }
   ]);
