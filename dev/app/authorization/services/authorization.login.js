@@ -58,7 +58,7 @@ class AuthorizationLoginService {
 
   login (data) {
     this.isWaiting = true;
-    this.authorizationSocket.authorize({
+    this.authorizationSocket.login({
       data: data,
       callbacks: {
         success: data => {

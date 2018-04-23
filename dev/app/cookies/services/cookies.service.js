@@ -5,14 +5,12 @@ class CookiesService {
   constructor (
     socketService,
     cookiesEvents,
-    cookiesNames,
     $cookies
   ) {
     "ngInject";
     Object.assign(this, {
       socketService,
       cookiesEvents,
-      cookiesNames,
       $cookies
     });
   }
@@ -27,7 +25,7 @@ class CookiesService {
         let {cookies} = data;
         let answer = {};
         cookies.forEach(cookie => {
-          answer[cookie] = this.$cookies.get(this.cookiesNames[cookie]);
+          answer[cookie] = this.$cookies.get(cookie);
         });
         this.sendCookie({
           "event": event.response,
@@ -54,6 +52,16 @@ class CookiesService {
     });
   }
 
+  getCookies (options) {
+    let result = {};
+    let {cookies} = options;
+    cookies.forEach(cookie => {
+      result[cookie] = this.$cookies.get(cookie);
+    });
+    cookies = null;
+    return result;
+  }
+
   /**
   * [sendCookie description]
   * @param  {[type]} options event
@@ -69,68 +77,12 @@ class CookiesService {
     });
   }
 
-  ///////////////////////////
-  // Authorization cookies //
-  ///////////////////////////
-  listenReqAuthorizationCookies (options) {
-    let {callback} = options;
-    this.listenReqCookies({
-      events: [{
-        name: this.cookiesEvents.reqAuthorizationCookies,
-        response: this.cookiesEvents.resAuthorizationCookies,
-        listen: this.cookiesEvents.resAuthorizedCookiesSuccess,
-        callback: data => {
-          callback(data);
-        }
-      }]
+  removeCookies (options) {
+    let {cookies} = options;
+    cookies.forEach(cookie => {
+      $cookies.remove(cookie);
     });
-  }
-
-  listenSetAuthorizationCookies () {
-    this.listenSetCookies({
-      events: [{
-        name: this.cookiesEvents.setAuthorizationCookies
-      }]
-    });
-  }
-
-  sendAuthorizationCookies (options) {
-    let {callbacks: {resolve, reject}} = options;
-    let answer = {};
-    ["login", "number"].forEach(cookie => {
-      answer[cookie] = this.$cookies.get(this.cookiesNames[cookie]);
-    });
-    // TODO not here
-    this.listenSetAuthorizationCookies();
-
-    if(answer.login && answer.number) {
-      this.sendCookie({
-        "event": this.cookiesEvents.resAuthorizationCookies,
-        "cookies": answer,
-        "callbacks": [
-          {
-            "event": this.cookiesEvents.resAuthorizedCookiesFailure,
-            "callback": data => {
-              resolve(data);
-            }
-          },
-          {
-            "event": this.cookiesEvents.resAuthorizedCookiesSuccess,
-            "callback": data => {
-              reject(data);
-            }
-          }
-        ]
-      });
-    } else {
-      resolve();
-    }
-  }
-
-  // TODO make a general method?
-  removeAuthorizationCookies () {
-    this.$cookies.remove("myscrabbleLogin");
-    this.$cookies.remove("myscrabbleNumber");
+    cookies = null;
   }
 
   removeListeners (options) {

@@ -11,7 +11,7 @@ class AuthorizationSocket {
     });
   }
 
-  authorize (options) {
+  login (options) {
     let {data, callbacks: {success, failureLogin, failurePassword}} = options;
     let events = this.authorizationEvents;
 
@@ -27,8 +27,6 @@ class AuthorizationSocket {
       events = null;
     };
 
-    this.socketService.emit(events.reqAuthorize, data);
-
     this.socketService.on(events.resAuthorizeSuccess, data => {
       success(data);
       off();
@@ -43,6 +41,8 @@ class AuthorizationSocket {
       failurePassword();
       off();
     });
+
+    this.socketService.emit(events.reqAuthorize, data);
 
     events = null;
   }

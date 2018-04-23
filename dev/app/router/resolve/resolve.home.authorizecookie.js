@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 /** Authorize user via the cookies. */
 module.exports = (
-  cookiesService,
+  authorizationCookiesService,
   authorizationService,
   $q,
   $timeout,
@@ -15,7 +15,8 @@ module.exports = (
   if (!userData.authorized) {
     const deferred = $q.defer();
     // TODO stop listnening when received
-    cookiesService.sendAuthorizationCookies({
+    /** Cookies authorization is initailised by client */
+    authorizationCookiesService.sendAuthorizationCookies({
       callbacks: {
         resolve: () => {
           // TODO out?
