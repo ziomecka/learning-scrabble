@@ -1,43 +1,42 @@
 /* jshint esversion: 6 */
-
-// TODO compile to ES5
-// https://github.com/webpack/webpack/issues/1206
-
 import path from "path";
 import webpack from "webpack";
+
+/** Plugins */
 import ExtractTextPlugin from "extract-text-webpack-plugin";
-import packageJSON from "./package.json";
+
+/** CSS */
 import postcssFlexbugs from "postcss-flexbugs-fixes";
 import postcssLost from "lost";
 import postcssImport from "postcss-import";
 import postcssNext from "postcss-cssnext";
 
-// const extractSASS = new ExtractTextPlugin("[name].css");
-// const extractHTML = new ExtractTextPlugin("[name]/[name].html");
-
 const settings = {
   devtool: "source-map",
   context: path.join(__dirname, "dev"),
   entry: {
-    app: [path.join(__dirname, "/dev/index.js"), path.join(__dirname, "/dev/css/index.sass")]
+    app: [path.join(__dirname, "/dev/index.js")],
+    vendors: [
+      "angular",
+      "@uirouter/angularjs",
+      "angular-animate",
+      "angular-cookies",
+      "angular-route",
+      "oclazyload"
+    ]
   },
   target: "node",
   resolve: {
+    extensions: [".js", ".sass"],
     modules: [
       path.resolve("./node_modules")
     ],
     alias: {
-      jquery: "jquery/src/jquery",
-      angular: "angular/angular.min.js"
     }
   },
   plugins: [
-    // extractSASS,
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery",
-      "window.$": "jquery"
+    new ExtractTextPlugin({
+      filename: "./index.css"
     })
   ],
   module: {
@@ -51,24 +50,16 @@ const settings = {
             loader: "ng-annotate-loader"
           },
           {
-            loader: "babel-loader",
+            loader: "babel-loader?cacheDirectory=false",
             options: {
-              /** For error: the code generator has deoptimised styling
-              When set to "auto" compact is set to true on input sizes of >100KB,
-              maeaning: Not include superfluous whitespace characters and line terminators
-              */
               compact: false,
-              presets: ["es2015"],
+              presets: ["env"]
             }
           },
           {
             loader: "jshint-loader",
           }
         ]
-      },
-      {
-        test: /angular\.min\.js$/,
-        loader: "exports-loader?angular"
       },
       {
         test: /\.pug$/,
@@ -87,79 +78,28 @@ const settings = {
         loader: "json-loader"
       },
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader"
-          },
-        ]
-      },
-      {
         test: /\.sass$/,
-        exclude: path.resolve(__dirname, "node_modules"),
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              outputPath: "./app/css",
-              name: "[name].css"
-            }
-          },
-          {
-            loader: "extract-loader",
-            options: {
-              publicPath: "../"
-            }
-          },
-          {
-            loader: "css-loader",
-            options: {
-              name: "[name].css",
-              sourceMap: true
-            }
-          },
-          {
-            loader: "postcss-loader",
-            options: {
-              plugins: [
-                postcssFlexbugs(),
-                postcssLost(),
-                postcssImport(),
-                postcssNext()
-              ],
-              sourceMap: true
-            }
-          },
-          {
-            loader: "sass-loader"
-          },
-        ]
-        // use: extractSASS.extract({
-        //   use: [
-        //     {
-        //       loader: "css-loader",
-        //       options: {sourceMap: true}
-        //     },
-        //     {
-        //       loader: "postcss-loader",
-        //       options: {
-        //         plugins: [
-        //           postcssFlexbugs(),
-        //           postcssLost(),
-        //           postcssImport(),
-        //           postcssNext()
-        //         ],
-        //         sourceMap: true
-        //       }
-        //     },
-        //     {
-        //       loader: "sass-loader"
-        //     }
-        //   ]
-        // })
+        use:
+          ExtractTextPlugin.extract({
+          fallback: "style-loader",
+            use: [
+              {
+                loader: "postcss-loader",
+                options: {
+                  plugins: [
+                    postcssFlexbugs(),
+                    postcssLost(),
+                    postcssImport(),
+                    postcssNext()
+                  ],
+                  sourceMap: true
+                }
+              },
+              {
+                loader: "sass-loader"
+              }
+            ]
+          })
       }
     ]
   }
