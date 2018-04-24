@@ -1,24 +1,24 @@
 /* jshint esversion: 6 */
-import * as mod from "./home/app.module";
+import * as mod from "./app/app.module";
 
 /** Controllers */
 /**Initialised in resolve */
 
 /** Services */
-import "./home/services/app.authorization.service";
-import "./home/services/socket.service";
-import "./home/services/app.socket";
+import "./app/services/app.authorization.service";
+import "./app/services/socket.service";
+import "./app/services/app.socket";
 
 /** Constants */
-import "./home/constants/title.letters";
-import "./home/constants/app.events";
-import "./home/constants/app.globals";
+import "./app/constants/title.letters";
+import "./app/constants/app.events";
+import "./app/constants/app.globals";
 
 /** Directives */
-import "./home/directives/title.directive";
+import "./app/directives/title.directive";
 
 /** Factories */
-import "./home/factories/lodash.factory";
+import "./app/factories/lodash.factory";
 
 const domain = "http://localhost:5000";
 // mod.run($trace => $trace.enable());

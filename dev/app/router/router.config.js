@@ -11,7 +11,7 @@ const routerConfig = (
   const home = {
     url: "/",
     templateUrl: "../index.html",
-    controller: require("../home/app.controller"),
+    controller: require("../app/app.controller"),
     controllerAs: "appCtrl",
     resolve: {
       socketIo: require("./resolve/resolve.home.socketio"),

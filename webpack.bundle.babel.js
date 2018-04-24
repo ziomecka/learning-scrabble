@@ -22,7 +22,7 @@ const htmlsOptions = {
     // minify: ""
   },
   htmlTitle: {
-    template: path.join("./app/home/templates/title.pug"),
+    template: path.join("./app/app/templates/title.pug"),
     filename: "./index.title.html",
     inject: false
   },
@@ -62,7 +62,7 @@ const htmlsOptions = {
     inject: false
   },
   htmlRoomControls: {
-    template: path.join("./app/room/controls/controls.pug"),
+    template: path.join("./app/room/controls/room.controls.pug"),
     filename: "./room.controls.html",
     inject: false
   },
