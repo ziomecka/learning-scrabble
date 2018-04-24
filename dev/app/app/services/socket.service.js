@@ -9,16 +9,10 @@ const socketFactory = (
 
   let socket;
   let id;
-  let on;
-  let off;
-  let emit;
-  let onHandler;
-  let emitHandler;
 
   const logSocket = () => {
     const deferred = $q.defer();
     /** io is avaialable thanks to socket.io-client */
-    // TODO why twice https://stackoverflow.com/questions/31050511/client-connecting-twice-to-server-socket-io
     socket = io();
 
     // TODO on connectin close all other sockets
@@ -28,7 +22,6 @@ const socketFactory = (
         id = data.id;
         console.log("Socket connected, id: " + id);
       });
-
 
       /** Get id on diconnection. */
       socket.on("disconnect", () => {
@@ -42,7 +35,7 @@ const socketFactory = (
     return deferred.promise;
   };
 
-  on = (event, callback) => {
+  const on = (event, callback) => {
     socket.on(event, function() {
       let args = arguments;
       $rootScope.$apply(() => {
@@ -51,11 +44,11 @@ const socketFactory = (
     });
   };
 
-  off = (event) => {
+  const off = (event) => {
     socket.off(event);
   };
 
-  emit = (event, data, callback) => {
+  const emit = (event, data, callback) => {
     socket.emit(event, data, () => {
       const args = arguments;
       $rootScope.$apply(() => {
@@ -65,70 +58,85 @@ const socketFactory = (
   };
 
   /** Options for onHandler:
-  {
-  callback: {
-  eventName: string,
-  callback: function,
-  offEvents: string[]
-}
-}
-*/
-
-onHandler = options => {
-  options = Object(options);
-
-  let handler = (eventName, callback, offEvents) => {
-    on(eventName, data => {
-      off(eventName);
-      if (Array.isArray(offEvents)) {
-        offEvents.forEach(eventName => {
-          off(eventName);
-        });
+    {
+      callback: {
+        eventName: string,
+        callback: function,
+        offEvents: string[]
       }
-      if (callback) {
-        callback(data);
-      }
-    });
+    }
+    */
+
+  const onHandler = options => {
+    options = Object(options);
+
+    let handler = (eventName, callback, offEvents) => {
+      on(eventName, data => {
+        off(eventName);
+        if (Array.isArray(offEvents)) {
+          offEvents.forEach(eventName => {
+            off(eventName);
+          });
+        }
+        if (callback) {
+          callback(data);
+        }
+      });
+    };
+
+    if (options.eventName) {
+      handler(options.eventName, options.callback, options.offEvents);
+    }
   };
 
-  if (options.eventName) {
-    handler(options.eventName, options.callback, options.offEvents);
-  }
-};
+  /** Options for emitHandler:
+      {
+        emit: {
+          event: string,
+          data: object
+        },
+        events: [
+          {
+            eventName: string,
+            callback: function,
+            offEvents: string[]
+          }
+        ]
+      }
+      */
 
-/** Options for emitHandler:
-{
-  emit: {
-    event: string,
-    data: object
-  },
-  events: [
-    {
-      eventName: string,
-      callback: function,
-      offEvents: string[]
+  const emitHandler = options => {
+    options = Object(options);
+    let {
+      emit: e,
+      events
+    } = options;
+
+    /** Emit roomID and login */
+    e.data = Object(e.data);
+    ({login: e.data.login, roomId: e.data.roomId} = userData);
+
+    emit(e.eventName, e.data);
+    if (Array.isArray(events)) {
+      events.forEach(event => {
+        onHandler(event);
+      });
     }
-  ]
-}
-*/
+  };
 
-emitHandler = options => {
-  options = Object(options);
-  let {
-    emit: e,
-    events
-  } = options;
-
-  /** Emit roomID and login */
-  ({login: e.data.login, roomId: e.data.roomId} = userData);
-
-  emit(e.eventName, e.data);
-  if (Array.isArray(events)) {
-    events.forEach(event => {
-      onHandler(event);
-    });
-  }
-};
+  /** If array of events received then
+      remove listeners for events,
+      else remove all listeners.
+      */
+  // const removeListeners = events => {
+  //   if (Array.isArray(events)) {
+  //     events.forEach(event => {
+  //       socket.off(event.eventName, event.callback);
+  //     });
+  //   } else {
+  //     socket.off();
+  //   }
+  // };
 
   return {
     logSocket: logSocket,
@@ -136,7 +144,8 @@ emitHandler = options => {
     emitHandler: emitHandler,
     on: on,
     emit: emit,
-    off: off
+    off: off,
+    // removeListeners: removeListeners
   };
 };
 
