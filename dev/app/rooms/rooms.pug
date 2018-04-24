@@ -1,9 +1,20 @@
-//- TODO correct links to rooms
-nav(ui-view="navigation")
-h2 List of rooms
-p(ng-show="roomsCtrl.rooms.length === 0") There are no opened rooms.
-ul
-  li(ng-repeat="room in roomsCtrl.rooms track by room.id")
+rooms-navigation
+h2 Hello {{roomsCtrl.roomsService.login}}, what would you like to do?
+div(ng-show="roomsCtrl.rooms.length !== 0")
+  p Return to game
     a(ui-sref="private.room({roomId:room.id})") {{room.name}}
-button(class="button__link" ng-click="roomsCtrl.showForm=!roomsCtrl.showForm") create new room
-newroom(ng-show="roomsCtrl.showForm")
+div(ng-show="roomsCtrl.rooms.length !== 0")
+  p Join an existing room
+  ul
+    li(ng-repeat="room in roomsCtrl.rooms track by room.id")
+      a(ui-sref="private.room({roomId:room.id})") {{room.name}}
+div
+  p(ng-show="roomsCtrl.rooms.length !== 0") Open a new room
+  button(
+    ng-click="roomsCtrl.showForm=!roomsCtrl.showForm"
+    ng-show="roomsCtrl.rooms.length !== 0"
+    class="button__link"
+    ) create new room
+  newroom(
+    ng-show="roomsCtrl.rooms.length === 0 || roomsCtrl.showForm"
+    )
