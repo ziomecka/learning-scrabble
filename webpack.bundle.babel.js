@@ -27,7 +27,7 @@ const htmlsOptions = {
     inject: false
   },
   htmlNavigation: {
-    template: path.join("./app/navigation/navigation.pug"),
+    template: path.join("./app/rooms/navigation/navigation.pug"),
     filename: "./rooms.navigation.html",
     inject: false
   },
