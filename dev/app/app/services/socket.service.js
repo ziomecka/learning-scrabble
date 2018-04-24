@@ -3,7 +3,8 @@ const socketFactory = (
   $rootScope,
   userData,
   appEvents,
-  $q
+  $q,
+  appGlobals
 ) => {
   "ngInject";
 
@@ -12,21 +13,33 @@ const socketFactory = (
 
   const logSocket = () => {
     const deferred = $q.defer();
+
+    let socketOptions = {
+      transportOptions: {
+        polling: {
+          extraHeaders: {
+            "x-app": appGlobals["x-app"]
+          }
+        }
+      }
+    };
+
     /** io is avaialable thanks to socket.io-client */
-    socket = io();
+    socket = io(socketOptions);
+    socketOptions = null;
 
     // TODO on connectin close all other sockets
     /** Get id on connection. */
     socket.on(appEvents.resConnected, data => {
       $rootScope.$apply(() => {
         id = data.id;
-        console.log("Socket connected, id: " + id);
+        // console.log("Socket connected, id: " + id);
       });
 
       /** Get id on diconnection. */
       socket.on("disconnect", () => {
         id = undefined;
-        console.log("Socket disconnected, id: " + id);
+        // console.log("Socket disconnected, id: " + id);
       });
 
       deferred.resolve();

@@ -3,6 +3,7 @@
 angular
   .module("app")
   .constant("appGlobals", {
-    shorterTitleTime: 800,
-    delayedViewTime: 810
+    "shorterTitleTime": 800,
+    "delayedViewTime": 810,
+    "x-app": "scrabble"
   });
