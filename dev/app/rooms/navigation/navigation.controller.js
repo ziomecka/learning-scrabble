@@ -1,14 +1,12 @@
 /* jshint esversion: 6 */
 module.exports = class NavigationController {
   constructor (
-    authorizationService,
-    userData
+    authorizationService
   ) {
     "ngInject";
 
     Object.assign(this, {
-      authorizationService,
-      userData
+      authorizationService
     });
   }
 
