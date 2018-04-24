@@ -1,26 +1,49 @@
 /* jshint esversion: 6 */
 class RoomsService {
   constructor (
-    roomsSocket
+    roomsSocket,
+    userData
   ) {
     "ngInject";
 
     Object.assign(this, {
-      roomsSocket
+      roomsSocket,
+      userData
     });
+
+    this.login = userData.login;
+    this.buttonsDisabled = false;
+    this.leftGame = {};
+    this._rooms = [];
   }
-    // this.updateRooms = data => {
-    //   this.rooms.push(data);
-    //   console.log(`Rooms: ${this.rooms}`);
-    // };
+
+  set rooms (options) {
+    if (options.add !== true) {
+      this._rooms = [...options.roomsList];
+    } else {
+      this._rooms.push(...options.roomsList);
+    }
+  }
+
+  get rooms () {
+    return this._rooms;
+  }
+
+  initializeRooms (roomsList) {
+    this.buttonsDisabled = false;
+    this.rooms = {
+      roomsList: roomsList,
+    };
+  }
 
   joinRoom (id) {
+    this.buttonsDisabled = true;
     this.roomsSocket.joinRoom({
-      id: id,
-      callbacks: {
-        successJoinRoom: data => {
-          // TODO
-        }
+      data: {
+        roomdId: id
+      },
+      failure: () => {
+        this.buttonsDisabled = false;
       }
     });
   }

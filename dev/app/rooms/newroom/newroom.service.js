@@ -3,19 +3,21 @@ class NewroomService {
   constructor (
     newroomSocket,
     routerGoService,
-    routerStates
+    routerStates,
+    roomsService
   ) {
     "ngInject";
 
     Object.assign(this, {
       newroomSocket,
       routerGoService,
-      routerStates
+      routerStates,
+      roomsService
     });
   }
 
   createRoom (options) {
-    let {data: {name, numberPlaces}, failure} = Object(options);
+    let {data: {name, numberPlaces}} = Object(options);
 
     this.newroomSocket.createRoom({
       data: {
@@ -29,12 +31,11 @@ class NewroomService {
         this.routerGoService.go({
           state: this.routerStates.room,
           roomId: data.roomId,
-          newroom: true
+          newroom: true // TODO out?
         });
       },
-      failure: data => {
-        /** Call success callback. */
-        failure(data);
+      failure: () => {
+        this.roomsService.buttonsDisabled = false;
       }
     });
   }

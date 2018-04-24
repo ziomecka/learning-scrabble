@@ -1,31 +1,28 @@
 /* jshint esversion: 6 */
 module.exports = class RoomsController {
-  constructor (roomsSocket, roomsList, roomsService) {
+  constructor (
+    roomsSocket,
+    roomsList,
+    roomsService
+  ) {
     "ngInject";
 
-    this.rooms = [];
+    Object.assign(this, {
+      roomsSocket,
+      roomsList,
+      roomsService
+    });
+  }
 
-    this.$onInit = () => {
-      this.rooms = [...roomsList];
-      roomsService.rooms = [...roomsList];
-    };
-}
+  $onInit () {
+    this.roomsService.initializeRooms(this.roomsList);
+  }
 
-joinRoom (id) {
-  roomsService.joinRoom({
-    id: id
-    // callbacks: {
-    //   successJoinRoom: data => {
-    //     me.buttonsDisabled = false; //TODO not needed?
-    //   }
-    // }
-  });
-}
+  joinRoom (id) {
+    this.roomsService.joinRoom(id);
+  }
 
-updateRooms (data) {
-  me.rooms.push(data);
-}
-
-    // // TODO:
-    // roomsSocket.createRoomSuccess(me.updateRooms);
+  updateRooms (data) {
+    me.rooms.push(data);
+  }
 };

@@ -12,15 +12,13 @@ module.exports = class NewroomController {
     });
 
     this.nameUnique = true; // TODO
-    this.name = "scrabble";
+    this.name = this.newroomDefaults.name;
     this.numberPlaces = this.newroomDefaults.placesOptions[0];
-    this.buttonsDisabled = false; // TODO
   }
 
   createRoom (data) {
     this.newroomService.createRoom({
-      data: data,
-      failure: () => {} //TODO
+      data: data
     });
   }
 };

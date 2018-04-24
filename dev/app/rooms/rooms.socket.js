@@ -3,18 +3,14 @@ class RoomsSocket {
   constructor (
     socketFactory,
     roomsEvents,
-    $stateParams,
-    routerGoService,
-    userData
+    routerGoService
   ) {
     "ngInject";
 
     Object.assign(this, {
       socketFactory,
       roomsEvents,
-      $stateParams,
-      routerGoService,
-      userData
+      routerGoService
     });
   }
 
@@ -40,9 +36,10 @@ class RoomsSocket {
 
   /** Join room and listen to room details */
   joinRoom (options) {
-    let {id, callbacks: {successJoinRoom}} = options;
+    let {data, success} = options;
+
     let successCallback = data => {
-      successJoinRoom();
+      success();
       this.routerGoService.go({
         state: auhtorizationStates.room,
         roomId: data.roomId
@@ -51,10 +48,9 @@ class RoomsSocket {
 
     options.emit = {
       eventName: this.roomsEvents.reqJoinRoom,
-      data: {
-        "id": id
-      }
+      data: data
     };
+
     options.events = [
       {
         eventName: this.roomsEvents.resRoomJoinedSuccess,
