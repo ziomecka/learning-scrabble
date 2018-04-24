@@ -16,26 +16,41 @@ const socketsManagerFactory = require("../app/authorization/authorization.socket
 io.on("connection", socket => {
   // redisFactory.flush();
 
-  /** Inform about the connection. */
-  console.log(`User connected: ${socket.id}.`);
-  socket.emit(serverEvents.resConnected, {id: socket.id});
+  /** Get IP and extra header 'x-app' */
+  const address = socket.conn.remoteAddress;
+  const header = socket.handshake.headers["x-app"];
 
-  /** Listen authorization cookies. */
-  cookies.listenAuthorizationCookies({
-    success: data => socketsManagerFactory().update(data),
-    socket: socket,
-    io: io
-  });
+  /** If header "x-app" === "scrabble" then
+      proceed.
+      Else close connection.
+      By checking the 'x-app' header I can catch hits from e.g. proxy.
+      */
+  if (header === "scrabble") {
+    /** Inform about the connection. */
+    console.log(`New connection from ${address} with header: ${header}.
+                Socket id: ${socket.id}`);
+    // console.log(`All clients: ${Object.keys(io.sockets.clients().connected)}`);
+    socket.emit(serverEvents.resConnected, {id: socket.id});
 
-  /** Register socket. */
-  socketsManagerFactory().register({socket: socket.id});
+    /** Listen authorization cookies. */
+    cookies.listenAuthorizationCookies({
+      success: data => socketsManagerFactory().update(data),
+      socket: socket,
+      io: io
+    });
 
-  authorizationSocketFactory.authorizationSocket({socket: socket, io: io}).listen();
-  newuserSocketFactory.newuserSocket({socket: socket, io: io}).listen();
+    /** Register socket. */
+    socketsManagerFactory().register({socket: socket.id});
 
-  socket.on("disconnect", () => {
-    socketsManagerFactory().unregister({socket: socket.id});
-    console.log("User disconnected.");
-    /** Garbage collection */ // TODO
-  });
+    authorizationSocketFactory.authorizationSocket({socket: socket, io: io}).listen();
+    newuserSocketFactory.newuserSocket({socket: socket, io: io}).listen();
+
+    socket.on("disconnect", () => {
+      socketsManagerFactory().unregister({socket: socket.id});
+      console.log("User disconnected.");
+      /** Garbage collection */ // TODO
+    });
+  } else {
+    socket.disconnect();
+  }
 });
