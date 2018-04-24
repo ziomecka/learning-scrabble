@@ -1,46 +1,45 @@
 /* jshint esversion: 6 */
 class AuthorizationService {
   constructor (
-    $state,
     routerStates,
-    cookiesService,
+    authorizationCookiesService,
     userData,
-    routerGoService
+    routerGoService,
+    socketFactory
   ) {
     "ngInject";
 
     Object.assign(this, {
-      $state,
       routerStates,
-      cookiesService,
+      authorizationCookiesService,
       userData,
-      routerGoService
+      routerGoService,
+      socketFactory
     });
   }
 
   clear () {
     this.userData.authorized = false;
-    this.$state.go(this.routerStates.authorization);
+    this.userData.login = undefined;
+    /** Go back to authorization state */
+    this.routerGoService.go({state: this.routerStates.authorization});
   }
 
-  /** Store login in authorization service. */
   authorize (data) {
+    /** Store authorized and login in user data. */
     ({
       authorized: this.userData.authorized = true,
-      login: this.userData.login = ""
+      login: this.userData.login
     } = data);
     this.routerGoService.go();
   }
 
   unauthorize () {
-    this.userData.authorized = false;
-    this.userData.login = "";
-    // TODO change name of the below service
     /** Destroy cookies */
-    this.cookiesService.removeAuthorizationCookies();
-    // TODO off all or some sockets???
-    /** Go back to authorization state */
-    this.routerGoService.go({state: this.routerStates.authorization});
+    this.authorizationCookiesService.removeAuthorizationCookies();
+    this.clear();
+    /** Remove all listeners. */
+    this.socketFactory.off();
   }
 }
 
