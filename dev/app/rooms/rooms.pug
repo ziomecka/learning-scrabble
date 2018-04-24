@@ -6,8 +6,8 @@ div(ng-show="roomsCtrl.rooms.length !== 0")
 div(ng-show="roomsCtrl.rooms.length !== 0")
   p Join an existing room
   ul
-    li(ng-repeat="room in roomsCtrl.rooms track by room.id")
-      a(ui-sref="private.room({roomId:room.id})") {{room.name}}
+    li(ng-repeat="room in roomsCtrl.roomsService.rooms track by room.id")
+      a(ui-sref="home.games.room({roomId: room.id})") {{room.name}}
 div
   p(ng-show="roomsCtrl.rooms.length !== 0") Open a new room
   button(
