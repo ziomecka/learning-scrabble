@@ -1,13 +1,23 @@
 /* jshint esversion: 6 */
 class RoomSocket {
-  constructor (socketFactory, roomEvents, playerStates, $timeout, $q, userData) {
+  constructor (
+    socketFactory,
+    roomEvents,
+    // playerStates,
+    // $timeout,
+    // $q,
+    userData
+  ) {
     "ngInject";
-    this.socketFactory = socketFactory;
-    this.roomEvents = roomEvents;
-    // this.playerStates = playerStates;
-    // this.$timeout = $timeout;
-    // this.$q = $q;
-    this.userData = userData;
+
+    Object.assign(this, {
+      socketFactory,
+      roomEvents,
+      // playerStates,
+      // $timeout,
+      // $q,
+      userData
+    });
   }
 
   leaveRoom(options) {
