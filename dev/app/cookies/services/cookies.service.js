@@ -80,7 +80,7 @@ class CookiesService {
   removeCookies (options) {
     let {cookies} = options;
     cookies.forEach(cookie => {
-      $cookies.remove(cookie);
+      this.$cookies.remove(cookie);
     });
     cookies = null;
   }
