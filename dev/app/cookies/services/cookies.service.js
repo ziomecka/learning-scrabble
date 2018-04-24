@@ -55,8 +55,8 @@ class CookiesService {
   getCookies (options) {
     let result = {};
     let {cookies} = options;
-    cookies.forEach(cookie => {
-      result[cookie] = this.$cookies.get(cookie);
+    Object.keys(cookies).forEach(cookie => {
+      result[cookie] = this.$cookies.get(cookies[cookie]);
     });
     cookies = null;
     return result;
@@ -79,8 +79,8 @@ class CookiesService {
 
   removeCookies (options) {
     let {cookies} = options;
-    cookies.forEach(cookie => {
-      this.$cookies.remove(cookie);
+    Object.keys(cookies).forEach(cookie => {
+      this.$cookies.remove(cookies[cookie]);
     });
     cookies = null;
   }
