@@ -21,27 +21,19 @@ class RoomSocket {
   }
 
   leaveRoom(options) {
-    let {callbacks: {success}} = options;
-    this.socketFactory.emit(this.roomEvents.reqLeaveRoom, {
-      roomId: options.roomId,
-      login: this.userData.login
-    });
+    options = Object(options);
+      options.emit = {
+        eventName: this.roomEvents.reqLeaveRoom
+      };
+      options.events = [
+        {
+          eventName: this.roomEvents.resLeaveRoomSuccess,
+          callback: options.success
+        }
+      ];
+      this.socketFactory.emitHandler(options);
+    }
 
-    this.listenleaveRoom({
-      callbacks: {
-        success: success
-      }
-    });
-  }
-
-  listenLeaveRoom(options) {
-    let {callbacks: {success}} = options;
-    let eventName= this.roomEvents.resLeaveRoomSuccess;
-    this.socketFactory.on(eventName, data => {
-      success(data);
-      this.socketFactory.off(eventName);
-    });
-  }
 
   /** Listen if other users joined the room. */
   listenOtherUserJoinedRoom(options) {

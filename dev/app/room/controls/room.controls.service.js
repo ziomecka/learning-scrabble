@@ -16,12 +16,9 @@ class RoomControlsService {
 
   leave () {
     this.roomSocket.leaveRoom({
-      callbacks: {
-        success: () => {
-          this.routerGoService.go();
-        }
-      },
-      roomId: this.userData.roomId
+      success: () => {
+        this.routerGoService.go();
+      }
     });
   }
 }
