@@ -25,7 +25,7 @@ class RoomService {
 
     /** Room options */
     this.numberPlaces = undefined;
-    this.time = this.newroomDefaults.timeOptions[3] || 10;
+    this.time = this.newroomDefaults.timeOptions[3];
 
     /** Room data */
     this.id = undefined;
@@ -239,6 +239,7 @@ class RoomService {
     this.userData.state = this.userStates.get("considersPlaying");
     this.observeWaitForPlayers.stopListen();
     this.observeWaitForPlayers = null;
+
     /** Collect garbage */
     thisData = null;
     place = null;
