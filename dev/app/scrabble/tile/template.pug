@@ -1,0 +1,32 @@
+//- game-state="{{tile.gameState}}"
+div(
+  tile-state="{{tile.stateDescription}}"
+  class="tile"
+  id="{{tile.id}}"
+  )
+  svg(
+    xmlns="http://www.w3.org/2000/svg"
+    height="100%"
+    width="100%"
+    pointer-events="none"
+    )
+    g(
+      pointer-events="none"
+      )
+      rect(
+        pointer-events="none"
+        )
+      text(
+        x="50%"
+        y="50%"
+        pointer-events="none"
+        text-anchor="middle"
+        class="tile__letter"
+        ) {{tile.letter}}
+      text(
+        x="85%"
+        y="85%"
+        pointer-events="none"
+        text-anchor="middle"
+        class="tile__points"
+        ) {{tile.points}}

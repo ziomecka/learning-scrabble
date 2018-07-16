@@ -1,0 +1,1534 @@
+{
+  "Polish": [
+    [
+      {
+        "bonus": "word3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word3",
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "bonus": "word3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word3",
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "bonus": "word3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word3",
+        "tile": null
+      }
+    ]
+  ],
+  "English": [
+    [
+      {
+        "bonus": "word3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word3",
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "bonus": "word3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word3",
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word2",
+        "tile": null
+      },
+      {
+        "tile": null
+      }
+    ],
+    [
+      {
+        "bonus": "word3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word3",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "letter2",
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "tile": null
+      },
+      {
+        "bonus": "word3",
+        "tile": null
+      }
+    ]
+  ]
+}

@@ -1,0 +1,19 @@
+div(
+  class="scrabble__board"
+  ng-model="boardCtrl"
+  name="boardController"
+  )
+  div(
+    class="scrabble__row"
+    ng-repeat="row in boardCtrl.rows track by $index"
+    ng-transclude="scrabbleField"
+    row-index="{{$index}}"
+    )
+    //- field-droppable="{{field.droppable}}"
+    scrabble-field(
+      ng-repeat="field in row track by $index"
+      class="scrabble__field scrabble__field--{{field.bonus}}"
+      field="field"
+      tile="field.tile"
+      column-index="{{$index}}"
+      )

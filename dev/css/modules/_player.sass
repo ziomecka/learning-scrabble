@@ -1,0 +1,74 @@
+%scrabble__player--text
+  font-size: 0.8em
+  // border deducted
+  line-height: 18px
+  text-align: center
+
+%scrabble__player--boxes
+  margin: 0 0 5px
+  padding: 0
+
+%scrabble__player--size
+  height: 20px
+  width: 100%
+
+%scrabble__player--border
+  border: 1px solid green
+
+%scrabble__player--background
+  background: lightgreen
+
+.scrabble__player
+  @include center-flex
+  flex-wrap: nowrap
+  flex-direction: column
+  width: 100%
+  @extend %scrabble__player--text
+  @extend %scrabble__player--boxes
+  // @extend %scrabble__player--size
+  @extend %scrabble__player--border
+  // @extend %scrabble__player--background
+  // TODO out
+  background-color: red
+  font-weight: 800
+  p
+    display: block
+    width: 100%
+    margin: 2px 0
+    padding: 1px
+
+.scrabble__rack
+  @include center-flex
+  @extend %scrabble__player--boxes
+  // @extend %scrabble__player--size
+  // @extend %scrabble__player--border
+  // @extend %scrabble__player--background
+  flex-wrap: nowrap
+  align-items: center
+  margin: 10px 0
+  min-height: $scrabble-rack-minheight
+  width: 100%
+  list-style: none
+  li
+    display: inline-block
+
+.scrabble__rack--field
+  min-height: 20px
+  min-width: 20px
+  height: $scrabble-rackField-width
+  width: $scrabble-rackField-width
+  position: relative
+  border: $scrabble-rackField-border-width solid $scrabble-rackField-border-color
+  margin: $scrabble-rackField-margin
+  margin-left: 0
+  &:nth-child(1)
+    margin-left: $scrabble-rackField-margin
+
+  rect
+    fill: $c-room-sidebar
+
+.scrabble__points
+  @extend %scrabble__player--boxes
+  @extend %scrabble__player--size
+  @extend %scrabble__player--border
+  @include center-flex

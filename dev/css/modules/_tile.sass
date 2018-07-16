@@ -1,0 +1,95 @@
+.field
+  position: relative
+  height: 100%
+  width: 100%
+
+.tile
+  position: absolute
+  top: 0
+  left: 0
+  display: inline-block
+  margin: 0
+  padding: 0
+  height: 100%
+  width: 100%
+  z-index: 20
+  user-select: auto
+  transition: all .4s ease
+  &--toBeExchanged
+    top: -10px
+  &--toBePlayed
+    top: -40px
+  &--placedOnBoard
+    fill: red
+  svg, g, rect
+    display: block
+    height: 100%
+    width: 100%
+    // float: left
+    position: absolute
+    top: 0
+    left: 0
+  text
+    display: block
+    text-align: center
+    // position: absolute
+    // top: 50%
+    // left: 50%
+    // transform: translate(-50%, -50%)
+  &__letter
+    font-size: 0.9em
+    font-weight: 800
+  &__points
+    font-size: 0.8em
+
+
+  div
+    display: inline-block
+    margin: 0
+    padding: 0
+    position: absolute
+    height: 100%
+    width: 100%
+    top: 0
+    left: 0
+  svg
+    height: 100%
+    width: 100%
+  svg g rect
+    fill: white !important
+    float: left
+    height: 100%
+    width: 100%
+    border: none
+  svg g text
+    cursor: default
+    user-select: auto
+  svg g text::selection
+    cursor: default
+    user-select: none
+    background: none
+
+.draggable
+  cursor: move
+
+.divTileBox
+  display: inline-block
+  border: 1px solid darkgreen
+  height: 100%
+  width: 100%
+
+.divTileBox--onboard
+  position: absolute
+  z-index: 1
+
+.scrabble__tile
+  fill: white
+  color: black
+
+.scrabble__tile--group
+  @include center-flex
+  text-anchor: middle
+
+.scrabble__tile--text
+  font-size: 0.6em
+  font-weight: 600

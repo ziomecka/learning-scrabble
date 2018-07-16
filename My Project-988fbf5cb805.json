@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "steel-watch-204319",
+  "private_key_id": "988fbf5cb80538fc7830ba3cf3e3dbbade4074e3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCqQBbfe7uxgUe6\nPz/plgRPpOgvtY/urJombz50j3CEBLHo7UFOQ6qrh80UM2fv7ApaVvkbtgITPr9L\nDb9KaQ8m8u9XmkC9lg0dDEX2YXWdyfp0B8crhqBISlrPJhyE/8RmeQl42rNR9b2A\nKDg4QQmSgXnANqsko4NnSv4TQkeCOvDCP/6XOKNr8FJ0LjJs5qwkoyUV1gbR7ZpA\nbKQujRh5bJbkT4N38IJ2TAEG3m2a9S5k3R+jOWwL1vyZirAuL+E3UbawX5viwL0a\nKLiAr6POKhU7rMepJEZvhVidK0yMllta6twR4aLEeBX0pBRM19TYmVfoios45WKv\nAL0SftD/AgMBAAECggEAS+SG7bfMGxwcu98fIAMCR/ikkkP29ffWPaTga/hXOVqY\nblN5BajvZ0iBuGwT/KU1lkDoChzP/wE9J/loWQTNPtkTrXLzQjAmB1llxKd8VUro\nzRl8hSAdyivvICGGnBkh1WZGPSwMvM/1WjBTo2wGltsFyZP1Jb+IP57z9OTaWKgv\n/tvAuADLahmGMKczC6siZV09otSrHJ/PSbikdkox3ztVRiQmk0Fo/0Sr0MKl7e4/\nE/sjmwi2yygEuRtvllN8rzRvW0xRWw81I8svETzmsb3P8lBcKLH63SWDUR0Tf9WE\nu+tapcGGSegirfLAI9BI7dmXK6Y9ZinUriy5o22R6QKBgQDf3yRFIkSINIY5ros5\ns8H4ACYqL+DOUAK+M41e5XwBbJRCMpBWwCNSm+3U6yFNHIuuqbwJTHhFc2jbl5wf\nITL71WnGGZ2PfursDp9t0T4G7A5vseEJmUV+mRq7I3J/UCSDRc9MBW6lieP0alqt\n/Mc2CMOdGw5lp9oUrLQyt22W1wKBgQDCrvIa3+3paOg4n4YeT/HZLsrCKKB0XihA\nmBQB/gee1ZgOTH98JiEbFEwM1sjrgk485lLMNoxq/FGUtKkPAAktTRxkqbS6Rm5i\nKlJLHYofdd7EAD1UgVIUpYM0LBEvuMDTo+jO4ZEp09pzldUQd7ry8Sn2L5XASqw2\nZcv1CWjaGQKBgQCsXacUX5T6dc5evQfPDpsqshqwYpqo3qut/A094ly+z/W6ninJ\n0TehFBNi2wKR14eonGD9m9YCSyCR6kI3KZ2SjjdZYkGQyTxhMcUIjZE/TSK0VvWY\nKV17YrBVI661XWQvemFn+8q8Q9WySuy0hypubQMHhFxqYnkjb/FyFw6WkwKBgQCj\nSAN6ktGBcCFETFc6WSaoVtxrl5NrxgTQmDw/p4VQrChJ5dMOlxQxGAboxcPh8noY\nDbzn1eBTYqgxpowcLpWDzya/Lq6LhMLTxlca9P2BgWSC0widNZFYC7FNMqB/e98O\nIm0CBqGviSWwx7vZgfHkDGx7NFHO41IolZxIOcodEQKBgG++r4eTedDytHt26vKR\n+exEPfZWRYpwEvM6INYkyfk9y2BqqMzT+KdWEUfnQg6PUsUVoSANOh6pDGWD1u4T\nHcSL/Z9df9A3FCLCXTPf27hdLlZAxdoT8IDZsgF0cj14M+CqRATo/R+YWWNbzsDt\nx+XUao7JpOfw93HFeU8z0BWv\n-----END PRIVATE KEY-----\n",
+  "client_email": "my-scrabble-801@steel-watch-204319.iam.gserviceaccount.com",
+  "client_id": "107556534750030554472",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/my-scrabble-801%40steel-watch-204319.iam.gserviceaccount.com"
+}

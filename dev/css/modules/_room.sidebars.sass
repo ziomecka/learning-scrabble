@@ -1,0 +1,67 @@
+.room__sidebar
+  @include center-flex
+  flex-direction: column
+  justify-content: space-around
+  align-items: center
+  flex-wrap: wrap
+  position: fixed
+  top: 0
+  right: 0
+  height: 100vh
+  width: $room-sidebar-width
+  padding: $room-sidebar-padding
+  background: $c-room-sidebar
+  z-index: 20
+
+.room__subsidebar
+  @include center-flex
+  flex-direction: colu
+  align-items: center
+  justify-content: space-around
+  flex-wrap: wrap
+  flex: 1 1 auto
+  width: 100%
+  overflow: hidden
+  &--column
+    flex-direction: column
+  &--short
+    max-height: 50px
+    flex: 0 3 auto
+  &--medium
+    // max-height: 50px
+    flex: 0 2 auto
+  &--long
+    flex: 0 1 auto
+  & p
+    text-align: center
+    margin: 0
+  // & button
+  //   height: 20%
+
+
+.room__subsidebar--place
+  position: relative
+  @include center-flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  width: 40%
+  overflow: hidden
+  .room__subsidebar--details
+    @include center-flex
+    justify-content: center
+    align-items: center
+    width: 100%
+    overflow: hidden
+    & p
+      width: 50%
+      font-size: 0.8em
+      overflow: visible
+
+.room__sidebar--tiles
+  width: 100%
+  border: 1px solid black
+
+.work--try
+  word-wrap: break-all
+  // @include center-flex

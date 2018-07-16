@@ -1,0 +1,14 @@
+div(ng-transclude)
+  div(
+    id="roomInfo"
+    class="room__subsidebar room__subsidebar--column room__subsidebar--short"
+    )
+    p Room {{roomCtrl.name}}
+    p(
+      ng-if="roomCtrl.owner"
+      ) Owned by {{roomCtrl.owner}}
+  players-room
+  controls-room(ng-transclude)
+  room-game-sidebar
+  options-room
+  users-room

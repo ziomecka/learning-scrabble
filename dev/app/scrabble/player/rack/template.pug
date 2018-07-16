@@ -1,0 +1,16 @@
+ul
+  li(
+    ng-model="rackCtrl"
+    name="rackController"
+    ng-repeat="field in rackCtrl.places track by $index"
+    class="scrabble__rack--field"
+    column-index="{{$index}}"
+    )
+    //- ng-model="field"
+    scrabble-field(
+      field="field"
+      tile="field._tile"
+      field-droppable="{{field.droppable}}"
+      class="field"
+      ng-class="{'tile--toBePlayed': field._tile.isBeingPlayed, 'tile--toBeExchanged': field._tile.isBeingExchanged}"
+      )

@@ -1,0 +1,37 @@
+form(
+  name="newroomForm"
+  class="form"
+  novalidate
+  )
+  label(
+    for="gameName"
+    )
+    input(
+      type="text"
+      id="gameName"
+      class="form-input--wide"
+      ng-model="newroomCtrl.name"
+      autocomplet="off"
+      placeholder="room's name"
+      required
+      )
+  label(
+    for="numberPlaces"
+    )
+    select(
+      ng-model="newroomCtrl.numberPlaces"
+      ng-options="placesOption as placesOption + ' players' for placesOption in newroomCtrl.placesOptions track by placesOption"
+      required
+      )
+        option(
+          value=""
+          selected="selected"
+          disabled
+          ) choose number of players
+  button(
+    type="button"
+    ng-class="{'button__main--wait': newroomCtrl.isWaiting, 'button__main--failure': newroomCtrl.isFailure, 'button__main--success': newroom.isSuccess}"
+    ng-click="newroomCtrl.createRoom({'numberPlaces': newroomCtrl.numberPlaces, 'name': newroomCtrl.name})"
+    ng-disabled="newroomForm.$invalid || newroomCtrl.disabledButtons"
+    class="button__main button__form"
+    ) create room

@@ -1,0 +1,42 @@
+.scrabble__board
+  @include center-flex
+  flex-direction: column
+  box-sizing: border-box
+  width: $s-board-size
+  height: $s-board-size
+  max-width: 70vh
+  max-height: 70vh
+  counter-reset: row-counter
+  font-size: 0.7em
+  // overflow: hidden
+
+.scrabble__row
+  @include center-flex
+  flex-direction: row
+  flex: 0 1 $s-field-flexbasis
+  box-sizing: border-box
+  margin: 0
+  margin-bottom: $s-field-margin
+  width: 100%
+  // Min-height is for mozilla - shrinkable below the intrinsic height (which is derived from the content)
+  min-height: 0
+  counter-reset: column-counter
+  position: relative
+  border: none
+  // height: $s-field-flexbasis
+  &:before
+    position: absolute
+    text-align: center
+    left: -30px
+    content: counter(row-counter, decimal)
+    counter-increment: row-counter
+  &:nth-child(1)
+    .scrabble__field
+      position: relative
+      &:before
+        position: absolute
+        text-align: center
+        top: -30px
+        width: 100%
+        content: counter(column-counter, lower-latin)
+        counter-increment: column-counter

@@ -1,0 +1,113 @@
+.ng-invalid-passwords-not-match
+  #password, #repeatedPassword
+    color: red
+
+.form
+  @include center-flex
+  justify-content: space-between
+  align-items: space-between
+  flex-wrap: nowrap
+  flex-direction: column
+  width: 50%
+  margin: 0
+  padding: 0
+
+.form fieldset
+  display: flex
+  flex: 0 1 100%
+  border: none
+  margin: 0
+  padding: 0
+  margin-bottom: 5px
+
+.form label
+  display: inline-block
+  flex: 1 0 20%
+  max-width: 150px
+
+.form input
+  display: inline-block
+  flex: 1 0 80%
+  padding: 2px
+  &[type=text], &[type=password]
+    padding: 5px
+    border: $input-border-width solid $input-border-color
+    border-radius: $input-border-radius
+    &:focus
+      outline: $c-font
+
+.form-select
+  padding: 2px
+  position: relative
+  display: block
+  max-width: 400px
+  min-width: 180px
+  margin: 0 auto
+  border: $input-border-width solid $input-border-color
+  border-radius: $input-border-radius
+  background-color: #fff
+  z-index: 10
+  &:after
+    position: absolute
+    right: 0
+    top: 0
+    width: 50px
+    height: 100%
+    // line-height: 38px
+    content: '\2228'
+    text-align: center
+    z-index: -1
+
+select
+  display: inline-block
+  width: 100%
+  text-align-last: left
+  text-align: left
+  // direction: rtl
+  padding: 5px
+  border: none
+  border-radius: 0
+  appearance: none
+  background-color: transparent
+  font-size: inherit
+  margin: 0
+  overflow: hidden
+  padding-top: 2px
+  padding-bottom: 2px
+  text-overflow: ""
+  text-indent: 0.01px
+  white-space: nowrap
+  outline: none
+  option, option:focus
+    outline: none
+    border: none
+    border-bottom: none
+  &:focus
+    outline: none
+// .form select
+//   display: inline-block
+//   width: 40px
+//   text-align-last: right
+//   text-align: right
+//   direction: rtl
+//   padding: 5px
+//   border: none
+//   border-radius: 0
+//   appearance: none
+//   background-color: #fff
+//   font-size: inherit
+//   margin: 0
+//   overflow: hidden
+//   padding-top: 2px
+//   padding-bottom: 2px
+//   text-overflow: ""
+//   text-indent: 0.01px
+//   white-space: nowrap
+//   &:focus
+//     outline: none
+
+.form .box__buttons
+
+
+.ng-invalid-password-not-confirmed input[type="password"]
+  color: red

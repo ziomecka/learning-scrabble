@@ -1,0 +1,20 @@
+div(
+  id="roomControls"
+  class="room__subsidebar room__subsidebar--medium"
+  )
+  button(
+    ng-click="roomControlsCtrl.getUp()"
+    ng-show="roomCtrl.userCanGetUp"
+    class="button button__controls"
+    ) Get up
+  button(
+    ng-click="roomControlsCtrl.leave()"
+    ng-show="roomCtrl.userCanLeave"
+    class="button button__controls"
+    ) Leave room
+  button(
+    ng-click="roomControlsCtrl.start()"
+    ng-show="roomCtrl.userCanStart"
+    class="button button__controls"
+    ) Start
+  scrabble-controls(ng-if="roomCtrl.isPlaying")

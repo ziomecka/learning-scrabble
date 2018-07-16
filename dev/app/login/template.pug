@@ -1,0 +1,40 @@
+form(
+  name="authorizationForm"
+  class="form"
+  novalidate
+  )
+  label(
+    for="login"
+    )
+    input(
+      type="text"
+      id="login"
+      ng-model="login"
+      autocomplete="off"
+      placeholder="login"
+      required
+      )
+  label(
+    for="password"
+    )
+    input(
+      type="password"
+      ng-model="password"
+      autocomplete="off"
+      placeholder="password"
+      required
+      )
+  button(
+    type="button"
+    ng-click="loginCtrl.loginUser({login: login, password: password})"
+    ng-class="{'button__main--wait': loginCtrl.isWaiting, 'button__main--failure': loginCtrl.isFailure, 'button__main--success': loginCtrl.isSuccess}"
+    ng-disabled="authorizationForm.$invalid || loginCtrl.disabledButtons"
+    class="button__main button__form"
+    ) {{loginCtrl.buttonText}}
+  button(
+    type="button"
+    ng-click="loginCtrl.goNewuser()"
+    ng-class="{'button__link--invisible': loginCtrl.disabledButtons}"
+    class="button__link button__form"
+    ng-disabled="loginCtrl.disabledButtons"
+    ) create user

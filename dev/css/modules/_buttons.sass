@@ -1,0 +1,149 @@
+%button
+  font-size: 0.8em
+  font-weight: 800
+  letter-spacing: $button-letter-spacing
+  text-decoration: none
+  outline: none
+  width: 100%
+  max-width: $button-width-max
+  height: $button-height
+  transition: all .25s ease
+
+%button_button
+  display: inline-block
+  border: $button-border-width solid $button-border-color
+  border-radius: $button-border-radius
+  background: $button-color
+  padding: $button-padding
+  margin: $button-margin
+
+%button_main
+  display: block
+  position: relative
+  border: $button-main-border-width solid $button-main-border-color
+  border-radius: $button-main-border-radius
+  background: $button-main-color
+  &:hover
+    background-color: $button-main-color-hover
+    color: $button-main-font-hover
+
+%button__navigation
+  display: block
+  border: none
+  background: transparent
+  letter-spacing: normal
+  font-size: 1rem
+  font-weight: inherit
+  margin: 0
+  padding: 0
+  text-align: left
+  &:hover
+    text-decoration: underline
+
+%button_link
+  display: block
+  border: none
+  background: inherit
+  height: calc(#{$button-height} / 2)
+  margin: 0
+  color: $button-link-color
+  &:hover
+    text-decoration: underline
+    font-size: 0.9rem
+
+%button_player
+  min-width: $button-width-min
+
+.button
+  @extend %button
+  @extend %button_button
+
+.button__player
+  // @extend %button
+  height: 30px
+  margin: 5px
+  &[disabled]
+    background: $button-color-disabled
+
+.button__controls
+  height: 30px
+  margin: 5px
+  flex: 0 1 auto
+  width: 100px
+  &[disabled]
+    background: $button-color-disabled
+
+.button__link
+  @extend %button
+  @extend %button_link
+
+.button__link--invisible
+  color: $c-background
+
+.button__form
+  box-sizing: border-box
+  flex: 0 1 80%
+
+.button__navigation
+  @extend %button
+  @extend %button__navigation
+
+.button__main
+  @extend %button
+  @extend %button_main
+
+.button__main--wait
+  width: 40px
+  font-size: 0
+  animation: rotating .25s 1s linear infinite
+  border-radius: 50%
+  border-left-color: $c-font
+  border-right-color: $c-font
+  &:hover
+    background-color: transparent
+    color: $c-background
+
+.button__main--failure
+  color: $c-error
+  border-color: $c-error
+  transform: scale(1.1)
+
+.ng-invalid-password-not-confirmed .button__main
+  &:before
+    @include center-flex
+    justify-content: center
+    align-items: center
+    height: 100%
+    width: 100%
+    background-color: $button-main-color-hover
+    color: $button-main-font-hover
+    border: $button-main-border-width solid $button-main-border-color
+    border-radius: $button-main-border-radius
+    content: "passwords don't match"
+    font-size: 2em
+    font-weight: 900
+    position: absolute
+    top: 0
+    left: 0
+    // right: 0
+    // bottom: 0
+    z-index: 10
+
+.button__main--success
+  &:before
+    @include center-flex
+    justify-content: center
+    align-items: center
+    height: 100%
+    width: 100%
+    background-color: $button-main-color-hover
+    color: $button-main-font-hover
+    border: $button-main-border-width solid $button-main-border-color
+    border-radius: $button-main-border-radius
+    content: "\2713"
+    font-size: 2em
+    font-weight: 900
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 10

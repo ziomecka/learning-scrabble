@@ -1,0 +1,23 @@
+div(
+  ng-transclude="scrabbleTile"
+  class="field"
+  )
+  svg(
+    xmlns="http://www.w3.org/2000/svg"
+    height="100%"
+    width="100%"
+    )
+    g
+      rect(
+        height="100%"
+        width="100%"
+        )
+      text(
+        ng-if="fieldDescription"
+        x="0"
+        y="0"
+        pointer-events="none"
+        ) {{fieldDescription}}
+  scrabble-tile(
+    ng-if="tile"
+    )

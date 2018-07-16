@@ -1,0 +1,14 @@
+
+/** Reference individual colors. */
+@function color($key: "primary")
+  @return map-get($colors, $key)
+
+/** Font functions */
+@function font-scale($level)
+  @return map-get($font-scale, $level)
+
+@function line-height($level)
+  @return map-get($line-height, $level)
+
+@function font-weight($level)
+  @return map-get($font-weight, $level)

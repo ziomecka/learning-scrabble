@@ -1,0 +1,36 @@
+div(
+  id="roomOptions"
+  class="room__subsidebar room__subsidebar--short"
+  )
+  label(
+    class="room__sidebar--standalone"
+    for="numberPlaces"
+    )
+    select(
+      ng-model="roomOptionsCtrl.numberPlaces"
+      ng-options="placesOption as placesOption + ' players' for placesOption in roomOptionsCtrl.placesOptions track by placesOption"
+      ng-change="roomOptionsCtrl.changeNumberPlaces(roomOptionsCtrl.numberPlaces)"
+      class="form__input--narrow room__sidebar--standalone"
+      ng-disabled="!roomCtrl.userCanChangeOptions"
+      required
+      )
+      option(
+        value=""
+        disabled
+        ) change number of players
+  label(
+    class="room__sidebar--standalone"
+    for="time"
+    )
+    select(
+      ng-model="roomOptionsCtrl.time"
+      ng-options="timeOption as timeOption + ' minutes' for timeOption in roomOptionsCtrl.timeOptions track by timeOption"
+      ng-change="roomOptionsCtrl.changeTime(roomOptionsCtrl.time)"
+      class="form__input--narrow room__sidebar--standalone"
+      ng-disabled="!roomCtrl.userCanChangeOptions"
+      required
+      )
+      option(
+        value=""
+        disabled
+        ) change time

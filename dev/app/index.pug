@@ -1,0 +1,18 @@
+html(ng-app="app")
+  head
+    title Let's play scrabble
+    base(href="/")
+  body(ui-view class="frosty")
+    header(
+      ng-class="{'header--short': appCtrl.shortTitle, 'header--narrow': appCtrl.narrowTitle}"
+      class="header"
+      )
+      app-title(
+        class="title"
+        )
+    main
+      div(ui-view="main" class="slide")
+    footer
+      p
+        a(href="") Katarzyna Ziomek-Zdanowicz
+    script(src="/socket.io/socket.io.js")

@@ -1,0 +1,30 @@
+// TODO use scrabble-field?
+
+.scrabble__field
+  display: inline-block
+  position: relative
+  height: 100%
+  flex: 1 1 $s-field-flexbasis
+  box-sizing: border-box
+  margin: 0
+  margin-left: $s-field-margin
+  padding: 0
+  border: none
+  svg rect
+    fill: $c-field
+    float: left
+    height: 100%
+    width: 100%
+    border: none
+  &--description
+    text-align: center
+    vertical-align: middle
+    flex-grow: 0
+  &--word2 svg rect
+    fill: $c-field-word2
+  &--word3 svg rect
+    fill: $c-field-word3
+  &--letter2 svg rect
+    fill: $c-field-letter2
+  &--letter3 svg rect
+    fill: $c-field-letter3

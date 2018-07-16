@@ -1,0 +1,42 @@
+h2 Hi {{roomsCtrl.login}}!
+p(
+  class="heading--normal"
+  ) What would you like to do?
+ul(
+  class="rooms__list"
+  )
+  li
+    //- ng-click="home.games.room({roomId: room._id, collection: roomsCtrl.collection})"
+    a(
+      ui-sref='{{roomsCtrl.joinRoom(room._id)}}'
+      class="button__navigation"
+      ) return to unfinished game
+  li
+    button(
+      ng-click="roomsCtrl.showRoomsList=!roomsCtrl.showRoomsList"
+      class="button__navigation"
+      ) join an existing room
+    ul(
+      ng-show="roomsCtrl.showRoomsList"
+      class="rooms__list list--scrabble"
+      )
+      //- ng-repeat="room in roomsCtrl.sortedRooms track by room._id"
+      li(
+        ng-repeat="room in roomsCtrl.rooms track by room._id"
+        )
+        a(
+          ui-sref='{{roomsCtrl.joinRoom(room._id)}}'
+          ) {{room.name}}
+  li
+    button(
+    ng-click="roomsCtrl.showNewroom=!roomsCtrl.showNewroom"
+    class="button__navigation"
+    ) create new room
+    newroom(
+      ng-show="roomsCtrl.showNewroom"
+      )
+  li
+    button(
+    ng-click="roomsCtrl.logout()"
+    class="button__navigation"
+    ) logout

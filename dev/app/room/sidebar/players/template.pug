@@ -1,0 +1,23 @@
+div(
+  id="roomPlayers"
+  class="room__subsidebar room__subsidebar--long"
+  )
+  div(
+    ng-repeat="place in roomPlayersCtrl.places track by $index"
+    class="room__subsidebar--place"
+    )
+    button(
+      ng-bind="place.player.login"
+      ng-click="roomPlayersCtrl.sit(place.id)"
+      ng-disabled="place.player.login || (roomPlayersCtrl.seated >= 0)"
+      class="button button__player"
+      )
+    div(
+      class="room__subsidebar--details"
+      )
+      p
+        span Points: {{place.player.points}}
+        span(ng-if="place.player.isUser")
+          span + {{roomPlayersCtrl.newPoints}}
+          span &#61; {{place.player.points + roomPlayersCtrl.newPoints}}
+      p Time: {{place.player.time}}

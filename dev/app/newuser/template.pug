@@ -1,0 +1,55 @@
+form(
+  name="newuserForm"
+  class="form"
+  novalidate
+  )
+  label(
+    for="newlogin"
+    )
+    input(
+      type="text"
+      id="newlogin"
+      ng-model="login"
+      ng-class="{invalid: loginNotUnique}"
+      autocomplete="new-username"
+      placeholder="login"
+      required
+      )
+  label(
+  for="password"
+  )
+    input(
+      type="password"
+      id="password"
+      ng-model="password"
+      autocomplete="new-password"
+      placeholder="password"
+      confirm-password
+      required
+      )
+  label(
+    for="confirmationPassword"
+    )
+    input(
+      type="password"
+      id="confirmPassword"
+      ng-model="confirmPassword"
+      autocomplete="new-password"
+      placeholder="confirm password"
+      confirm-password
+      required
+      )
+  button(
+    type="button"
+    ng-click="newuserCtrl.createUser({'login': login, 'password': password})"
+    ng-class="{'button__main--wait': newuserCtrl.isWaiting, 'button__main--failure': newuserCtrl.isFailure, 'button__main--success': newuserCtrl.isSuccess}"
+    class="button__main button__form"
+    ng-disabled="newuserForm.$invalid || newuserCtrl.disabledButtons"
+    ) {{newuserCtrl.buttonText}}
+  button(
+    type="button"
+    ng-click="newuserCtrl.goAuthorization()"
+    ng-class="{'button__link--invisible': newuserCtrl.disabledButtons}"
+    class="button__link button__form"
+    ng-disabled="newuserCtrl.disabledButtons"
+    ) login

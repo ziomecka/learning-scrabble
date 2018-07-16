@@ -1,0 +1,6 @@
+div(
+  id="roomUsers"
+  class="room__subsidebar room__subsidebar--short"
+  )
+  ul(ng-repeat="user in room.users track by user.login")
+    li user.login

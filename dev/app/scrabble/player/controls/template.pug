@@ -1,0 +1,44 @@
+span(
+  ng-switch on="scrabbleControlsCtrl.state"
+  )
+  span(
+    ng-switch-when="movePlaceWord"
+    )
+    button(
+      ng-click="scrabbleControlsCtrl.placeWord()"
+      ng-disabled="!scrabbleControlsCtrl.tilesPlacedCorrectly"
+      class="button button__controls"
+      ) Ok
+    button(
+      ng-click="scrabbleControlsCtrl.letsExchange()"
+      class="button button__controls"
+      ) Exchange
+    button(
+      ng-click="scrabbleControlsCtrl.resignMove()"
+      class="button button__controls"
+      ) Resign
+  span(
+    ng-switch-when="moveExchangeTiles"
+    )
+    button(
+      ng-click="scrabbleControlsCtrl.exchangeTiles()"
+      class="button button__controls"
+      ) Ok
+    button(
+      ng-click="scrabbleControlsCtrl.resignExchange()"
+      class="button button__controls"
+      ) Resign
+  span(
+    ng-switch-when="acceptOpponentWord"
+    )
+    button(
+      ng-click="scrabbleControlsCtrl.acceptWord()"
+      class="button button__controls"
+      ) Ok
+    button(
+      ng-click="scrabbleControlsCtrl.verifyWord()"
+      class="button button__controls"
+      ) Verify
+  span(
+    ng-switch-when="waitingOpponentMove"
+    )

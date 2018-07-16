@@ -1,0 +1,12 @@
+{
+  "presets": [
+    ["env", {"loose": true, "modules": false}]
+  ],
+	"plugins": [
+    ["syntax-dynamic-import"],
+    ["add-module-exports"],
+    ["angularjs-annotate", {"explicitOnly": true}]
+  ],
+  "ignore": ["../../node_modules/**.js"],
+  "compact": false
+}

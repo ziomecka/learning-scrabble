@@ -1,0 +1,122 @@
+/** Standard distance - used in distance function */
+$distance: 20px
+
+$margin-body: 10%
+
+$padding-standard: calc(#{distance(1)} / 2)
+
+$border-radius: 10px
+
+/** Font weight */
+$fw-bold: 800
+
+/** Colors variables.
+    From here colors are exported to JS
+    */
+$c-primary: lightgreen
+$c-secondary: darkgreen
+$c-accent: #d81e5b
+$c-background: #fcfafa
+$c-background-dark: #e6e4e4
+$c-font: #071110
+// $c-font: #070707
+$c-error: #ef6f6c
+
+/** Containers variables */
+$con-padding: 20px
+$con-header-height: 100px
+$con-footer-height: 100px
+/* TODO
+
+/** Room */
+$room-sidebar-width: 300px
+$room-sidebar-padding: 10px
+$c-room-sidebar: $c-background-dark
+
+
+
+/** Scrabble */
+/** Board */
+/** 16th field for board's descriptive row / column. */
+$field-number: 16
+
+$c-field: #a6cfd5
+$c-field-word2: #c3a9b4
+$c-field-word3: #9f7687
+$c-field-letter2: #51b7bc
+$c-field-letter3: #4cb5ae
+
+$s-field-flexbasis: 100% / ($field-number + 1)
+$s-field-size: 40px
+$s-field-margin: 3px
+
+$s-board-size: ($s-field-size + $s-field-margin) * $field-number
+
+// Buttons
+/** ALL BUTTONS */
+/** Size */
+$button-height: 40px
+$button-width-min: 150px
+$button-width-max: 200px
+
+/** Margin, padding */
+$button-margin: 20px
+$button-padding: 0.2em 0.5em
+
+/** Border */
+$button-border-width: 2px
+$button-border-radius: 5px
+
+/** Font */
+$button-font-size: font-setting("-1")
+$button-letter-spacing: 2px
+
+/** Colors */
+$button-border-color: #a6cfd5
+$button-color: transparent
+$button-color-hover: $button-border-color
+$button-color-disabled: #fce4e4
+$button-border-color-disabled: #fad7d6
+
+/** MAIN BUTTONS */
+/** Colors */
+$button-main-border-color: $button-border-color
+$button-main-color: transparent
+$button-main-color-hover: $button-main-border-color
+/** Font */
+$button-main-font-hover: $c-background
+/** Border */
+$button-main-border-width: 2px
+$button-main-border-radius: 5px
+
+/** LINK BUTTONS */
+$button-link-color: $c-font
+
+/** TITLE - "scrabble" */
+$c-title-first: #f6fafb
+$c-title-second: #eef6f7
+$c-title-board: $button-border-color
+$c-title-font: #79979b
+
+$title-border-width: $button-border-width
+$title-border-radius: $button-border-radius
+$title-width: 40px
+$title-points-width: $title-width / 4
+$title-margin: 5px
+
+// $button-color: #ef6f6c
+// $button-color-middle: #f18986
+// $button-color-light: #f4a3a1
+
+/** Form */
+$input-border-color: $button-border-color
+$input-border-radius: $button-border-radius
+$input-border-width: $button-border-width / 2
+
+/** Scrabble */
+/** Rack */
+$scrabble-rackField-border-width: 1px
+$scrabble-rackField-border-color: green
+$scrabble-rackField-margin: $scrabble-rackField-border-width * 2
+$scrabble-rackField-width: ($room-sidebar-width - ($room-sidebar-padding * 2) - (9 * ($scrabble-rackField-border-width + $scrabble-rackField-margin))) / 7
+$scrabble-rack-minheight: $scrabble-rackField-width + ($scrabble-rackField-margin + $scrabble-rackField-border-width) * 2
